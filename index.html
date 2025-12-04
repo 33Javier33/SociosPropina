@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
     <style>
-        /* ... (Estilos Omitidos por Brevedad) ... */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         :root{--menu-width:250px;--primary-color:#3498db;--primary-hover-color:#2980b9;--secondary-color:#2ecc71;--danger-color:#e74c3c;--warning-color:#f39c12;--light-bg:#eef2f6;--white-bg:#fff;--text-dark:#2c3e50;--text-light:#555;--border-color:#e0e6ed}body{font-family:'Poppins',sans-serif;margin:0;background-color:var(--light-bg);color:#333}.menu-toggle{position:fixed;top:15px;left:15px;z-index:1002;width:40px;height:40px;background-color:var(--primary-color);border:none;border-radius:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.1);transition:left .3s ease}.menu-toggle span{display:block;width:22px;height:2px;background-color:#fff;margin:2px 0;transition:all .3s ease}.side-menu.open+.main-container .menu-toggle{left:calc(var(--menu-width) + 15px)}.menu-toggle.active span:nth-child(1){transform:translateY(6px) rotate(45deg)}.menu-toggle.active span:nth-child(2){opacity:0}.menu-toggle.active span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}.side-menu{position:fixed;top:0;left:0;width:var(--menu-width);height:100%;background-color:var(--text-dark);z-index:1001;transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column;padding-top:60px;box-shadow:5px 0 15px rgba(0,0,0,.1)}.side-menu.open{transform:translateX(0)}.side-menu .menu-header{color:#fff;font-size:1.5em;font-weight:700;text-align:center;padding:20px 10px;border-bottom:1px solid #4a627a}.side-menu a{color:#fff;text-decoration:none;padding:15px 20px;display:block;font-size:1em;transition:background-color .2s ease,padding-left .2s ease;border-bottom:1px solid #3e5268}.side-menu a:hover,.side-menu a.active-link{background-color:var(--primary-color);padding-left:25px}.main-container{transition:margin-left .3s ease;padding:15px}.container{max-width:960px;margin:10px auto;background-color:var(--white-bg);padding:20px;border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,.07)}h1{color:var(--text-dark);text-align:center;margin-bottom:20px;font-weight:700;font-size:1.8em;padding-top:45px}h2{color:var(--primary-color);margin:0 0 20px;font-weight:600;font-size:1.5em;border-bottom:2px solid var(--border-color);padding-bottom:10px;display:flex;justify-content:space-between;align-items:center}#sync-indicator{font-size:.6em;font-weight:400;color:var(--text-light);opacity:0;transition:opacity .3s}#sync-indicator.visible{opacity:1}h3{color:var(--primary-color);margin-top:25px;margin-bottom:10px;font-size:1.4em}.content-panel{display:none}.content-panel.active{display:block;animation:fadeIn .5s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}label{display:block;margin-bottom:7px;font-weight:600;color:var(--text-light)}input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:10px;margin-bottom:18px;border:1px solid #dcdcdc;border-radius:6px;box-sizing:border-box;font-size:1em}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:0;box-shadow:0 0 0 3px rgba(52,152,219,.2)}button{background-color:var(--secondary-color);color:#fff;padding:10px 15px;border:none;border-radius:6px;cursor:pointer;font-size:1em;font-weight:600;width:100%;transition:background-color .3s ease,transform .2s ease;margin-top:8px}button:hover{background-color:#27ae60;transform:translateY(-1px)}button:disabled{background-color:#bdc3c7;cursor:not-allowed}button.cancel-btn{background-color:#95a5a6}.socios-list-container{margin-top:30px;border-top:2px solid var(--border-color)}.socio-card{padding:15px;background-color:#f7f9fc;border-radius:8px;margin-bottom:10px;border:1px solid #dbe9f5}.socio-card-info p{margin:4px 0;color:var(--text-light)}.socio-card-info p strong{color:var(--text-dark)}.socio-card-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px;border-top:1px solid #e0e6ed;padding-top:10px}.socio-card-actions button{width:auto;font-size:.9em;padding:6px 10px}.socio-card-actions .edit-btn{background-color:var(--primary-color)}.socio-card-actions .delete-btn{background-color:var(--danger-color)}.distribucion-planta-container,.distribucion-part-time-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:15px;padding-top:15px;border-top:1px solid var(--border-color)}.socio-distribucion-card{background-color:#f7f9fc;border:1px solid #dbe9f5;border-radius:10px;padding:18px;box-shadow:0 4px 15px rgba(0,0,0,.06)}.anticipos-list-container{margin-top:15px;padding-top:10px;border-top:1px dashed var(--border-color)}.anticipos-list-container h4{margin:0 0 10px;font-size:1em;color:var(--text-dark)}.anticipo-item,.descuento-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:.9em;border-bottom:1px solid #eef2f6}.anticipo-item:last-child,.descuento-item:last-child{border-bottom:none}.anticipo-item-info,.descuento-item-info{display:flex;flex-direction:column;flex-grow:1}.anticipo-item-info span,.descuento-item-info span{color:var(--text-light)}.anticipo-item-info .monto,.descuento-item-info .monto{font-weight:600;color:var(--text-dark)}.descuento-item-info .categoria{font-size:0.85em;font-style:italic;color:var(--primary-color)}.anticipo-item-actions,.descuento-item-actions{display:flex;gap:5px}.anticipo-item-actions button,.descuento-item-actions button{font-size:.8em;padding:4px 8px;margin:0;width:auto}.anticipo-item-actions .edit-anticipo-btn,.descuento-item-actions .edit-descuento-btn{background-color:var(--warning-color)}.anticipo-item-actions .delete-anticipo-btn,.descuento-item-actions .delete-descuento-btn{background-color:var(--danger-color)}.general-total{background-color:var(--secondary-color);color:#fff;padding:12px 15px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:1.3em;font-weight:700}.action-button-group{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin:15px 0}.show-punto-planta-btn{background-color:#9b59b6}#addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:1001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px}.modal-content .modal-actions button{width:45%}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}#toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;flex-direction:column;align-items:center;gap:10px}.toast{background-color:var(--text-dark);color:#fff;padding:12px 20px;border-radius:25px;box-shadow:0 4px 15px rgba(0,0,0,.1);font-size:.9em;font-weight:500;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background-color:var(--secondary-color)}.toast.danger{background-color:var(--danger-color)}.part-time-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;border-top:1px solid var(--border-color);padding-top:10px}.part-time-actions button{width:100%;padding:8px;font-size:.85em}.part-time-actions .calendar-btn{background-color:#f39c12}.part-time-actions .calculate-btn{background-color:#1abc9c}.distribucion-part-time-container .puntos-calculados-pt{font-weight:700;color:#16a085}
         /* ESTILOS ESPECÍFICOS PARA LOS BOTONES DE ANTICIPO INDIVIDUAL */
@@ -256,11 +255,11 @@
     <template id="templateConfirmDeleteModal">
         <div class="modal">
             <div class="modal-content">
-                <h3>Confirmar Eliminación</h3>
+                <h3>Confirmar Acción</h3>
                 <p id="confirmDeleteText"></p>
                 <div class="modal-actions">
                     <button class="cancel-btn">Cancelar</button>
-                    <button class="delete-btn confirm-delete-btn">Eliminar</button>
+                    <button class="delete-btn confirm-delete-btn">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -296,7 +295,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- CONEXIONES CON GOOGLE SHEETS --- ¡¡¡IMPORTANTE!!!
-            // ASEGÚRATE DE QUE ESTAS URLs SON CORRECTAS PARA TU PROYECTO.
+            // REEMPLAZA ESTAS URLs CON LAS TUYAS.
             const SCRIPT_URL_MONTOS = 'https://script.google.com/macros/s/AKfycbxna9EH5LZPTPCPws58pGro6qCrZ8_zNwvUkUHS28BYfd8CsAcD1MRcqlITbDm4lTk/exec'; // Para Balance (Propina Bruta)
             const SCRIPT_URL_SOCIOS = 'https://script.google.com/macros/s/AKfycbyr447pMQtsKoBfp8qTcB1uyE3rORhgPPmZM6Fgia3BgmIvtlZ_h04uGZrmx_HwubHQ/exec'; // URL ficticia para Apps Script Socios
             
@@ -310,7 +309,6 @@
                 modalContainer: document.getElementById('modal-container'),
                 syncIndicator: document.getElementById('sync-indicator'),
                 syncDataBtn: document.getElementById('syncDataBtn'), 
-                // NUEVA REFERENCIA
                 resetAnticiposLocalBtn: document.getElementById('resetAnticiposLocalBtn'),
                 balancePropinaBruta: document.getElementById('balancePropinaBruta'),
                 balanceDescuentos: document.getElementById('balanceDescuentos'),
@@ -328,18 +326,14 @@
                 ultimaDistFecha: document.getElementById('ultimaDistFecha'),                 
                 ultimaDistNeta: document.getElementById('ultimaDistNeta'),                   
                 ultimaDistPunto: document.getElementById('ultimaDistPunto'),                 
-                // cargarUltimaDistribucionBtn: document.getElementById('cargarUltimaDistribucionBtn'), // ELIMINADO
-                // loadDistribucionBtn: document.getElementById('loadDistribucionBtn'), // ELIMINADO
                 totalPuntosDisplay: document.getElementById('totalPuntosDisplay'),
                 loadAllAnticiposBtn: document.getElementById('loadAllAnticiposBtn'), 
-                // NUEVO BOTÓN
                 saveAllAnticiposAndDistribucionBtn: document.getElementById('saveAllAnticiposAndDistribucionBtn'),
                 
                 // --- REFERENCIAS DE FILTRO ---
                 filtroNombre: document.getElementById('filtroNombre'),
                 filtroArea: document.getElementById('filtroArea'),
                 filtroContrato: document.getElementById('filtroContrato'),
-                // -----------------------------
             };
 
             let isSyncing = false;
@@ -1113,67 +1107,85 @@
             
             // --- FUNCIÓN PARA RECOPILAR Y ENVIAR LA DISTRIBUCIÓN (UNIFICADA) ---
             async function handleSaveDistribucionFinal() {
-                const propinaNeta = parseNumber(ui.balancePropinaNeta.textContent);
-                const puntoPlanta = parseFloat(localStorage.getItem('lastPuntoPlantaValue')) || 0;
+                // --- LÓGICA DE CONFIRMACIÓN DE USUARIO (NUEVA) ---
+                ui.modalContainer.innerHTML = document.getElementById('templateConfirmDeleteModal').innerHTML;
+                const modal = ui.modalContainer.querySelector('.modal');
                 
-                // RECALCULAR TOTAL ANTICIPOS GENERAL y DETALLE ANTICIPOS para envío
-                const anticiposPorSocio = getAnticiposFromStorage();
-                let totalAnticiposGeneral = 0;
-                const detalleAnticipos = []; // <-- Array para el nuevo detalle
-
-                Object.keys(anticiposPorSocio).forEach(socioId => {
-                    const socio = sociosData.find(s => s.ID === socioId);
-                    // Obtener el nombre para guardarlo con el anticipo
-                    const nombreCompleto = socio ? `${socio.Nombre} ${socio.Apellido}` : `ID Desconocido (${socioId})`;
+                // **ADVERTENCIA CLARA**
+                modal.querySelector('#confirmDeleteText').innerHTML = 
+                    `🚨 **ADVERTENCIA: Acción Irreversible** 🚨<br><br>
+                    Al guardar la **Distribución Final**, los datos serán registrados en Sheets y se **ELIMINARÁN PERMANENTEMENTE** todos los **Anticipos Registrados LOCALMENTE** para evitar dobles pagos.
+                    <br><br>
+                    **¿Desea continuar y guardar la distribución?**`;
                     
-                    if (anticiposPorSocio[socioId].length > 0) {
-                        anticiposPorSocio[socioId].forEach(anticipo => {
-                            detalleAnticipos.push({
-                                id: socioId,
-                                nombre: nombreCompleto,
-                                fecha: anticipo.fecha,
-                                monto: Math.round(anticipo.cantidad) // Redondear para guardar
+                modal.style.display = 'flex';
+                
+                // Configurar botones de acción
+                modal.querySelector('.cancel-btn').onclick = () => modal.style.display = 'none';
+                modal.querySelector('.confirm-delete-btn').onclick = () => {
+                    modal.style.display = 'none'; // Cerrar el modal antes de proceder
+
+                    // *************** LÓGICA ORIGINAL DE GUARDADO ***************
+
+                    const propinaNeta = parseNumber(ui.balancePropinaNeta.textContent);
+                    const puntoPlanta = parseFloat(localStorage.getItem('lastPuntoPlantaValue')) || 0;
+                    
+                    // RECALCULAR TOTAL ANTICIPOS GENERAL y DETALLE ANTICIPOS para envío
+                    const anticiposPorSocio = getAnticiposFromStorage();
+                    let totalAnticiposGeneral = 0;
+                    const detalleAnticipos = []; 
+
+                    Object.keys(anticiposPorSocio).forEach(socioId => {
+                        const socio = sociosData.find(s => s.ID === socioId);
+                        const nombreCompleto = socio ? `${socio.Nombre} ${socio.Apellido}` : `ID Desconocido (${socioId})`;
+                        
+                        if (anticiposPorSocio[socioId].length > 0) {
+                            anticiposPorSocio[socioId].forEach(anticipo => {
+                                detalleAnticipos.push({
+                                    id: socioId,
+                                    nombre: nombreCompleto,
+                                    fecha: anticipo.fecha,
+                                    monto: Math.round(anticipo.cantidad) 
+                                });
                             });
-                        });
-                        totalAnticiposGeneral += anticiposPorSocio[socioId].reduce((sum, a) => sum + a.cantidad, 0);
+                            totalAnticiposGeneral += anticiposPorSocio[socioId].reduce((sum, a) => sum + a.cantidad, 0);
+                        }
+                    });
+
+                    const totalPuntosMatch = ui.totalPuntosDisplay.innerText.match(/Puntos Totales Distribuidos: ([\d\.]+)/);
+                    const totalPuntos = totalPuntosMatch ? parseFloat(totalPuntosMatch[1]) : 0;
+
+                    if (puntoPlanta <= 0) {
+                        showToast('Primero debes calcular el Punto-Planta.', 'warning');
+                        return;
                     }
-                });
-                
-                const totalPuntosMatch = ui.totalPuntosDisplay.innerText.match(/Puntos Totales Distribuidos: ([\d\.]+)/);
-                const totalPuntos = totalPuntosMatch ? parseFloat(totalPuntosMatch[1]) : 0;
-
-                if (puntoPlanta <= 0) {
-                    showToast('Primero debes calcular el Punto-Planta.', 'warning');
-                    return;
-                }
-                
-                // 1. Recopilar datos de distribución
-                const distribucion = sociosData.map(socio => {
-                    const anticiposSocio = (anticiposPorSocio[socio.ID] || []).reduce((sum, a) => sum + a.cantidad, 0);
                     
-                    const puntosFinales = socio.puntosAsignadosFinales;
-                    const propinaAsignada = socio.propinaAsignada;
+                    // 1. Recopilar datos de distribución
+                    const distribucion = sociosData.map(socio => {
+                        const anticiposSocio = (anticiposPorSocio[socio.ID] || []).reduce((sum, a) => sum + a.cantidad, 0);
+                        
+                        const puntosFinales = socio.puntosAsignadosFinales;
+                        const propinaAsignada = socio.propinaAsignada;
 
-                    const saldoFinal = propinaAsignada - anticiposSocio;
-                    
-                    return {
-                        ID: socio.ID,
-                        NombreCompleto: `${socio.Nombre} ${socio.Apellido}`,
-                        Area: socio.Area,
-                        TipoContrato: socio.TipoContrato,
-                        PuntosAntiguedad: socio.puntosAntiguedad,
-                        PuntosFinales: parseFloat(puntosFinales.toFixed(2)),
-                        PropinaAsignada: Math.round(propinaAsignada),
-                        Anticipos: Math.round(anticiposSocio),
-                        SaldoFinal: Math.round(saldoFinal)
-                    };
-                });
+                        const saldoFinal = propinaAsignada - anticiposSocio;
+                        
+                        return {
+                            ID: socio.ID,
+                            NombreCompleto: `${socio.Nombre} ${socio.Apellido}`,
+                            Area: socio.Area,
+                            TipoContrato: socio.TipoContrato,
+                            PuntosAntiguedad: socio.puntosAntiguedad,
+                            PuntosFinales: parseFloat(puntosFinales.toFixed(2)),
+                            PropinaAsignada: Math.round(propinaAsignada),
+                            Anticipos: Math.round(anticiposSocio),
+                            SaldoFinal: Math.round(saldoFinal)
+                        };
+                    });
 
-                try {
                     showToast('Enviando datos a Google Sheets...', 'warning');
                     
                     // 2. Llamada al Google Apps Script
-                    const descuentos = getDescuentosFromStorage(); // Obtener los descuentos también
+                    const descuentos = getDescuentosFromStorage(); 
 
                     const dataToSend = {
                         resumen: {
@@ -1181,25 +1193,30 @@
                             propinaNeta: propinaNeta,
                             puntoPlanta: puntoPlanta,
                             totalPuntos: totalPuntos,
-                            totalAnticipos: Math.round(totalAnticiposGeneral) // Total anticipos para el resumen
+                            totalAnticipos: Math.round(totalAnticiposGeneral)
                         },
                         distribucion: distribucion,
                         descuentos: descuentos,
-                        detalleAnticipos: detalleAnticipos // <-- ¡EL DATO DETALLADO!
+                        detalleAnticipos: detalleAnticipos 
                     };
-
-                    const result = await apiCall(SCRIPT_URL_SOCIOS, 'guardarDistribucion', 'POST', dataToSend);
                     
-                    showToast(`Distribución guardada en Sheets. Hoja: ${result.sheetName}`, 'success');
-                    
-                    // 3. Resincronizar y limpiar LocalStorage (ya que los anticipos pasan a ser "Distribución Final")
-                    localStorage.removeItem('anticipos_data_v3');
-                    await syncData(); 
-                    
-                } catch (error) {
-                    console.error('Error al guardar la distribución:', error);
-                    showToast(`Error al guardar: ${error.message}`, 'danger');
-                }
+                    // Función autoejecutable asíncrona para manejar el fetch
+                    (async () => { 
+                        try {
+                            const result = await apiCall(SCRIPT_URL_SOCIOS, 'guardarDistribucion', 'POST', dataToSend);
+                            
+                            showToast(`Distribución guardada en Sheets. Hoja: ${result.sheetName}`, 'success');
+                            
+                            // 3. Resincronizar y limpiar LocalStorage
+                            localStorage.removeItem('anticipos_data_v3');
+                            await syncData(); 
+                        } catch (error) {
+                            console.error('Error al guardar la distribución:', error);
+                            showToast(`Error al guardar: ${error.message}`, 'danger');
+                        }
+                    })(); 
+                    // *************** FIN LÓGICA ORIGINAL DE GUARDADO ***************
+                };
             }
             // --- FIN DE LA FUNCIÓN DE GUARDADO ---
             
