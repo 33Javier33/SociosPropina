@@ -135,7 +135,7 @@
                 <div class="punto-planta-display-general" id="puntoPlantaDisplay"></div>
                 
                 <div class="action-button-group">
-                    <button type="button" class="show-punto-planta-btn">Calcular Punto-Planta</button>
+                    <button type="button" class="show-punto-planta-btn">Obtener Valor Punto-Planta</button>
                     <button type="button" id="addAnticipoBtn">Registrar Nuevo Anticipo</button>
                     <button type="button" id="loadAllAnticiposBtn">📥 Cargar Todos los Anticipos (Sheets)</button>
                     <button type="button" id="saveAllAnticiposAndDistribucionBtn" style="background-color: #27ae60;">
@@ -184,13 +184,23 @@
     <template id="templatePuntoPlantaModal">
         <div class="modal">
             <div class="modal-content">
-                <span class="close-button">&times;</span><h3>Cálculo de Punto-Planta</h3>
+                <span class="close-button">&times;</span><h3>Valor de Punto-Planta</h3>
                 <div>
-                    <p><strong>Propina Neta a Distribuir:</strong> <span id="propinaNetaModal">$0</span></p>
+                    <div id="propinaNetaContainer">
+                        <p><strong>Propina Neta a Distribuir:</strong> <span id="propinaNetaModal">$0</span></p>
+                    </div>
+                    <div id="divisorContainer">
+                        <p style="text-align:left;">
+                            <strong>Divisor (Total Puntos Historial):</strong> 
+                            <strong id="divisorPuntoPlantaDisplay" style="color:#28a745;">Cargando...</strong>
+                        </p>
+                    </div>
                     <hr>
-                    <label for="divisorPuntoPlanta">Ingresar Divisor:</label>
-                    <input type="text" id="divisorPuntoPlanta" inputmode="numeric" placeholder="Ej: 100000" required>
-                    <button type="button" id="calcularPuntoPlantaInternoBtn">Calcular y Guardar</button>
+                    <p style="text-align:left;">
+                        <strong>Valor Punto Actual (desde Arqueo):</strong> 
+                        <strong id="valorPuntoActualDisplay" style="color:var(--primary-color);">Cargando...</strong>
+                    </p>
+                    <button type="button" id="calcularPuntoPlantaInternoBtn">Guardar Valor Punto</button>
                     <div id="puntoPlantaValor" style="text-align:center; margin-top:15px; font-weight:bold;"></div>
                 </div>
             </div>
@@ -297,7 +307,10 @@
             // --- CONEXIONES CON GOOGLE SHEETS --- ¡¡¡IMPORTANTE!!!
             // REEMPLAZA ESTAS URLs CON LAS TUYAS.
             const SCRIPT_URL_MONTOS = 'https://script.google.com/macros/s/AKfycbxna9EH5LZPTPCPws58pGro6qCrZ8_zNwvUkUHS28BYfd8CsAcD1MRcqlITbDm4lTk/exec'; // Para Balance (Propina Bruta)
-            const SCRIPT_URL_SOCIOS = 'https://script.google.com/macros/s/AKfycbyr447pMQtsKoBfp8qTcB1uyE3rORhgPPmZM6Fgia3BgmIvtlZ_h04uGZrmx_HwubHQ/exec'; // URL ficticia para Apps Script Socios
+            const SCRIPT_URL_SOCIOS = 'https://script.google.com/macros/s/AKfycbyr447pMQtsKoBfp8qTcB1uyE3rORhgPPmZM6Fgia3BgmIvtlZ_h04uGZrmx_HwubHQ/exec'; // URL ficticia para Apps Script Socios (DEBES REEMPLAZAR)
+            
+            // ** CLAVE DE ARQUEO.HTML PARA OBTENER EL VALOR PUNTO ACTUAL **
+            const STORAGE_KEY_SUMA_PUNTOS = 'arqueoSumaPuntosCLP'; 
             
             document.getElementById('registroSocioForm').innerHTML = document.getElementById('templateRegistroSocioForm').innerHTML;
             
@@ -1156,7 +1169,7 @@
                     const totalPuntos = totalPuntosMatch ? parseFloat(totalPuntosMatch[1]) : 0;
 
                     if (puntoPlanta <= 0) {
-                        showToast('Primero debes calcular el Punto-Planta.', 'warning');
+                        showToast('Primero debes obtener el Valor Punto-Planta.', 'warning');
                         return;
                     }
                     
@@ -1388,31 +1401,53 @@
             }
 
             function handleShowPuntoPlantaModal() {
+                // Aunque no se usan para calcular, se mantienen para referencia en el modal.
                 const totalPropinaBruta = montosData.reduce((sum, monto) => sum + parseFloat(monto.monto || monto.cantidad || 0), 0);
                 const totalDescuentos = getDescuentosFromStorage().reduce((sum, d) => sum + d.cantidad, 0);
                 const propinaNeta = totalPropinaBruta - totalDescuentos;
 
+                // --- LÓGICA CLAVE: Recuperar el Valor Punto Actual (que fue guardado por arqueo.html) ---
+                const valorPuntoActual = parseNumber(localStorage.getItem(STORAGE_KEY_SUMA_PUNTOS) || '0');
+                // -------------------------------------------------------------------------------------
+
                 ui.modalContainer.innerHTML = document.getElementById('templatePuntoPlantaModal').innerHTML;
                 const modal = ui.modalContainer.querySelector('.modal');
+                
+                // Mostrar la Propina Neta y el Divisor (por si acaso, aunque no se usan para el cálculo final del punto)
                 modal.querySelector('#propinaNetaModal').textContent = `$${formatNumber(propinaNeta)}`;
-                setupNumericInputFormatting(modal.querySelector('#divisorPuntoPlanta'));
-                modal.querySelector('#calcularPuntoPlantaInternoBtn').onclick = () => handleCalculatePuntoPlanta(propinaNeta);
+                modal.querySelector('#divisorPuntoPlantaDisplay').textContent = formatNumber(parseNumber(localStorage.getItem(STORAGE_KEY_SUMA_PUNTOS) || '0'));
+                
+                // Mostrar el valor recuperado como el Valor Punto Actual
+                const valorDisplay = modal.querySelector('#valorPuntoActualDisplay');
+                valorDisplay.textContent = valorPuntoActual > 0 
+                    ? `$${formatNumber(valorPuntoActual)}`
+                    : 'ERROR: Valor Punto = 0. Verifique el arqueo.';
+                
+                // Usamos la nueva función para guardar el valor recuperado
+                modal.querySelector('#calcularPuntoPlantaInternoBtn').onclick = () => handleSetPuntoPlanta(valorPuntoActual);
+                
                 modal.querySelector('.close-button').onclick = () => modal.style.display = 'none';
                 modal.style.display = 'flex';
+                
+                // Ocultamos los contenedores si no queremos ver los componentes de la fórmula clásica
+                modal.querySelector('#propinaNetaContainer').style.display = 'none'; 
+                modal.querySelector('#divisorContainer').style.display = 'none'; 
             }
 
-            function handleCalculatePuntoPlanta(propinaNeta) {
+            function handleSetPuntoPlanta(valorPunto) {
                 const modal = ui.modalContainer.querySelector('.modal');
-                const divisor = parseNumber(modal.querySelector('#divisorPuntoPlanta').value);
-                if (!divisor || divisor <= 0) {
-                    showToast('El divisor debe ser un número mayor a cero.', 'warning');
+                
+                if (!valorPunto || valorPunto <= 0) {
+                    showToast('El Valor Punto (desde Arqueo) no es válido o es cero. Verifique el arqueo.', 'warning');
                     return;
                 }
-                const puntoPlanta = propinaNeta / divisor;
-                localStorage.setItem('lastPuntoPlantaValue', puntoPlanta);
                 
-                modal.querySelector('#puntoPlantaValor').textContent = `Valor del Punto: $${formatNumber(puntoPlanta)}`;
-                showToast('Punto-Planta calculado y guardado.', 'success');
+                // 1. Guardar el valor recuperado
+                localStorage.setItem('lastPuntoPlantaValue', valorPunto);
+                
+                modal.querySelector('#puntoPlantaValor').textContent = `Valor del Punto: $${formatNumber(valorPunto)}`;
+                showToast('Valor Punto-Planta obtenido y guardado.', 'success');
+                
                 setTimeout(() => {
                     updateAllUI();
                     if (modal) modal.style.display = 'none';
