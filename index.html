@@ -184,26 +184,33 @@
     <template id="templatePuntoPlantaModal">
         <div class="modal">
             <div class="modal-content">
-                <span class="close-button">&times;</span><h3>Valor de Punto-Planta</h3>
+                <span class="close-button">&times;</span><h3>Calcular Valor Punto-Planta</h3>
                 <div>
                     <div id="propinaNetaContainer">
-                        <p><strong>Propina Neta a Distribuir:</strong> <span id="propinaNetaModal">$0</span></p>
-                    </div>
-                    <div id="divisorContainer">
                         <p style="text-align:left;">
-                            <strong>Divisor (Total Puntos Historial):</strong> 
-                            <strong id="divisorPuntoPlantaDisplay" style="color:#28a745;">Cargando...</strong>
+                            <strong>Propina Neta a Distribuir:</strong> <span id="propinaNetaModal">$0</span>
+                        </p>
+                    </div>
+                    <div id="divisorPuntosContainer">
+                        <p style="text-align:left;">
+                            <strong>Total Puntos (Planta + PT Base):</strong> 
+                            <span id="totalPuntosGeneralDisplay" style="color:#28a745;">0</span>
                         </p>
                     </div>
                     <hr>
-                    <p style="text-align:left;">
-                        <strong>Valor Punto Actual (desde Arqueo):</strong> 
-                        <strong id="valorPuntoActualDisplay" style="color:var(--primary-color);">Cargando...</strong>
+                    <label for="divisorManualInput">Divisor Manual (Total Puntos):</label>
+                    <input type="text" id="divisorManualInput" inputmode="numeric" required placeholder="Ingrese el divisor manual">
+                    
+                    <p style="text-align:left; margin-top: 15px;">
+                        <strong>Valor Punto Calculado:</strong> 
+                        <strong id="valorPuntoCalculadoDisplay" style="color:var(--primary-color);">$0</strong>
                     </p>
-                    <button type="button" id="calcularPuntoPlantaInternoBtn">Guardar Valor Punto</button>
+                    
+                    <button type="button" id="calcularPuntoPlantaInternoBtn">Calcular y Guardar Valor Punto</button>
                     <div id="puntoPlantaValor" style="text-align:center; margin-top:15px; font-weight:bold;"></div>
                 </div>
             </div>
+        </div>
     </template>
     
     <template id="templateAddDescuentoModal">
@@ -309,8 +316,8 @@
             const SCRIPT_URL_MONTOS = 'https://script.google.com/macros/s/AKfycbxna9EH5LZPTPCPws58pGro6qCrZ8_zNwvUkUHS28BYfd8CsAcD1MRcqlITbDm4lTk/exec'; // Para Balance (Propina Bruta)
             const SCRIPT_URL_SOCIOS = 'https://script.google.com/macros/s/AKfycbyr447pMQtsKoBfp8qTcB1uyE3rORhgPPmZM6Fgia3BgmIvtlZ_h04uGZrmx_HwubHQ/exec'; // URL ficticia para Apps Script Socios (DEBES REEMPLAZAR)
             
-            // ** CLAVE DE ARQUEO.HTML PARA OBTENER EL VALOR PUNTO ACTUAL **
-            const STORAGE_KEY_SUMA_PUNTOS = 'arqueoSumaPuntosCLP'; 
+            // ** CLAVE ANTERIOR (ELIMINADA) **
+            // const STORAGE_KEY_SUMA_PUNTOS = 'arqueoSumaPuntosCLP'; 
             
             document.getElementById('registroSocioForm').innerHTML = document.getElementById('templateRegistroSocioForm').innerHTML;
             
@@ -398,6 +405,7 @@
                     if (isNaN(value) || value.trim() === '') {
                         e.target.value = '';
                     } else {
+                        // Permite números grandes sin perder precisión al parsear a entero para el formato
                         e.target.value = new Intl.NumberFormat('es-CL').format(parseInt(value, 10));
                     }
                 });
@@ -481,6 +489,8 @@
                         const puntosCalculados = ptData.puntosCalculados || 0;
                         
                         // CÁLCULO PARA EL TOTAL DE PUNTOS DISTRIBUIDOS (Part-Time: Puntos Antigüedad Base)
+                        // NOTA: Se usan los puntos de Antigüedad *base* para el divisor general (totalPuntosPartTime)
+                        // y también para el cálculo de su asignación (puntosAntiguedad * puntosCalculados)
                         totalPuntosPartTime += socio.puntosAntiguedad; 
                         
                         // CÁLCULO DE PROPINA ASIGNADA
@@ -502,6 +512,7 @@
                     }
                 });
                 
+                // Los puntos totales son la suma de los puntos con tope (Planta) y los puntos base (Part-Time)
                 const totalPuntosGeneral = totalPuntosPlanta + totalPuntosPartTime;
                 
                 ui.totalPuntosDisplay.innerHTML = `Puntos Totales Distribuidos: <strong>${totalPuntosGeneral.toFixed(2)}</strong> 
@@ -545,8 +556,12 @@
                 const distribucion = ultimaDistribucionData.distribucion;
                 const allPtData = getPartTimeDataFromStorage();
 
-                // 1. Cargar el Punto Planta
+                // 1. Cargar el Punto Planta y el Divisor
                 localStorage.setItem('lastPuntoPlantaValue', resumen.puntoPlanta);
+                // Asumimos que el divisor fue el Total Puntos General, si no tenemos el dato explícito
+                if (resumen.totalPuntos) {
+                     localStorage.setItem('lastPuntoPlantaDivisor', resumen.totalPuntos);
+                }
                 
                 // 2. Aplicar los Puntos Finales a cada socio
                 distribucion.forEach(distSocio => {
@@ -554,6 +569,7 @@
                     if (socio && isPartTime(socio)) {
                         // Reversa para obtener el 'puntosCalculados' (Multiplicador PT)
                         // PropinaAsignada = Puntos Antigüedad * Multiplicador
+                        // Nota: Se usa PuntosAntiguedad porque es el divisor base de PT.
                         const puntosCalculados = distSocio.PropinaAsignada / distSocio.PuntosAntiguedad;
                         const ptData = allPtData[socio.ID] || {};
                         allPtData[socio.ID] = { 
@@ -1400,59 +1416,80 @@
                 };
             }
 
+            // INICIO DE LA MODIFICACIÓN CLAVE
             function handleShowPuntoPlantaModal() {
-                // Aunque no se usan para calcular, se mantienen para referencia en el modal.
                 const totalPropinaBruta = montosData.reduce((sum, monto) => sum + parseFloat(monto.monto || monto.cantidad || 0), 0);
                 const totalDescuentos = getDescuentosFromStorage().reduce((sum, d) => sum + d.cantidad, 0);
                 const propinaNeta = totalPropinaBruta - totalDescuentos;
 
-                // --- LÓGICA CLAVE: Recuperar el Valor Punto Actual (que fue guardado por arqueo.html) ---
-                const valorPuntoActual = parseNumber(localStorage.getItem(STORAGE_KEY_SUMA_PUNTOS) || '0');
-                // -------------------------------------------------------------------------------------
-
+                // Recuperar el Total de Puntos de la UI (calculado en updateAllUI)
+                const totalPuntosMatch = ui.totalPuntosDisplay.innerText.match(/Puntos Totales Distribuidos: ([\d\.]+)/);
+                const totalPuntos = totalPuntosMatch ? parseFloat(totalPuntosMatch[1]) : 0;
+                
                 ui.modalContainer.innerHTML = document.getElementById('templatePuntoPlantaModal').innerHTML;
                 const modal = ui.modalContainer.querySelector('.modal');
+                const divisorInput = modal.querySelector('#divisorManualInput');
+                const valorCalculadoDisplay = modal.querySelector('#valorPuntoCalculadoDisplay');
                 
-                // Mostrar la Propina Neta y el Divisor (por si acaso, aunque no se usan para el cálculo final del punto)
+                setupNumericInputFormatting(divisorInput); // Habilitar formato numérico
+
+                // Mostrar Propina Neta y Total Puntos (Divisor sugerido)
                 modal.querySelector('#propinaNetaModal').textContent = `$${formatNumber(propinaNeta)}`;
-                modal.querySelector('#divisorPuntoPlantaDisplay').textContent = formatNumber(parseNumber(localStorage.getItem(STORAGE_KEY_SUMA_PUNTOS) || '0'));
+                modal.querySelector('#totalPuntosGeneralDisplay').textContent = totalPuntos.toFixed(2);
                 
-                // Mostrar el valor recuperado como el Valor Punto Actual
-                const valorDisplay = modal.querySelector('#valorPuntoActualDisplay');
-                valorDisplay.textContent = valorPuntoActual > 0 
-                    ? `$${formatNumber(valorPuntoActual)}`
-                    : 'ERROR: Valor Punto = 0. Verifique el arqueo.';
+                // Cargar el último divisor usado si existe, si no, usar el total de puntos calculado
+                const lastDivisor = localStorage.getItem('lastPuntoPlantaDivisor') || totalPuntos.toFixed(2);
+                divisorInput.value = formatNumber(lastDivisor);
                 
-                // Usamos la nueva función para guardar el valor recuperado
-                modal.querySelector('#calcularPuntoPlantaInternoBtn').onclick = () => handleSetPuntoPlanta(valorPuntoActual);
+                // Mostrar un cálculo inicial
+                const divisorInicial = parseNumber(lastDivisor);
+                const initialPunto = divisorInicial > 0 ? propinaNeta / divisorInicial : 0;
+                valorCalculadoDisplay.textContent = `$${formatNumber(initialPunto)}`;
+
+                // Evento para recalcular al cambiar el divisor
+                divisorInput.addEventListener('input', () => {
+                    const divisor = parseNumber(divisorInput.value);
+                    const puntoCalculado = divisor > 0 ? propinaNeta / divisor : 0;
+                    valorCalculadoDisplay.textContent = `$${formatNumber(puntoCalculado)}`;
+                });
+
+                // Usamos la nueva función para calcular y guardar
+                modal.querySelector('#calcularPuntoPlantaInternoBtn').onclick = () => handleSetPuntoPlanta(propinaNeta, divisorInput.value);
                 
                 modal.querySelector('.close-button').onclick = () => modal.style.display = 'none';
                 modal.style.display = 'flex';
-                
-                // Ocultamos los contenedores si no queremos ver los componentes de la fórmula clásica
-                modal.querySelector('#propinaNetaContainer').style.display = 'none'; 
-                modal.querySelector('#divisorContainer').style.display = 'none'; 
             }
 
-            function handleSetPuntoPlanta(valorPunto) {
+            function handleSetPuntoPlanta(propinaNeta, divisorManualStr) {
                 const modal = ui.modalContainer.querySelector('.modal');
+                // Parsear el divisor (limpiar puntos y comas de formato)
+                const divisor = parseNumber(divisorManualStr); 
                 
-                if (!valorPunto || valorPunto <= 0) {
-                    showToast('El Valor Punto (desde Arqueo) no es válido o es cero. Verifique el arqueo.', 'warning');
+                if (!divisor || divisor <= 0) {
+                    showToast('El divisor debe ser un número mayor a 0.', 'warning');
                     return;
                 }
                 
-                // 1. Guardar el valor recuperado
+                const valorPunto = propinaNeta / divisor;
+                
+                if (valorPunto <= 0) {
+                    showToast('El Valor Punto es cero. Verifique la Propina Neta y el Divisor.', 'warning');
+                    return;
+                }
+                
+                // 1. Guardar el valor calculado y el divisor usado
                 localStorage.setItem('lastPuntoPlantaValue', valorPunto);
+                localStorage.setItem('lastPuntoPlantaDivisor', divisor); // Guardamos el valor numérico limpio
                 
                 modal.querySelector('#puntoPlantaValor').textContent = `Valor del Punto: $${formatNumber(valorPunto)}`;
-                showToast('Valor Punto-Planta obtenido y guardado.', 'success');
+                showToast('Valor Punto-Planta calculado y guardado.', 'success');
                 
                 setTimeout(() => {
                     updateAllUI();
                     if (modal) modal.style.display = 'none';
                 }, 1500);
             }
+            // FIN DE LA MODIFICACIÓN CLAVE
             
             async function handleRegisterSocio(e) {
                 e.preventDefault();
