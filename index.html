@@ -93,6 +93,16 @@
         #resetPuntoPlantaBtn:hover {
             background-color: #a93226;
         }
+        /* ESTILO PARA EL NUEVO BOTÓN DE REINICIO PT */
+        #resetPartTimeDataBtn {
+            background-color: #e74c3c; /* Rojo de peligro */
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        #resetPartTimeDataBtn:hover {
+            background-color: #c0392b;
+        }
+
         /* ESTILO PARA EL NUEVO ENLACE DE ARQUEO */
         .side-menu a.arqueo-link {
             background-color: #e67e22; /* Color distintivo para el Arqueo */
@@ -202,6 +212,8 @@
                         💾 Guardar Todos los Anticipos y Distribución Final
                     </button>
                 </div>
+                <button type="button" id="resetPartTimeDataBtn">🔴 Reiniciar Días y Punto Calculado de Part-Time</button>
+
                 <div id="distribucionPlantaContainer"></div>
                 <div id="distribucionPartTimeContainer"></div>
             </div>
@@ -388,6 +400,8 @@
                 syncDataBtn: document.getElementById('syncDataBtn'), 
                 resetAnticiposLocalBtn: document.getElementById('resetAnticiposLocalBtn'),
                 resetPuntoPlantaBtn: document.getElementById('resetPuntoPlantaBtn'),
+                // NUEVO BOTÓN
+                resetPartTimeDataBtn: document.getElementById('resetPartTimeDataBtn'),
                 balancePropinaBruta: document.getElementById('balancePropinaBruta'),
                 balanceDescuentos: document.getElementById('balanceDescuentos'),
                 balancePropinaNeta: document.getElementById('balancePropinaNeta'),
@@ -1230,6 +1244,7 @@
                     const allPtData = getPartTimeDataFromStorage();
                     
                     sociosData = sociosDesdeNube.map(socio => {
+                        // Inicializa o verifica la estructura PT si es Part-Time
                         if (isPartTime(socio) && !allPtData[socio.ID]) {
                             allPtData[socio.ID] = { diasTrabajados: [], montoAsignable: 0, puntosCalculados: 0, multiplicador: 1 };
                         }
@@ -1417,7 +1432,7 @@
             }
             // -----------------------------------------------------
 
-            // --- NUEVA FUNCIÓN PARA REINICIAR VALOR PUNTO-PLANTA ---
+            // --- FUNCIÓN PARA REINICIAR VALOR PUNTO-PLANTA ---
             function handleResetPuntoPlanta() {
                 ui.modalContainer.innerHTML = document.getElementById('templateConfirmDeleteModal').innerHTML;
                 const modal = ui.modalContainer.querySelector('.modal');
@@ -1435,6 +1450,46 @@
                     showToast('Valor Punto-Planta reiniciado a $0.', 'danger');
                     modal.style.display = 'none';
                     updateAllUI(); // Forzar la actualización de la distribución
+                };
+            }
+            // -----------------------------------------------------
+
+            // --- NUEVA FUNCIÓN PARA REINICIAR DATOS PT LOCALES ---
+            function handleResetPartTimeData() {
+                ui.modalContainer.innerHTML = document.getElementById('templateConfirmDeleteModal').innerHTML;
+                const modal = ui.modalContainer.querySelector('.modal');
+                modal.querySelector('#confirmDeleteText').innerHTML = 
+                    `¿Estás seguro de que quieres **REINICIAR LOS DATOS DE CÁLCULO** de todos los Part-Time?<br><br>
+                    Esto limpiará **Días Trabajados**, **Monto Asignable** y **Puntos Calculados** de Part-Time, dejándolos listos para la próxima distribución.
+                    <br><br>
+                    **Nota:** Los Puntos de Antigüedad y los anticipos NO serán afectados.`;
+                modal.style.display = 'flex';
+                
+                // Botón de Cancelar
+                modal.querySelector('.cancel-btn').onclick = () => modal.style.display = 'none';
+                
+                // Botón de Confirmar (Reiniciar)
+                modal.querySelector('.confirm-delete-btn').onclick = () => {
+                    let allPtData = getPartTimeDataFromStorage();
+                    const sociosPartTime = sociosData.filter(isPartTime);
+                    let count = 0;
+                    
+                    sociosPartTime.forEach(socio => {
+                        if (allPtData[socio.ID]) {
+                            allPtData[socio.ID] = { 
+                                diasTrabajados: [], 
+                                montoAsignable: 0, 
+                                puntosCalculados: 0,
+                                multiplicador: 1 // Reinicia el multiplicador a 1 por defecto
+                            };
+                            count++;
+                        }
+                    });
+                    
+                    savePartTimeDataToStorage(allPtData);
+                    showToast(`Datos de cálculo de ${count} Part-Time reiniciados.`, 'danger');
+                    modal.style.display = 'none';
+                    updateAllUI(); 
                 };
             }
             // -----------------------------------------------------
@@ -1472,9 +1527,14 @@
                     ui.resetAnticiposLocalBtn.addEventListener('click', handleResetAnticiposLocal);
                 }
                 
-                // CONEXIÓN DEL BOTÓN DE REINICIO DE PUNTO-PLANTA (NUEVO)
+                // CONEXIÓN DEL BOTÓN DE REINICIO DE PUNTO-PLANTA
                 if (ui.resetPuntoPlantaBtn) {
                     ui.resetPuntoPlantaBtn.addEventListener('click', handleResetPuntoPlanta);
+                }
+                
+                // CONEXIÓN DEL BOTÓN DE REINICIO DE DATOS PART-TIME (NUEVO)
+                if (ui.resetPartTimeDataBtn) {
+                    ui.resetPartTimeDataBtn.addEventListener('click', handleResetPartTimeData);
                 }
 
 
@@ -1483,7 +1543,7 @@
                     ui.loadAllAnticiposBtn.addEventListener('click', handleLoadAllAnticipos);
                 }
 
-                // CONEXIÓN DEL BOTÓN DE SUBIDA MASIVA (NUEVO)
+                // CONEXIÓN DEL BOTÓN DE SUBIDA MASIVA
                 if (ui.uploadAllAnticiposBtn) {
                     ui.uploadAllAnticiposBtn.addEventListener('click', handleUploadAllAnticipos);
                 }
@@ -1669,7 +1729,7 @@
                 if (valorPunto <= 0) {
                     showToast('El Valor Punto es cero. Verifique la Propina Neta y el Divisor.', 'warning');
                     return;
-                }
+                    }
                 
                 // 1. Guardar el valor calculado y el divisor usado
                 localStorage.setItem('lastPuntoPlantaValue', valorPunto);
