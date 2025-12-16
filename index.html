@@ -143,6 +143,27 @@
                 grid-template-columns: 1fr 1fr 1fr; /* 3 columnas en desktop */
             }
         }
+        /* Puntos en Tarjeta de Gestión */
+        .socio-card-info p.puntos-info {
+            font-size: 0.9em;
+            color: var(--text-dark);
+            background-color: #eafaf1;
+            padding: 5px 8px;
+            border-radius: 4px;
+            margin: 6px 0;
+            border-left: 3px solid var(--secondary-color);
+        }
+        .socio-card-info p.puntos-info strong {
+            font-weight: 700;
+        }
+
+        /* ESTILO AÑADIDO PARA LA FECHA DE INGRESO */
+        .socio-card-info p.fecha-ingreso-info {
+            font-size: 0.9em;
+            color: var(--primary-color);
+            margin: 4px 0;
+        }
+
 
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
@@ -459,8 +480,6 @@
             const SCRIPT_URL_MONTOS = 'https://script.google.com/macros/s/AKfycbxna9EH5LZPTPCPws58pGro6qCrZ8_zNwvUkUHS28BYfd8CsAcD1MRcqlITbDm4lTk/exec'; // Para Balance (Propina Bruta)
             const SCRIPT_URL_SOCIOS = 'https://script.google.com/macros/s/AKfycbyr447pMQtsKoBfp8qTcB1uyE3rORhgPPmZM6Fgia3BgmIvtlZ_h04uGZrmx_HwubHQ/exec'; // URL ficticia para Apps Script Socios (DEBES REEMPLAZAR)
             
-            // ELIMINADO: document.getElementById('registroSocioForm').innerHTML = document.getElementById('templateRegistroSocioForm').innerHTML;
-            
             const ui = {
                 menuToggle: document.getElementById('menuToggle'),
                 sideMenu: document.getElementById('sideMenu'),
@@ -592,6 +611,18 @@
                 allPtData[socio.ID] = { ...ptData, montoAsignable };
                 savePartTimeDataToStorage(allPtData);
             }
+            
+            const calcularPuntosConTope = (socio) => {
+                 let topePuntos;
+                 if (socio.Area === 'Mesas') {
+                     topePuntos = 20;
+                 } else if (socio.Area === 'Boveda') {
+                     topePuntos = 10;
+                 } else {
+                     topePuntos = 12;
+                 }
+                 return Math.min(socio.puntosAntiguedad, topePuntos);
+            }
 
             const updateAllUI = () => {
                 const totalPropinaBruta = montosData.reduce((sum, monto) => sum + parseFloat(monto.monto || monto.cantidad || 0), 0);
@@ -623,16 +654,7 @@
                 const puntoPlanta = parseFloat(localStorage.getItem('lastPuntoPlantaValue')) || 0;
 
                 sociosData.forEach(socio => {
-                    // Lógica para Puntos Planta (TOPE)
-                    let topePuntos;
-                    if (socio.Area === 'Mesas') {
-                        topePuntos = 20;
-                    } else if (socio.Area === 'Boveda') {
-                        topePuntos = 10;
-                    } else {
-                        topePuntos = 12;
-                    }
-                    const puntosFinalesPlanta = Math.min(socio.puntosAntiguedad, topePuntos);
+                    const puntosFinalesPlanta = calcularPuntosConTope(socio);
 
                     if (isPartTime(socio)) {
                         const ptData = allPtData[socio.ID] || {};
@@ -870,24 +892,48 @@
 
             // --------------------------------------------------------------------------------------------------
 
+            // CÓDIGO ACTUALIZADO: Se muestra solo los puntos con tope
             const createSocioManageCard = (socio) => {
                 const card = document.createElement('div');
                 card.className = 'socio-card';
+                
+                const puntosAntiguedad = socio.puntosAntiguedad;
+                const puntosConTope = calcularPuntosConTope(socio); 
+
+                // CLAVE: Obtener y formatear la fecha de ingreso
+                const fechaIngresoDisplay = formatDisplayDate(socio.FechaIngreso);
+
                 let ptInfo = '';
+                let puntosInfoHtml = ''; 
+
                 if (isPartTime(socio)) {
                     const ptData = getPartTimeDataFromStorage()[socio.ID] || {};
                     const diasTrabajados = ptData.diasTrabajados || [];
                     const montoAsignable = ptData.montoAsignable || 0;
+                    
+                    // Para Part-Time, mostramos los Puntos de Antigüedad (ya que son la base para su cálculo PT)
+                    puntosInfoHtml = `<p class="puntos-info">
+                                        <strong>Puntos Base (Antigüedad):</strong> ${puntosAntiguedad}
+                                      </p>`;
+                    
                     ptInfo = `<p><strong>Días Trabajados:</strong> ${diasTrabajados.length}</p>
                               <p><strong>Monto Asignable:</strong> $${formatNumber(montoAsignable)}</p>
                               <div class="part-time-actions">
                                   <button class="calendar-btn" data-socio-id="${socio.ID}">Registrar Días</button>
                                   <button class="calculate-btn" data-socio-id="${socio.ID}">Calcular Puntos PT</button>
                               </div>`;
+                } else {
+                    // Si es Planta, solo mostramos los puntos con tope, como solicitaste.
+                    puntosInfoHtml = `<p class="puntos-info">
+                                        <strong>Puntos Finales (Tope ${puntosConTope}):</strong> ${puntosConTope}
+                                      </p>`;
                 }
+
                 card.innerHTML = `<div class="socio-card-info">
                                     <p><strong>${socio.Nombre} ${socio.Apellido}</strong></p>
                                     <p>${socio.Area} - ${socio.TipoContrato}</p>
+                                    <p class="fecha-ingreso-info"><strong>Ingreso:</strong> ${fechaIngresoDisplay}</p>
+                                    ${puntosInfoHtml}
                                     ${ptInfo}
                                  </div>
                                  <div class="socio-card-actions">
@@ -905,15 +951,7 @@
                 card.dataset.socioId = socio.ID;
                 
                 // Lógica de Puntos Planta
-                let topePuntos;
-                if (socio.Area === 'Mesas') {
-                    topePuntos = 20;
-                } else if (socio.Area === 'Boveda') {
-                    topePuntos = 10;
-                } else {
-                    topePuntos = 12; 
-                }
-                const puntosFinalesPlanta = Math.min(socio.puntosAntiguedad, topePuntos);
+                const puntosFinalesPlanta = calcularPuntosConTope(socio);
 
 
                 let puntosDisplayHtml = '';
@@ -953,15 +991,7 @@
                     let puntosAsignadosFinales = 0;
 
                     // Lógica de Tope de Puntos Planta
-                    let topePuntos;
-                    if (socio.Area === 'Mesas') {
-                        topePuntos = 20;
-                    } else if (socio.Area === 'Boveda') {
-                        topePuntos = 10;
-                    } else {
-                        topePuntos = 12;
-                    }
-                    const puntosFinalesPlanta = Math.min(socio.puntosAntiguedad, topePuntos);
+                    const puntosFinalesPlanta = calcularPuntosConTope(socio);
                     
                     if (isPartTime(socio)) {
                         const ptData = allPtData[socio.ID] || {};
@@ -1269,7 +1299,7 @@
                     const result = await apiCall(SCRIPT_URL_SOCIOS, 'registrarTodosLosAnticipos', 'POST', dataToSend);
                     
                     // Si apiCall no lanzó error, la subida fue exitosa.
-                    showToast(result.message || `Subida masiva exitosa de ${detalleAntalleAnticipos.length} registros.`, 'success');
+                    showToast(result.message || `Subida masiva exitosa de ${detalleAnticipos.length} registros.`, 'success');
                     
                 } catch (error) {
                     console.error('Error al subir todos los anticipos:', error);
