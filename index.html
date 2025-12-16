@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-        :root{--menu-width:250px;--primary-color:#3498db;--primary-hover-color:#2980b9;--secondary-color:#2ecc71;--danger-color:#e74c3c;--warning-color:#f39c12;--light-bg:#eef2f6;--white-bg:#fff;--text-dark:#2c3e50;--text-light:#555;--border-color:#e0e6ed}body{font-family:'Poppins',sans-serif;margin:0;background-color:var(--light-bg);color:#333}.menu-toggle{position:fixed;top:15px;left:15px;z-index:1002;width:40px;height:40px;background-color:var(--primary-color);border:none;border-radius:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.1);transition:left .3s ease}.menu-toggle span{display:block;width:22px;height:2px;background-color:#fff;margin:2px 0;transition:all .3s ease}.side-menu.open+.main-container .menu-toggle{left:calc(var(--menu-width) + 15px)}.menu-toggle.active span:nth-child(1){transform:translateY(6px) rotate(45deg)}.menu-toggle.active span:nth-child(2){opacity:0}.menu-toggle.active span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}.side-menu{position:fixed;top:0;left:0;width:var(--menu-width);height:100%;background-color:var(--text-dark);z-index:1001;transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column;padding-top:60px;box-shadow:5px 0 15px rgba(0,0,0,.1)}.side-menu.open{transform:translateX(0)}.side-menu .menu-header{color:#fff;font-size:1.5em;font-weight:700;text-align:center;padding:20px 10px;border-bottom:1px solid #4a627a}.side-menu a{color:#fff;text-decoration:none;padding:15px 20px;display:block;font-size:1em;transition:background-color .2s ease,padding-left .2s ease;border-bottom:1px solid #3e5268}.side-menu a:hover,.side-menu a.active-link{background-color:var(--primary-color);padding-left:25px}.main-container{transition:margin-left .3s ease;padding:15px}.container{max-width:960px;margin:10px auto;background-color:var(--white-bg);padding:20px;border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,.07)}h1{color:var(--text-dark);text-align:center;margin-bottom:20px;font-weight:700;font-size:1.8em;padding-top:45px}h2{color:var(--primary-color);margin:0 0 20px;font-weight:600;font-size:1.5em;border-bottom:2px solid var(--border-color);padding-bottom:10px;display:flex;justify-content:space-between;align-items:center}#sync-indicator{font-size:.6em;font-weight:400;color:var(--text-light);opacity:0;transition:opacity .3s}#sync-indicator.visible{opacity:1}h3{color:var(--primary-color);margin-top:25px;margin-bottom:10px;font-size:1.4em}.content-panel{display:none}.content-panel.active{display:block;animation:fadeIn .5s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}label{display:block;margin-bottom:7px;font-weight:600;color:var(--text-light)}input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:10px;margin-bottom:18px;border:1px solid #dcdcdc;border-radius:6px;box-sizing:border-box;font-size:1em}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:0;box-shadow:0 0 0 3px rgba(52,152,219,.2)}button{background-color:var(--secondary-color);color:#fff;padding:10px 15px;border:none;border-radius:6px;cursor:pointer;font-size:1em;font-weight:600;width:100%;transition:background-color .3s ease,transform .2s ease;margin-top:8px}button:hover{background-color:#27ae60;transform:translateY(-1px)}button:disabled{background-color:#bdc3c7;cursor:not-allowed}button.cancel-btn{background-color:#95a5a6}.socios-list-container{margin-top:30px;border-top:2px solid var(--border-color)}.socio-card{padding:15px;background-color:#f7f9fc;border-radius:8px;margin-bottom:10px;border:1px solid #dbe9f5}.socio-card-info p{margin:4px 0;color:var(--text-light)}.socio-card-info p strong{color:var(--text-dark)}.socio-card-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px;border-top:1px solid #e0e6ed;padding-top:10px}.socio-card-actions button{width:auto;font-size:.9em;padding:6px 10px}.socio-card-actions .edit-btn{background-color:var(--primary-color)}.socio-card-actions .delete-btn{background-color:var(--danger-color)}.distribucion-planta-container,.distribucion-part-time-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:15px;padding-top:15px;border-top:1px solid var(--border-color)}.socio-distribucion-card{background-color:#f7f9fc;border:1px solid #dbe9f5;border-radius:10px;padding:18px;box-shadow:0 4px 15px rgba(0,0,0,.06)}.anticipos-list-container{margin-top:15px;padding-top:10px;border-top:1px dashed var(--border-color)}.anticipos-list-container h4{margin:0 0 10px;font-size:1em;color:var(--text-dark)}.anticipo-item,.descuento-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:.9em;border-bottom:1px solid #eef2f6}.anticipo-item:last-child,.descuento-item:last-child{border-bottom:none}.anticipo-item-info,.descuento-item-info{display:flex;flex-direction:column;flex-grow:1}.anticipo-item-info span,.descuento-item-info span{color:var(--text-light)}.anticipo-item-info .monto,.descuento-item-info .monto{font-weight:600;color:var(--text-dark)}.descuento-item-info .categoria{font-size:0.85em;font-style:italic;color:var(--primary-color)}.anticipo-item-actions,.descuento-item-actions{display:flex;gap:5px}.anticipo-item-actions button,.descuento-item-actions button{font-size:.8em;padding:4px 8px;margin:0;width:auto}.anticipo-item-actions .edit-anticipo-btn,.descuento-item-actions .edit-descuento-btn{background-color:var(--warning-color)}.anticipo-item-actions .delete-anticipo-btn,.descuento-item-actions .delete-descuento-btn{background-color:var(--danger-color)}.general-total{background-color:var(--secondary-color);color:#fff;padding:12px 15px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:1.3em;font-weight:700}
+        :root{--menu-width:250px;--primary-color:#3498db;--primary-hover-color:#2980b9;--secondary-color:#2ecc71;--danger-color:#e74c3c;--warning-color:#f39c12;--light-bg:#eef2f6;--white-bg:#fff;--text-dark:#2c3e50;--text-light:#555;--border-color:#e0e6ed}body{font-family:'Poppins',sans-serif;margin:0;background-color:var(--light-bg);color:#333}.menu-toggle{position:fixed;top:15px;left:15px;z-index:1002;width:40px;height:40px;background-color:var(--primary-color);border:none;border-radius:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.1);transition:left .3s ease}.menu-toggle span{display:block;width:22px;height:2px;background-color:#fff;margin:2px 0;transition:all .3s ease}.side-menu.open+.main-container .menu-toggle{left:calc(var(--menu-width) + 15px)}.menu-toggle.active span:nth-child(1){transform:translateY(6px) rotate(45deg)}.menu-toggle.active span:nth-child(2){opacity:0}.menu-toggle.active span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}.side-menu{position:fixed;top:0;left:0;width:var(--menu-width);height:100%;background-color:var(--text-dark);z-index:1001;transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column;padding-top:60px;box-shadow:5px 0 15px rgba(0,0,0,.1)}.side-menu.open{transform:translateX(0)}.side-menu .menu-header{color:#fff;font-size:1.5em;font-weight:700;text-align:center;padding:20px 10px;border-bottom:1px solid #4a627a}.side-menu a{color:#fff;text-decoration:none;padding:15px 20px;display:block;font-size:1em;transition:background-color .2s ease,padding-left .2s ease;border-bottom:1px solid #3e5268}.side-menu a:hover,.side-menu a.active-link{background-color:var(--primary-color);padding-left:25px}.main-container{transition:margin-left .3s ease;padding:15px}.container{max-width:960px;margin:10px auto;background-color:var(--white-bg);padding:20px;border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,.07)}h1{color:var(--text-dark);text-align:center;margin-bottom:20px;font-weight:700;font-size:1.8em;padding-top:55px} /* Ajustado el padding top para móvil */
+        h2{color:var(--primary-color);margin:0 0 20px;font-weight:600;font-size:1.5em;border-bottom:2px solid var(--border-color);padding-bottom:10px;display:flex;justify-content:space-between;align-items:center}#sync-indicator{font-size:.6em;font-weight:400;color:var(--text-light);opacity:0;transition:opacity .3s}#sync-indicator.visible{opacity:1}h3{color:var(--primary-color);margin-top:25px;margin-bottom:10px;font-size:1.4em}.content-panel{display:none}.content-panel.active{display:block;animation:fadeIn .5s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}label{display:block;margin-bottom:7px;font-weight:600;color:var(--text-light)}input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:10px;margin-bottom:18px;border:1px solid #dcdcdc;border-radius:6px;box-sizing:border-box;font-size:1em}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:0;box-shadow:0 0 0 3px rgba(52,152,219,.2)}button{background-color:var(--secondary-color);color:#fff;padding:10px 15px;border:none;border-radius:6px;cursor:pointer;font-size:1em;font-weight:600;width:100%;transition:background-color .3s ease,transform .2s ease;margin-top:8px}button:hover{background-color:#27ae60;transform:translateY(-1px)}button:disabled{background-color:#bdc3c7;cursor:not-allowed}button.cancel-btn{background-color:#95a5a6}.socios-list-container{margin-top:30px;border-top:2px solid var(--border-color)}.socio-card{padding:15px;background-color:#f7f9fc;border-radius:8px;margin-bottom:10px;border:1px solid #dbe9f5}.socio-card-info p{margin:4px 0;color:var(--text-light)}.socio-card-info p strong{color:var(--text-dark)}.socio-card-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px;border-top:1px solid #e0e6ed;padding-top:10px}.socio-card-actions button{width:auto;font-size:.9em;padding:6px 10px}.socio-card-actions .edit-btn{background-color:var(--primary-color)}.socio-card-actions .delete-btn{background-color:var(--danger-color)}.distribucion-planta-container,.distribucion-part-time-container{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;margin-top:15px;padding-top:15px;border-top:1px solid var(--border-color)}.socio-distribucion-card{background-color:#f7f9fc;border:1px solid #dbe9f5;border-radius:10px;padding:18px;box-shadow:0 4px 15px rgba(0,0,0,.06)}.anticipos-list-container{margin-top:15px;padding-top:10px;border-top:1px dashed var(--border-color)}.anticipos-list-container h4{margin:0 0 10px;font-size:1em;color:var(--text-dark)}.anticipo-item,.descuento-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:.9em;border-bottom:1px solid #eef2f6}.anticipo-item:last-child,.descuento-item:last-child{border-bottom:none}.anticipo-item-info,.descuento-item-info{display:flex;flex-direction:column;flex-grow:1}.anticipo-item-info span,.descuento-item-info span{color:var(--text-light)}.anticipo-item-info .monto,.descuento-item-info .monto{font-weight:600;color:var(--text-dark)}.descuento-item-info .categoria{font-size:0.85em;font-style:italic;color:var(--primary-color)}.anticipo-item-actions,.descuento-item-actions{display:flex;gap:5px}.anticipo-item-actions button,.descuento-item-actions button{font-size:.8em;padding:4px 8px;margin:0;width:auto}.anticipo-item-actions .edit-anticipo-btn,.descuento-item-actions .edit-descuento-btn{background-color:var(--warning-color)}.anticipo-item-actions .delete-anticipo-btn,.descuento-item-actions .delete-descuento-btn{background-color:var(--danger-color)}.general-total{background-color:var(--secondary-color);color:#fff;padding:12px 15px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:1.3em;font-weight:700}
 
         /* INICIO: MODIFICACIÓN CLAVE DEL CSS PARA AGRUPAR BOTONES */
         .action-button-group{
@@ -111,6 +112,38 @@
             background-color: #d35400; 
             padding-left: 25px;
         }
+
+        /* NUEVOS ESTILOS PARA LA SECCIÓN DE FILTROS EN DISTRIBUCIÓN Y GESTIÓN */
+        .filtros-container{
+            margin-bottom: 25px; 
+            padding: 15px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            background-color: var(--light-bg);
+        }
+        .filtros-container h3 {
+             margin-top: 0; 
+             margin-bottom: 10px; 
+             border-bottom: none; 
+             color: var(--text-dark); 
+             font-size: 1.2em;
+        }
+        .filtros-grid {
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 15px;
+        }
+        @media (min-width: 600px) {
+            .filtros-grid {
+                grid-template-columns: 1fr 1fr; 
+            }
+        }
+        @media (min-width: 992px) {
+            .filtros-grid {
+                grid-template-columns: 1fr 1fr 1fr; /* 3 columnas en desktop */
+            }
+        }
+
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
 </head>
@@ -156,19 +189,50 @@
                     </div>
             </div>
             <div id="registroContent" class="content-panel">
-                <h2>Registrar Nuevo Socio (en Sheets)</h2>
-                <form id="registroSocioForm"></form>
+                <h2>Gestionar Socios</h2>
+                
+                <button type="button" id="showRegisterSocioModalBtn" style="background-color: var(--primary-color); margin-bottom: 20px;">
+                    ➕ Registrar Nuevo Socio
+                </button>
+                
+                <div id="filtrosGestion" class="filtros-container">
+                    <h3>Filtrar Socios</h3>
+                    <div class="filtros-grid">
+                        <div>
+                            <label for="filtroNombreGestion">Buscar por Nombre/Apellido:</label>
+                            <input type="text" id="filtroNombreGestion" placeholder="Ej: Juan Pérez" style="margin-bottom: 0;">
+                        </div>
+                        <div>
+                            <label for="filtroAreaGestion">Filtrar por Área:</label>
+                            <select id="filtroAreaGestion" style="margin-bottom: 0;">
+                                <option value="todos">Todas las Áreas</option>
+                                <option value="Mesas">Mesas</option>
+                                <option value="Maquinas">Máquinas</option>
+                                <option value="Boveda">Boveda</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="filtroContratoGestion">Filtrar por Contrato:</label>
+                            <select id="filtroContratoGestion" style="margin-bottom: 0;">
+                                <option value="todos">Todos los Contratos</option>
+                                <option value="Planta">Planta</option>
+                                <option value="Part-Time">Part-Time</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="socios-list-container">
-                    <h3>Socios Registrados (de Sheets)</h3>
+                    <h3>Lista de Socios</h3>
                     <div id="sociosListContainer"></div>
                 </div>
             </div>
             <div id="distribucionContent" class="content-panel">
                 <h2>Distribución de Propina</h2>
                 
-                <div id="filtrosDistribucion" style="margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--light-bg);">
-                    <h3 style="margin-top: 0; margin-bottom: 10px; border-bottom: none; color: var(--text-dark); font-size: 1.2em;">Filtros Rápidos de Socios</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div id="filtrosDistribucion" class="filtros-container">
+                    <h3>Filtros Rápidos de Socios</h3>
+                    <div class="filtros-grid" style="grid-template-columns: 1fr 1fr;">
                         <div>
                             <label for="filtroNombre">Buscar por Nombre/Apellido:</label>
                             <input type="text" id="filtroNombre" placeholder="Ej: Juan Pérez" style="margin-bottom: 0;">
@@ -222,13 +286,20 @@
     <div id="modal-container"></div>
     <div id="toast-container"></div>
     
-    <template id="templateRegistroSocioForm">
-        <label for="nombre">Nombre:</label><input type="text" id="nombre" required>
-        <label for="apellido">Apellido:</label><input type="text" id="apellido" required>
-        <label for="fechaIngreso">Fecha de Ingreso:</label><input type="date" id="fechaIngreso" required>
-        <label for="area">Área:</label><select id="area" required><option value="">Seleccione</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option></select>
-        <label for="tipoContrato">Contrato:</label><select id="tipoContrato" required><option value="">Seleccione</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select>
-        <button type="submit">Registrar Socio</button>
+    <template id="templateRegisterSocioModal">
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span><h3>Registrar Nuevo Socio</h3>
+                <form id="registroSocioFormModal">
+                    <label for="nombre">Nombre:</label><input type="text" id="nombre" required>
+                    <label for="apellido">Apellido:</label><input type="text" id="apellido" required>
+                    <label for="fechaIngreso">Fecha de Ingreso:</label><input type="date" id="fechaIngreso" required>
+                    <label for="area">Área:</label><select id="area" required><option value="">Seleccione</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option></select>
+                    <label for="tipoContrato">Contrato:</label><select id="tipoContrato" required><option value="">Seleccione</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select>
+                    <button type="submit">Registrar Socio</button>
+                </form>
+            </div>
+        </div>
     </template>
     
     <template id="templateAddAnticipoModal">
@@ -388,7 +459,7 @@
             const SCRIPT_URL_MONTOS = 'https://script.google.com/macros/s/AKfycbxna9EH5LZPTPCPws58pGro6qCrZ8_zNwvUkUHS28BYfd8CsAcD1MRcqlITbDm4lTk/exec'; // Para Balance (Propina Bruta)
             const SCRIPT_URL_SOCIOS = 'https://script.google.com/macros/s/AKfycbyr447pMQtsKoBfp8qTcB1uyE3rORhgPPmZM6Fgia3BgmIvtlZ_h04uGZrmx_HwubHQ/exec'; // URL ficticia para Apps Script Socios (DEBES REEMPLAZAR)
             
-            document.getElementById('registroSocioForm').innerHTML = document.getElementById('templateRegistroSocioForm').innerHTML;
+            // ELIMINADO: document.getElementById('registroSocioForm').innerHTML = document.getElementById('templateRegistroSocioForm').innerHTML;
             
             const ui = {
                 menuToggle: document.getElementById('menuToggle'),
@@ -400,7 +471,6 @@
                 syncDataBtn: document.getElementById('syncDataBtn'), 
                 resetAnticiposLocalBtn: document.getElementById('resetAnticiposLocalBtn'),
                 resetPuntoPlantaBtn: document.getElementById('resetPuntoPlantaBtn'),
-                // NUEVO BOTÓN
                 resetPartTimeDataBtn: document.getElementById('resetPartTimeDataBtn'),
                 balancePropinaBruta: document.getElementById('balancePropinaBruta'),
                 balanceDescuentos: document.getElementById('balanceDescuentos'),
@@ -413,7 +483,8 @@
                 distribucionPartTimeContainer: document.getElementById('distribucionPartTimeContainer'),
                 sociosListContainer: document.getElementById('sociosListContainer'),
                 descuentosListContainer: document.getElementById('descuentosListContainer'),
-                registroSocioForm: document.getElementById('registroSocioForm'),
+                // Formulario de Registro ya no está aquí directamente, solo el botón que lo abre
+                showRegisterSocioModalBtn: document.getElementById('showRegisterSocioModalBtn'),
                 ultimaDistribucionReport: document.getElementById('ultimaDistribucionReport'),
                 ultimaDistFecha: document.getElementById('ultimaDistFecha'),                 
                 ultimaDistNeta: document.getElementById('ultimaDistNeta'),                   
@@ -423,10 +494,15 @@
                 uploadAllAnticiposBtn: document.getElementById('uploadAllAnticiposBtn'), 
                 saveAllAnticiposAndDistribucionBtn: document.getElementById('saveAllAnticiposAndDistribucionBtn'),
                 
-                // --- REFERENCIAS DE FILTRO ---
+                // --- REFERENCIAS DE FILTRO DISTRIBUCIÓN ---
                 filtroNombre: document.getElementById('filtroNombre'),
                 filtroArea: document.getElementById('filtroArea'),
                 filtroContrato: document.getElementById('filtroContrato'),
+
+                // --- REFERENCIAS DE FILTRO GESTIÓN ---
+                filtroNombreGestion: document.getElementById('filtroNombreGestion'),
+                filtroAreaGestion: document.getElementById('filtroAreaGestion'),
+                filtroContratoGestion: document.getElementById('filtroContratoGestion'),
             };
 
             let isSyncing = false;
@@ -640,7 +716,7 @@
                     if (socio && isPartTime(socio)) {
                         // Reversa para obtener el 'puntosCalculados' (Multiplicador PT)
                         // PropinaAsignada = Puntos Antigüedad * Multiplicador
-                        // Nota: Se usa PuntosAntiguedad porque es el divisor base de PT.
+                        // Nota: Se usan los puntos de Antigüedad porque es el divisor base de PT.
                         const puntosCalculados = distSocio.PropinaAsignada / distSocio.PuntosAntiguedad;
                         const ptData = allPtData[socio.ID] || {};
                         allPtData[socio.ID] = { 
@@ -709,6 +785,11 @@
                 ui.sociosListContainer.innerHTML = '';
                 const gruposSocios = groupSociosByAreaAndContract(socios);
 
+                if (socios.length === 0) {
+                     ui.sociosListContainer.innerHTML = '<p>No hay socios registrados que coincidan con los filtros.</p>';
+                     return;
+                }
+
                 for (const area in gruposSocios) {
                     const areaGroup = document.createElement('div');
                     areaGroup.innerHTML = `<h3 style="margin-top: 30px; margin-bottom: 10px; color: var(--text-dark); border-bottom: 1px solid var(--border-color); padding-bottom: 5px;">${area}</h3>`;
@@ -726,14 +807,21 @@
             };
 
             // --- FUNCIÓN renderSocios (Recibe la lista completa y la filtrada para la distribución) ---
-            const renderSocios = (sociosCompletos, sociosDistribucion) => {
+            const renderSocios = (sociosGestion, sociosDistribucion) => {
                 ui.distribucionPlantaContainer.innerHTML = '<h3>Socios Planta</h3>';
                 ui.distribucionPartTimeContainer.innerHTML = '<h3>Socios Part-Time</h3>';
                 
-                // 1. Renderizar la Pestaña de Gestión (sin filtros)
-                renderSociosGestion(sociosCompletos);
+                // 1. Renderizar la Pestaña de Gestión (con filtros de gestión)
+                renderSociosGestion(sociosGestion);
 
-                // 2. Renderizar las Tarjetas de Distribución (filtradas)
+                // 2. Renderizar las Tarjetas de Distribución (con filtros de distribución)
+                if (sociosDistribucion.filter(s => !isPartTime(s)).length === 0) {
+                    ui.distribucionPlantaContainer.innerHTML += '<p>No hay socios de Planta que coincidan con los filtros.</p>';
+                }
+                 if (sociosDistribucion.filter(isPartTime).length === 0) {
+                    ui.distribucionPartTimeContainer.innerHTML += '<p>No hay socios Part-Time que coincidan con los filtros.</p>';
+                }
+
                 sociosDistribucion.forEach((socio) => {
                     const distCard = createSocioDistribucionCard(socio);
                     if (isPartTime(socio)) {
@@ -748,30 +836,36 @@
 
             // --- NUEVA FUNCIÓN DE FILTRADO Y RENDERIZADO (Se llama desde updateAllUI y los eventos) ---
             const renderSociosFiltrados = () => {
-                const nombreFiltro = ui.filtroNombre.value.toLowerCase().trim();
-                const areaFiltro = ui.filtroArea.value;
-                const contratoFiltro = ui.filtroContrato.value;
+                
+                // --- FILTROS DE DISTRIBUCIÓN ---
+                const nombreFiltroDist = ui.filtroNombre.value.toLowerCase().trim();
+                const areaFiltroDist = ui.filtroArea.value;
+                const contratoFiltroDist = ui.filtroContrato.value;
 
-                // Aplicar los filtros a la lista completa de socios
                 const sociosDistribucion = sociosData.filter(socio => {
                     const nombreCompleto = `${socio.Nombre} ${socio.Apellido}`.toLowerCase();
-                    const area = socio.Area;
-                    const contrato = socio.TipoContrato;
-
-                    // Filtro 1: Nombre/Apellido
-                    const pasaFiltroNombre = nombreCompleto.includes(nombreFiltro);
-                    
-                    // Filtro 2: Área
-                    const pasaFiltroArea = areaFiltro === 'todos' || area === areaFiltro;
-
-                    // Filtro 3: Contrato
-                    const pasaFiltroContrato = contratoFiltro === 'todos' || contrato === contratoFiltro;
-
+                    const pasaFiltroNombre = nombreCompleto.includes(nombreFiltroDist);
+                    const pasaFiltroArea = areaFiltroDist === 'todos' || socio.Area === areaFiltroDist;
+                    const pasaFiltroContrato = contratoFiltroDist === 'todos' || socio.TipoContrato === contratoFiltroDist;
                     return pasaFiltroNombre && pasaFiltroArea && pasaFiltroContrato;
                 });
 
-                // Renderizar ambas secciones, usando la lista completa para Gestión y la filtrada para Distribución
-                renderSocios(sociosData, sociosDistribucion);
+                // --- FILTROS DE GESTIÓN ---
+                const nombreFiltroGestion = ui.filtroNombreGestion.value.toLowerCase().trim();
+                const areaFiltroGestion = ui.filtroAreaGestion.value;
+                const contratoFiltroGestion = ui.filtroContratoGestion.value;
+
+                const sociosGestion = sociosData.filter(socio => {
+                    const nombreCompleto = `${socio.Nombre} ${socio.Apellido}`.toLowerCase();
+                    const pasaFiltroNombre = nombreCompleto.includes(nombreFiltroGestion);
+                    const pasaFiltroArea = areaFiltroGestion === 'todos' || socio.Area === areaFiltroGestion;
+                    const pasaFiltroContrato = contratoFiltroGestion === 'todos' || socio.TipoContrato === contratoFiltroGestion;
+                    return pasaFiltroNombre && pasaFiltroArea && pasaFiltroContrato;
+                });
+
+
+                // Renderizar ambas secciones con sus listas filtradas correspondientes
+                renderSocios(sociosGestion, sociosDistribucion);
             };
 
             // --------------------------------------------------------------------------------------------------
@@ -1175,7 +1269,7 @@
                     const result = await apiCall(SCRIPT_URL_SOCIOS, 'registrarTodosLosAnticipos', 'POST', dataToSend);
                     
                     // Si apiCall no lanzó error, la subida fue exitosa.
-                    showToast(result.message || `Subida masiva exitosa de ${detalleAnticipos.length} registros.`, 'success');
+                    showToast(result.message || `Subida masiva exitosa de ${detalleAntalleAnticipos.length} registros.`, 'success');
                     
                 } catch (error) {
                     console.error('Error al subir todos los anticipos:', error);
@@ -1496,7 +1590,14 @@
 
 
             function setupEventListeners() {
-                ui.menuToggle.addEventListener('click', (e) => { e.stopPropagation(); ui.sideMenu.classList.toggle('open'); ui.menuToggle.classList.toggle('active'); });
+                // 1. Alternar menú con el botón (Hamburguesa <-> X)
+                ui.menuToggle.addEventListener('click', (e) => { 
+                    e.stopPropagation(); 
+                    ui.sideMenu.classList.toggle('open'); 
+                    ui.menuToggle.classList.toggle('active'); 
+                });
+                
+                // 2. Navegación y Cierre de Menú al hacer clic en un enlace
                 document.querySelectorAll('.menu-link').forEach(link => { 
                     link.addEventListener('click', (e) => {
                         // Si el enlace tiene un target='_blank' (como el de Arqueo), deja que el navegador lo maneje
@@ -1507,51 +1608,73 @@
                         document.getElementById(link.dataset.target).classList.add('active');
                         document.querySelectorAll('.menu-link').forEach(l => l.classList.remove('active-link'));
                         link.classList.add('active-link');
-                        if (window.innerWidth <= 991) { ui.sideMenu.classList.remove('open'); ui.menuToggle.classList.remove('active'); }
+                        
+                        // **CIERRE DE MENÚ MÓVIL AL HACER CLIC EN UN ENLACE**
+                        if (window.innerWidth <= 991) { 
+                            ui.sideMenu.classList.remove('open'); 
+                            ui.menuToggle.classList.remove('active'); 
+                        }
                     });
                 });
-                ui.registroSocioForm.addEventListener('submit', handleRegisterSocio);
+                
+                // 3. **CIERRE DE MENÚ MÓVIL AL HACER CLIC FUERA DEL MENÚ**
+                document.body.addEventListener('click', (e) => {
+                    // Solo actuar si el menú está abierto y estamos en vista móvil/tablet (donde la sidebar está oculta por defecto)
+                    if (ui.sideMenu.classList.contains('open') && window.innerWidth < 992) {
+                        
+                        // Verifica que el clic NO haya sido en el menú lateral ni en el botón de hamburguesa/toggle
+                        if (!ui.sideMenu.contains(e.target) && !ui.menuToggle.contains(e.target)) {
+                            ui.sideMenu.classList.remove('open');
+                            ui.menuToggle.classList.remove('active');
+                        }
+                    }
+                });
+
+
+                // --- Eventos de Botones Principales ---
+                
+                // NUEVO: Botón para mostrar el modal de registro de socio
+                ui.showRegisterSocioModalBtn.addEventListener('click', handleShowRegisterSocioModal);
+
                 document.querySelector('.show-punto-planta-btn').addEventListener('click', handleShowPuntoPlantaModal);
                 document.getElementById('addAnticipoBtn').addEventListener('click', handleShowAnticipoModal);
-                // CONEXIÓN DEL BOTÓN UNIFICADO DE GUARDAR DISTRIBUCIÓN
                 if (ui.saveAllAnticiposAndDistribucionBtn) {
                     ui.saveAllAnticiposAndDistribucionBtn.addEventListener('click', handleSaveDistribucionFinal);
                 }
                 document.getElementById('addDescuentoBtn').addEventListener('click', () => handleShowDescuentoModal());
                 
-                // CONEXIÓN DEL BOTÓN DE SINCRONIZACIÓN MANUAL
                 ui.syncDataBtn.addEventListener('click', syncData);
 
-                // CONEXIÓN DEL BOTÓN DE LIMPIEZA DE ANTICIPOS LOCALES
                 if (ui.resetAnticiposLocalBtn) {
                     ui.resetAnticiposLocalBtn.addEventListener('click', handleResetAnticiposLocal);
                 }
                 
-                // CONEXIÓN DEL BOTÓN DE REINICIO DE PUNTO-PLANTA
                 if (ui.resetPuntoPlantaBtn) {
                     ui.resetPuntoPlantaBtn.addEventListener('click', handleResetPuntoPlanta);
                 }
                 
-                // CONEXIÓN DEL BOTÓN DE REINICIO DE DATOS PART-TIME (NUEVO)
                 if (ui.resetPartTimeDataBtn) {
                     ui.resetPartTimeDataBtn.addEventListener('click', handleResetPartTimeData);
                 }
 
-
-                // CONEXIÓN DEL BOTÓN DE CARGA MASIVA 
                 if (ui.loadAllAnticiposBtn) {
                     ui.loadAllAnticiposBtn.addEventListener('click', handleLoadAllAnticipos);
                 }
 
-                // CONEXIÓN DEL BOTÓN DE SUBIDA MASIVA
                 if (ui.uploadAllAnticiposBtn) {
                     ui.uploadAllAnticiposBtn.addEventListener('click', handleUploadAllAnticipos);
                 }
                 
                 // --- CONEXIÓN DE EVENTOS DE FILTRADO ---
+                // Filtros de Distribución
                 ui.filtroNombre.addEventListener('input', renderSociosFiltrados);
                 ui.filtroArea.addEventListener('change', renderSociosFiltrados);
                 ui.filtroContrato.addEventListener('change', renderSociosFiltrados);
+                
+                // Filtros de Gestión
+                ui.filtroNombreGestion.addEventListener('input', renderSociosFiltrados);
+                ui.filtroAreaGestion.addEventListener('change', renderSociosFiltrados);
+                ui.filtroContratoGestion.addEventListener('change', renderSociosFiltrados);
                 // -----------------------------------------------
                 
                 document.body.addEventListener('click', e => {
@@ -1563,9 +1686,7 @@
                     if (e.target.matches('.calculate-btn')) abrirPartTimePointsModal(e.target.dataset.socioId);
                     if (e.target.matches('.edit-descuento-btn')) handleShowDescuentoModal(e.target.dataset.id);
                     if (e.target.matches('.delete-descuento-btn')) handleDeleteDescuento(e.target.dataset.id);
-                    // EVENTO PARA EL BOTÓN DE SUBIDA INDIVIDUAL
                     if (e.target.matches('.upload-anticipos-btn')) handleUploadAnticipos(e.target.dataset.socioId); 
-                    // EVENTO PARA EL BOTÓN DE DESCARGA INDIVIDUAL
                     if (e.target.matches('.download-anticipos-btn')) handleDownloadAnticipos(e.target.dataset.socioId); 
                 });
             }
@@ -1745,6 +1866,18 @@
             }
             // FIN DE LA MODIFICACIÓN CLAVE
             
+            // --- NUEVA FUNCIÓN PARA MOSTRAR EL MODAL DE REGISTRO DE SOCIO ---
+            function handleShowRegisterSocioModal() {
+                ui.modalContainer.innerHTML = document.getElementById('templateRegisterSocioModal').innerHTML;
+                const modal = ui.modalContainer.querySelector('.modal');
+                const form = modal.querySelector('#registroSocioFormModal');
+                
+                form.onsubmit = handleRegisterSocio;
+                modal.querySelector('.close-button').onclick = () => modal.style.display = 'none';
+                modal.style.display = 'flex';
+            }
+            // --- FIN NUEVA FUNCIÓN ---
+
             async function handleRegisterSocio(e) {
                 e.preventDefault();
                 const form = e.target;
@@ -1760,7 +1893,9 @@
                         savePartTimeDataToStorage(allPtData);
                     }
                     showToast('Socio registrado con éxito en Sheets!', 'success');
-                    form.reset();
+                    
+                    // Cerrar el modal
+                    ui.modalContainer.querySelector('.modal').style.display = 'none';
                     await syncData();
                 } catch (error) { showToast(`Error al registrar: ${error.message || 'Error desconocido'}`, 'danger'); }
             }
