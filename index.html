@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Propina (Final Completo)</title>
+    <title>Gestión de Propina (Saldo Anterior + Menu Fix)</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
     <style>
@@ -42,6 +42,14 @@
         .calendar-discount-btn { background-color: #e67e22; width: 100%; margin-top: 8px; font-size: 0.85em; }
         .calendar-discount-btn:hover { background-color: #d35400; }
         .ausencias-info { color: #c0392b; font-weight: 600; font-size: 0.9em; margin-bottom: 5px; display: block;}
+        
+        /* ESTILO PARA BOTON SALDO ANTERIOR */
+        .edit-saldo-anterior-btn {
+            background: none; border: none; cursor: pointer; font-size: 1.1em; padding: 0 5px; color: var(--primary-color); width: auto; display: inline-block; margin: 0;
+        }
+        .saldo-anterior-row {
+            display: flex; justify-content: space-between; align-items: center; background-color: #fff8e1; padding: 5px 8px; border-radius: 4px; margin: 5px 0; border: 1px solid #ffe082;
+        }
 
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
@@ -296,6 +304,20 @@
         </div>
     </template>
 
+    <template id="templateEditSaldoAnteriorModal">
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span><h3>Editar Saldo Anterior</h3>
+                <form id="editSaldoAnteriorForm">
+                    <input type="hidden" id="editSaldoSocioId">
+                    <label for="editSaldoMonto">Monto (Deuda o Saldo a Favor):</label>
+                    <input type="text" id="editSaldoMonto" inputmode="numeric" required placeholder="0">
+                    <button type="submit">Guardar Saldo</button>
+                </form>
+            </div>
+        </div>
+    </template>
+
     <template id="templateConfirmDeleteModal">
         <div class="modal">
             <div class="modal-content">
@@ -315,7 +337,6 @@
                 <span class="close-button">&times;</span><h3 id="calendarModalTitle">Días</h3>
                 <input type="text" id="flatpickrInput" placeholder="Selecciona días...">
                 <p style="text-align:center; margin-top:15px;">Días seleccionados: <strong id="selectedDaysCount">0</strong></p>
-                <!-- Mostrará el dinero afectado si es Planta -->
                 <p id="montoDescuentoInfo" style="text-align:center; margin-top:5px; display:none; color:var(--danger-color); font-weight:bold; font-size:0.9em;"></p>
                 <button id="saveCalendarBtn">Guardar</button>
             </div>
@@ -522,20 +543,40 @@
                         }
                         actionBtn = `<button class="calendar-discount-btn" data-socio-id="${s.ID}">📅 Marcar Ausencias</button>`;
                     }
-                    card.innerHTML = `<h3>${s.Nombre} ${s.Apellido}</h3><p>${ptsDisplay}</p><p>Asignado: <span class="propina-asignada">$0</span></p><p>Anticipos: <span class="total-anticipos">$0</span></p><p>Saldo: <span class="saldo-disponible">$0</span></p>${actionBtn}<div class="anticipos-container"></div><div class="individual-actions"><button class="download-anticipos-btn" data-socio-id="${s.ID}">📥 Cargar</button><button class="upload-anticipos-btn" data-socio-id="${s.ID}">Subir</button></div>`;
+                    // Nuevo bloque de Saldo Anterior
+                    const saldoAnt = (getStorage('saldo_anterior_v1')[s.ID] || 0);
+                    card.innerHTML = `<h3>${s.Nombre} ${s.Apellido}</h3>
+                                      <p>${ptsDisplay}</p>
+                                      <p>Asignado: <span class="propina-asignada">$0</span></p>
+                                      <div class="saldo-anterior-row">
+                                        <span>Saldo Ant: <strong>$${formatNumber(saldoAnt)}</strong></span>
+                                        <button class="edit-saldo-anterior-btn" data-socio-id="${s.ID}">💰</button>
+                                      </div>
+                                      <p>Anticipos: <span class="total-anticipos">$0</span></p>
+                                      <p>Saldo Final: <span class="saldo-disponible">$0</span></p>
+                                      ${actionBtn}
+                                      <div class="anticipos-container"></div>
+                                      <div class="individual-actions"><button class="download-anticipos-btn" data-socio-id="${s.ID}">📥 Cargar</button><button class="upload-anticipos-btn" data-socio-id="${s.ID}">Subir</button></div>`;
                 }
                 return card;
             };
 
             const updatePropinaUI = () => {
                 const ants = getStorage('anticipos_data_v3');
+                const saldoAntData = getStorage('saldo_anterior_v1');
+                
                 sociosData.forEach(s => {
                     const c = document.querySelector(`.socio-distribucion-card[data-socio-id="${s.ID}"]`);
                     if(!c) return;
                     const antS = ants[s.ID]||[]; const totA = antS.reduce((a,b)=>a+b.cantidad,0);
+                    const saldoAnt = saldoAntData[s.ID] || 0;
+                    
                     c.querySelector('.propina-asignada').textContent=`$${formatNumber(s.propinaAsignada)}`;
                     c.querySelector('.total-anticipos').textContent=`$${formatNumber(totA)}`;
-                    const sal = s.propinaAsignada-totA;
+                    
+                    // Calculo Final: Asignado - Anticipos + Saldo Anterior
+                    const sal = s.propinaAsignada - totA + saldoAnt;
+                    
                     const elSal = c.querySelector('.saldo-disponible'); elSal.textContent=`$${formatNumber(sal)}`; elSal.classList.toggle('negative', sal<0);
                     let html = antS.length ? `<div class="anticipos-list-container"><h4>Anticipos Locales</h4>${antS.map((a,i)=>`<div class="anticipo-item"><span class="monto">$${formatNumber(a.cantidad)} (${formatDisplayDate(a.fecha)})</span><div class="anticipo-item-actions"><button class="edit-anticipo-btn" data-socio-id="${s.ID}" data-anticipo-index="${i}">✏️</button><button class="delete-anticipo-btn" data-socio-id="${s.ID}" data-anticipo-index="${i}">🗑️</button></div></div>`).join('')}</div>` : '';
                     c.querySelector('.anticipos-container').innerHTML = html;
@@ -654,12 +695,19 @@
                     const punto = parseFloat(localStorage.getItem('lastPuntoPlantaValue'))||0;
                     if(punto<=0) { showToast('Falta punto planta', 'warning'); return; }
                     const ants = getStorage('anticipos_data_v3');
+                    const saldoAntData = getStorage('saldo_anterior_v1');
+                    
                     const detalleAnts = []; let totAnts=0;
                     const distribucion = sociosData.map(s => {
                         const l = ants[s.ID]||[]; const sumA = l.reduce((x,y)=>x+y.cantidad,0);
+                        const sAnt = saldoAntData[s.ID] || 0;
                         totAnts+=sumA;
                         l.forEach(a => detalleAnts.push({id:s.ID, nombre:`${s.Nombre} ${s.Apellido}`, fecha:a.fecha, monto:Math.round(a.cantidad)}));
-                        return { ID:s.ID, NombreCompleto:`${s.Nombre} ${s.Apellido}`, Area:s.Area, TipoContrato:s.TipoContrato, PuntosAntiguedad:s.puntosAntiguedad, PuntosFinales:s.puntosAsignadosFinales, PropinaAsignada:Math.round(s.propinaAsignada), Anticipos:Math.round(sumA), SaldoFinal:Math.round(s.propinaAsignada-sumA) };
+                        
+                        // Calculo final que se envia a sheets
+                        const saldoFinal = Math.round(s.propinaAsignada - sumA + sAnt);
+                        
+                        return { ID:s.ID, NombreCompleto:`${s.Nombre} ${s.Apellido}`, Area:s.Area, TipoContrato:s.TipoContrato, PuntosAntiguedad:s.puntosAntiguedad, PuntosFinales:s.puntosAsignadosFinales, PropinaAsignada:Math.round(s.propinaAsignada), Anticipos:Math.round(sumA), SaldoFinal:saldoFinal };
                     });
                     try {
                         showToast('Guardando...');
@@ -672,13 +720,64 @@
                 };
             }
 
+            // =========================================================================
+            // MANEJO DE SALDO ANTERIOR
+            // =========================================================================
+            function handleEditSaldoAnterior(socioId) {
+                const s = sociosData.find(x => x.ID === socioId);
+                if(!s) return;
+                
+                ui.modalContainer.innerHTML = document.getElementById('templateEditSaldoAnteriorModal').innerHTML;
+                const m = ui.modalContainer.querySelector('.modal');
+                const f = m.querySelector('form');
+                const inputVal = f.querySelector('#editSaldoMonto');
+                
+                setupNumericInputFormatting(inputVal);
+                
+                // Cargar valor actual
+                const current = getStorage('saldo_anterior_v1')[socioId] || 0;
+                inputVal.value = formatNumber(current);
+                f.querySelector('#editSaldoSocioId').value = socioId;
+                
+                f.onsubmit = (e) => {
+                    e.preventDefault();
+                    const val = parseNumber(inputVal.value);
+                    const allData = getStorage('saldo_anterior_v1');
+                    allData[socioId] = val;
+                    setStorage('saldo_anterior_v1', allData);
+                    updateAllUI();
+                    m.style.display = 'none';
+                    showToast('Saldo anterior actualizado');
+                };
+                
+                // Boton cerrar
+                const closeBtn = document.createElement('span'); 
+                closeBtn.className = 'close-button'; 
+                closeBtn.innerHTML = '&times;';
+                closeBtn.onclick = () => m.style.display = 'none';
+                m.querySelector('.modal-content').prepend(closeBtn);
+                
+                m.style.display = 'flex';
+            }
+
             function setupEventListeners() {
-                ui.menuToggle.onclick=e=>{e.stopPropagation();ui.sideMenu.classList.toggle('open');};
+                ui.menuToggle.onclick=e=>{e.stopPropagation();ui.sideMenu.classList.toggle('open'); ui.menuToggle.classList.toggle('active');};
+                
+                // CLOSE MENU ON CLICK OUTSIDE
+                document.addEventListener('click', (e) => {
+                    const isClickInsideMenu = ui.sideMenu.contains(e.target);
+                    const isClickOnToggle = ui.menuToggle.contains(e.target);
+                    if (ui.sideMenu.classList.contains('open') && !isClickInsideMenu && !isClickOnToggle) {
+                        ui.sideMenu.classList.remove('open');
+                        ui.menuToggle.classList.remove('active');
+                    }
+                });
+
                 document.querySelectorAll('.menu-link').forEach(l=>l.onclick=e=>{
                     if(l.target==='_blank')return; e.preventDefault();
                     document.querySelectorAll('.content-panel').forEach(p=>p.classList.remove('active'));
                     document.getElementById(l.dataset.target).classList.add('active');
-                    if(window.innerWidth<=991) ui.sideMenu.classList.remove('open');
+                    if(window.innerWidth<=991) { ui.sideMenu.classList.remove('open'); ui.menuToggle.classList.remove('active'); }
                 });
                 
                 document.body.onclick = e => {
@@ -694,6 +793,7 @@
                     const dlD=e.target.closest('.delete-descuento-btn'); if(dlD) handleDelDesc(dlD.dataset.id);
                     const up=e.target.closest('.upload-anticipos-btn'); if(up) handleUpInd(up.dataset.socioId);
                     const down=e.target.closest('.download-anticipos-btn'); if(down) handleDownloadAnticipos(down.dataset.socioId);
+                    const editSaldo = e.target.closest('.edit-saldo-anterior-btn'); if(editSaldo) handleEditSaldoAnterior(editSaldo.dataset.socioId);
                 };
 
                 [ui.filtroNombre, ui.filtroArea, ui.filtroContrato, ui.filtroNombreGestion, ui.filtroAreaGestion, ui.filtroContratoGestion].forEach(el => {
@@ -728,9 +828,6 @@
                 f.onsubmit=e=>{e.preventDefault(); const id=e.target.anticipoSocioId.value; if(!id)return; const l=getStorage('anticipos_data_v3'); if(!l[id])l[id]=[]; l[id].push({fecha:e.target.anticipoFecha.value, cantidad:parseNumber(e.target.anticipoCantidad.value)}); setStorage('anticipos_data_v3',l); updateAllUI(); m.style.display='none';};
             });}
             
-            // =====================================================================
-            // FUNCION OPEN PUNTO PLANTA CORREGIDA (CALCULO DIRECTO)
-            // =====================================================================
             function openPuntoPlanta() {
                 openModal('templatePuntoPlantaModal', (f, m) => {
                     const bruto = Object.values(recaudacionPorDia).reduce((a,b)=>a+b,0);
