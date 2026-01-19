@@ -485,7 +485,8 @@
                     }
                 });
 
-                ui.totalPuntosDisplay.innerHTML=`Puntos Totales: <strong>${(pPlanta+pPT).toFixed(2)}</strong> (Planta:${pPlanta.toFixed(2)} + PT:${pPT.toFixed(2)})`;
+                // --- MODIFICADO: PUNTOS SIN DECIMALES ---
+                ui.totalPuntosDisplay.innerHTML=`Puntos Totales: <strong>${Math.round(pPlanta+pPT)}</strong> (Planta:${Math.round(pPlanta)} + PT:${Math.round(pPT)})`;
                 ui.puntoPlantaDisplay.innerHTML = valPunto>0 ? `<p style="text-align:center;font-weight:bold;background:#f0f9ff;padding:10px;">Valor Punto: $${formatNumber(valPunto)}</p>` : '<p style="text-align:center;color:var(--danger-color);">⚠️ Valor Punto no establecido.</p>';
 
                 renderSociosFiltrados(); renderDescuentos(desc);
@@ -532,8 +533,8 @@
                             
                             const header = document.createElement('div'); 
                             header.className='area-header'; 
-                            // SE AÑADE SPAN CON TOTAL DE PUNTOS
-                            header.innerHTML=`${area} <span style="float:right; font-weight:normal; font-size:0.9em;">Total Puntos: <strong>${totalAreaPts.toFixed(2)}</strong></span>`;
+                            // --- MODIFICADO: PUNTOS SIN DECIMALES EN ÁREA ---
+                            header.innerHTML=`${area} <span style="float:right; font-weight:normal; font-size:0.9em;">Total Puntos: <strong>${Math.round(totalAreaPts)}</strong></span>`;
                             
                             const grid = document.createElement('div'); grid.className='area-section-grid';
                             grp[area].forEach(s=>grid.appendChild(createCard(s, 'dist')));
@@ -880,10 +881,11 @@
                         }
                     });
 
-                    m.querySelector('#totalPuntosGeneralDisplay').textContent = totalPuntos.toFixed(2);
+                    // --- MODIFICADO: PUNTOS SIN DECIMALES EN MODAL ---
+                    m.querySelector('#totalPuntosGeneralDisplay').textContent = Math.round(totalPuntos);
 
                     const divIn = m.querySelector('#divisorManualInput');
-                    divIn.value = totalPuntos.toFixed(2).replace('.', ',');
+                    divIn.value = Math.round(totalPuntos).toString(); // Set rounded integer as default divisor
 
                     const valDisplay = m.querySelector('#valorPuntoCalculadoDisplay');
                     const resultDisplay = m.querySelector('#puntoPlantaValor');
