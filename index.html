@@ -422,6 +422,21 @@
             const getStorage = (k) => JSON.parse(localStorage.getItem(k))||(k.includes('anticipos')?{}:k.includes('descuentos')?[]:{});
             const setStorage = (k,v) => localStorage.setItem(k,JSON.stringify(v));
             
+            // NUEVA FUNCIÓN PARA NORMALIZAR FECHAS DE SHEETS A YYYY-MM-DD
+            const normalizeRemoteDate = (dateStr) => {
+                if (!dateStr) return '';
+                // Intentar convertir la cadena (ej: "Sun Jan 18 2026...") a objeto Date
+                const d = new Date(dateStr);
+                if (isNaN(d.getTime())) return dateStr; // Si falla, devolver original
+                
+                // Formatear manualmente a YYYY-MM-DD usando fecha local
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                
+                return `${year}-${month}-${day}`;
+            };
+            
             function setupNumericInputFormatting(el) { if(!el)return; el.addEventListener('input', e=>{ let v=e.target.value.replace(/\./g,''); e.target.value=isNaN(v)||v.trim()===''?'':new Intl.NumberFormat('es-CL').format(parseInt(v,10)); }); }
             
             const calcPuntos = (f) => {
@@ -505,18 +520,28 @@
 
                 ui.distribucionPlantaContainer.innerHTML=''; ui.distribucionPartTimeContainer.innerHTML='';
                 const planta = dist.filter(s=>!isPartTime(s)); const pt = dist.filter(isPartTime);
+                
                 const renderPorArea = (lista, container, tituloVacio) => {
                     if(lista.length===0) { container.innerHTML=`<p style="color:#777;font-style:italic;">${tituloVacio}</p>`; return; }
                     const grp = lista.reduce((a,s)=>{ let k=s.Area; if(!a[k])a[k]=[]; a[k].push(s); return a;},{});
+                    
                     ['Mesas','Maquinas','Boveda'].forEach(area => {
                         if(grp[area]) {
-                            const header = document.createElement('div'); header.className='area-header'; header.textContent=area;
+                            // CÁLCULO DE PUNTOS TOTALES POR ÁREA (filtrados)
+                            const totalAreaPts = grp[area].reduce((acc, curr) => acc + (curr.puntosAsignadosFinales || 0), 0);
+                            
+                            const header = document.createElement('div'); 
+                            header.className='area-header'; 
+                            // SE AÑADE SPAN CON TOTAL DE PUNTOS
+                            header.innerHTML=`${area} <span style="float:right; font-weight:normal; font-size:0.9em;">Total Puntos: <strong>${totalAreaPts.toFixed(2)}</strong></span>`;
+                            
                             const grid = document.createElement('div'); grid.className='area-section-grid';
                             grp[area].forEach(s=>grid.appendChild(createCard(s, 'dist')));
                             container.appendChild(header); container.appendChild(grid);
                         }
                     });
                 };
+                
                 ui.distribucionPlantaContainer.innerHTML='<h3>Socios Planta</h3>'; renderPorArea(planta, ui.distribucionPlantaContainer, "Sin socios Planta.");
                 ui.distribucionPartTimeContainer.innerHTML='<h3>Socios Part-Time</h3>'; renderPorArea(pt, ui.distribucionPartTimeContainer, "Sin socios Part-Time.");
                 updatePropinaUI();
@@ -640,7 +665,8 @@
                         if (!locals[id]) locals[id] = [];
                         const existingKeys = new Set(locals[id].map(a => `${a.fecha.split('T')[0]}_${Math.round(a.cantidad)}`));
                         data[id].forEach(remote => {
-                            const cleanDate = remote.fecha.split('T')[0];
+                            // AQUÍ SE APLICA LA NORMALIZACIÓN DE FECHA
+                            const cleanDate = normalizeRemoteDate(remote.fecha); 
                             const cleanAmt = Math.round(remote.cantidad);
                             const key = `${cleanDate}_${cleanAmt}`;
                             if (!existingKeys.has(key)) { locals[id].push({ fecha: cleanDate, cantidad: cleanAmt }); existingKeys.add(key); }
@@ -660,7 +686,8 @@
                     const existingKeys = new Set(locals[id].map(a => `${a.fecha.split('T')[0]}_${Math.round(a.cantidad)}`));
                     let count = 0;
                     data.forEach(remote => {
-                        const cleanDate = remote.fecha.split('T')[0];
+                        // AQUÍ SE APLICA LA NORMALIZACIÓN DE FECHA
+                        const cleanDate = normalizeRemoteDate(remote.fecha); 
                         const cleanAmt = Math.round(remote.cantidad);
                         const key = `${cleanDate}_${cleanAmt}`;
                         if(!existingKeys.has(key)){ locals[id].push({fecha:cleanDate, cantidad:cleanAmt}); existingKeys.add(key); count++; }
