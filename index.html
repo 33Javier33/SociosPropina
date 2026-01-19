@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Propina (Saldo Anterior + Menu Fix)</title>
+    <title>Gestión de Propina (Auto-Update)</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
     <style>
@@ -49,6 +49,29 @@
         }
         .saldo-anterior-row {
             display: flex; justify-content: space-between; align-items: center; background-color: #fff8e1; padding: 5px 8px; border-radius: 4px; margin: 5px 0; border: 1px solid #ffe082;
+        }
+
+        /* --- NUEVOS ESTILOS PARA COLORES DE MONTOS --- */
+        .socio-distribucion-card p {
+            display: flex; justify-content: space-between; align-items: center; margin: 5px 0;
+        }
+        .propina-asignada {
+            color: #2980b9; /* Azul fuerte */
+            font-weight: 700;
+            font-size: 1.05em;
+        }
+        .total-anticipos {
+            color: #d35400; /* Naranja rojizo */
+            font-weight: 700;
+            font-size: 1.05em;
+        }
+        .saldo-disponible {
+            color: #27ae60; /* Verde fuerte (positivo) */
+            font-weight: 700;
+            font-size: 1.2em; /* Un poco más grande para destacar */
+        }
+        .saldo-disponible.negative {
+            color: #c0392b !important; /* Rojo fuerte (negativo) */
         }
 
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
@@ -412,7 +435,39 @@
             let ultimaDistribucionData = null; 
             let flatpickrInstance = null;
             
-            const formatDisplayDate = (d) => { if(!d || !/^\d{4}-\d{2}-\d{2}/.test(d)) return d; const [y,m,day]=d.split('T')[0].split('-'); return `${day.padStart(2,'0')}-${m.padStart(2,'0')}-${y}`; };
+            // --- INICIO DE LA CORRECCIÓN DE FECHAS ---
+            const formatDisplayDate = (d) => { 
+                if(!d) return '';
+                // Si la fecha ya viene como YYYY-MM-DD, simplemente la reordenamos
+                if (/^\d{4}-\d{2}-\d{2}/.test(d)) {
+                    const [y, m, day] = d.split('T')[0].split('-'); 
+                    return `${day.padStart(2,'0')}-${m.padStart(2,'0')}-${y}`;
+                }
+                return d; 
+            };
+
+            const normalizeRemoteDate = (dateStr) => {
+                if (!dateStr) return '';
+                // 1. Si viene como cadena ISO (ej: 2026-01-19T00:00...) cortamos para evitar cambios de hora
+                if (typeof dateStr === 'string' && dateStr.indexOf('T') > -1) {
+                    return dateStr.split('T')[0];
+                }
+                
+                // 2. Si viene como texto largo (ej: "Sun Jan 19..."), parseamos
+                const d = new Date(dateStr);
+                
+                // Si la fecha no es válida, devolvemos la cadena original (seguridad)
+                if (isNaN(d.getTime())) return dateStr;
+                
+                // 3. Construimos manualmente YYYY-MM-DD respetando la fecha local del navegador
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                
+                return `${year}-${month}-${day}`;
+            };
+            // --- FIN DE LA CORRECCIÓN DE FECHAS ---
+
             const showToast = (msg, type='success') => {
                 const t = document.createElement('div'); t.className=`toast ${type}`; t.textContent=msg; ui.toastContainer.appendChild(t);
                 setTimeout(()=>t.classList.add('show'),10); setTimeout(()=>{t.classList.remove('show');t.addEventListener('transitionend',()=>t.remove())},4000);
@@ -421,21 +476,6 @@
             const parseNumber = (s) => parseFloat(String(s).replace(/\./g,'').replace(',','.'))||0;
             const getStorage = (k) => JSON.parse(localStorage.getItem(k))||(k.includes('anticipos')?{}:k.includes('descuentos')?[]:{});
             const setStorage = (k,v) => localStorage.setItem(k,JSON.stringify(v));
-            
-            // NUEVA FUNCIÓN PARA NORMALIZAR FECHAS DE SHEETS A YYYY-MM-DD
-            const normalizeRemoteDate = (dateStr) => {
-                if (!dateStr) return '';
-                // Intentar convertir la cadena (ej: "Sun Jan 18 2026...") a objeto Date
-                const d = new Date(dateStr);
-                if (isNaN(d.getTime())) return dateStr; // Si falla, devolver original
-                
-                // Formatear manualmente a YYYY-MM-DD usando fecha local
-                const year = d.getFullYear();
-                const month = String(d.getMonth() + 1).padStart(2, '0');
-                const day = String(d.getDate()).padStart(2, '0');
-                
-                return `${year}-${month}-${day}`;
-            };
             
             function setupNumericInputFormatting(el) { if(!el)return; el.addEventListener('input', e=>{ let v=e.target.value.replace(/\./g,''); e.target.value=isNaN(v)||v.trim()===''?'':new Intl.NumberFormat('es-CL').format(parseInt(v,10)); }); }
             
@@ -553,8 +593,18 @@
                 if(type==='manage') {
                     card.className='socio-card';
                     const ptData = getStorage('part_time_data_v3')[s.ID]||{};
+                    
+                    // --- NUEVO: DETERMINAR TEXTO DEL TOPE DE PUNTOS ---
+                    let puntosTexto = '';
+                    if(isPartTime(s)){
+                        puntosTexto = `Puntos Base: ${s.puntosAntiguedad}`;
+                    } else {
+                        puntosTexto = `Tope Puntos: <strong>${Math.round(calcTope(s))}</strong>`;
+                    }
+                    // --------------------------------------------------
+
                     const extra = isPartTime(s) ? `<p><strong>Días:</strong> ${(ptData.diasTrabajados||[]).length}</p><div class="part-time-actions"><button class="calendar-btn" data-socio-id="${s.ID}">Registrar Días</button><button class="calculate-btn" data-socio-id="${s.ID}">Calcular Puntos</button></div>` : '';
-                    card.innerHTML = `<div class="socio-card-info"><p><strong>${s.Nombre} ${s.Apellido}</strong></p><p>${s.Area} - ${s.TipoContrato}</p><p class="fecha-ingreso-info">Ingreso: ${formatDisplayDate(s.FechaIngreso)}</p>${extra}</div><div class="socio-card-actions"><button class="edit-btn" data-socio-id="${s.ID}">✏️</button><button class="delete-btn" data-socio-id="${s.ID}">🗑️</button></div>`;
+                    card.innerHTML = `<div class="socio-card-info"><p><strong>${s.Nombre} ${s.Apellido}</strong></p><p>${s.Area} - ${s.TipoContrato}</p><p class="puntos-info">${puntosTexto}</p><p class="fecha-ingreso-info">Ingreso: ${formatDisplayDate(s.FechaIngreso)}</p>${extra}</div><div class="socio-card-actions"><button class="edit-btn" data-socio-id="${s.ID}">✏️</button><button class="delete-btn" data-socio-id="${s.ID}">🗑️</button></div>`;
                 } else {
                     card.className='socio-distribucion-card'; card.dataset.socioId=s.ID;
                     let ptsDisplay = ''; let actionBtn = '';
@@ -881,11 +931,10 @@
                         }
                     });
 
-                    // --- MODIFICADO: PUNTOS SIN DECIMALES EN MODAL ---
                     m.querySelector('#totalPuntosGeneralDisplay').textContent = Math.round(totalPuntos);
 
                     const divIn = m.querySelector('#divisorManualInput');
-                    divIn.value = Math.round(totalPuntos).toString(); // Set rounded integer as default divisor
+                    divIn.value = Math.round(totalPuntos).toString();
 
                     const valDisplay = m.querySelector('#valorPuntoCalculadoDisplay');
                     const resultDisplay = m.querySelector('#puntoPlantaValor');
@@ -925,13 +974,20 @@
 
             async function syncData() { 
                 if(isSyncing)return; isSyncing=true; ui.syncIndicator.classList.add('visible'); 
+                
+                // --- NUEVO: INDICADOR VISUAL EN TOTAL RECAUDADO ---
+                ui.balancePropinaBruta.innerHTML = '<span style="color:#f39c12; font-size:0.8em;">Actualizando...</span>';
+                
                 try{ 
                     await fetchRecaudaciones();
                     await fetchSocios(); 
                     await fetchBalanceFinal(); 
                     updateAllUI(); 
                     showToast('Datos Sincronizados (Propinas + Recaudaciones)'); 
-                }catch(e){showToast(e.message,'danger');}
+                }catch(e){
+                    ui.balancePropinaBruta.textContent = "Error";
+                    showToast(e.message,'danger');
+                }
                 finally{isSyncing=false;ui.syncIndicator.classList.remove('visible');} 
             }
             
@@ -1004,6 +1060,9 @@
 
             setupEventListeners();
             syncData();
+            
+            // --- NUEVO: TEMPORIZADOR DE ACTUALIZACIÓN AUTOMÁTICA (1 HORA) ---
+            setInterval(syncData, 3600000); 
         });
     </script>
 </body>
