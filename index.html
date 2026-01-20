@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Propina</title>
+    <!-- Librerías Externas -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -16,7 +17,8 @@
         .action-button-group{display: grid;grid-template-columns: repeat(2, 1fr);gap: 10px;margin: 15px 0;}
         @media (min-width: 768px) { .action-button-group { grid-template-columns: repeat(3, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
         @media (min-width: 992px) { .action-button-group { grid-template-columns: repeat(4, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
-        .show-punto-planta-btn{background-color:#9b59b6}#addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:1001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px}.modal-content .modal-actions button{width:45%}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}#toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:2000;display:flex;flex-direction:column;align-items:center;gap:10px}.toast{background-color:var(--text-dark);color:#fff;padding:12px 20px;border-radius:25px;box-shadow:0 4px 15px rgba(0,0,0,.1);font-size:.9em;font-weight:500;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background-color:var(--secondary-color)}.toast.danger{background-color:var(--danger-color)}.part-time-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;border-top:1px solid var(--border-color);padding-top:10px}.part-time-actions button{width:100%;padding:8px;font-size:.85em}.part-time-actions .calendar-btn{background-color:#f39c12}.part-time-actions .calculate-btn{background-color:#1abc9c}.distribucion-part-time-container .puntos-calculados-pt{font-weight:700;color:#16a085}
+        .show-punto-planta-btn{background-color:#9b59b6}#addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:2001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px;gap: 10px}.modal-content .modal-actions button{flex:1}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}#toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;align-items:center;gap:10px}.toast{background-color:var(--text-dark);color:#fff;padding:12px 20px;border-radius:25px;box-shadow:0 4px 15px rgba(0,0,0,.1);font-size:.9em;font-weight:500;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background-color:var(--secondary-color)}.toast.danger{background-color:var(--danger-color)}.toast.warning{background-color:var(--warning-color); color: #fff;}
+        .part-time-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;border-top:1px solid var(--border-color);padding-top:10px}.part-time-actions button{width:100%;padding:8px;font-size:.85em}.part-time-actions .calendar-btn{background-color:#f39c12}.part-time-actions .calculate-btn{background-color:#1abc9c}.distribucion-part-time-container .puntos-calculados-pt{font-weight:700;color:#16a085}
         .socio-distribucion-card .individual-actions {display: flex;gap: 10px;margin-top: 15px;padding-top: 10px;border-top: 1px solid #e0e6ed;}
         .socio-distribucion-card .individual-actions button {flex: 1;padding: 8px 10px;font-size: 0.9em;margin-top: 0; }
         .socio-distribucion-card .upload-anticipos-btn {background-color: #f39c12; }
@@ -37,26 +39,46 @@
         .socio-card-info p.puntos-info {font-size: 0.9em;color: var(--text-dark);background-color: #eafaf1;padding: 5px 8px;border-radius: 4px;margin: 6px 0;border-left: 3px solid var(--secondary-color);}
         .socio-card-info p.puntos-info strong {font-weight: 700;}
         .socio-card-info p.fecha-ingreso-info {font-size: 0.9em;color: var(--primary-color);margin: 4px 0;}
-        
         .distribucion-planta-container, .distribucion-part-time-container { display: block; margin-top: 15px; }
         .area-section-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-bottom: 30px; }
         .area-header { background-color: #eef2f6; color: var(--text-dark); padding: 8px 15px; border-left: 4px solid var(--primary-color); border-radius: 4px; margin-bottom: 15px; font-size: 1.1em; font-weight: 700; }
-        
         .calendar-discount-btn { background-color: #e67e22; width: 100%; margin-top: 8px; font-size: 0.85em; }
         .calendar-discount-btn:hover { background-color: #d35400; }
         .ausencias-info { color: #c0392b; font-weight: 600; font-size: 0.9em; margin-bottom: 5px; display: block;}
-        
-        .edit-saldo-anterior-btn {
-            background: none; border: none; cursor: pointer; font-size: 1.1em; padding: 0 5px; color: var(--primary-color); width: auto; display: inline-block; margin: 0;
-        }
-        .saldo-anterior-row {
-            display: flex; justify-content: space-between; align-items: center; background-color: #fff8e1; padding: 5px 8px; border-radius: 4px; margin: 5px 0; border: 1px solid #ffe082;
-        }
+        .edit-saldo-anterior-btn {background: none; border: none; cursor: pointer; font-size: 1.1em; padding: 0 5px; color: var(--primary-color); width: auto; display: inline-block; margin: 0;}
+        .saldo-anterior-row {display: flex; justify-content: space-between; align-items: center; background-color: #fff8e1; padding: 5px 8px; border-radius: 4px; margin: 5px 0; border: 1px solid #ffe082;}
         .socio-distribucion-card p { display: flex; justify-content: space-between; align-items: center; margin: 5px 0; }
         .propina-asignada { color: #2980b9; font-weight: 700; font-size: 1.05em; }
         .total-anticipos { color: #d35400; font-weight: 700; font-size: 1.05em; }
         .saldo-disponible { color: #27ae60; font-weight: 700; font-size: 1.2em; }
         .saldo-disponible.negative { color: #c0392b !important; }
+        
+        /* --- ESTILOS BOTÓN VOLVER ARRIBA --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, transform 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8em;
+        }
+        .scroll-to-top.show { opacity: 1; visibility: visible; }
+        .scroll-to-top:hover { transform: translateY(-5px); background-color: var(--primary-hover-color); }
+        .scroll-to-top span { margin-top: -5px; } /* Ajuste visual flecha */
+
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
 </head>
@@ -137,6 +159,13 @@
             </div>
         </div>
     </div>
+    
+    <!-- Botón Flotante Volver Arriba -->
+    <button id="scrollToTopBtn" class="scroll-to-top" title="Volver arriba">
+        <span>&#8679;</span>
+    </button>
+    
+    <!-- Contenedor general para modales -->
     <div id="modal-container"></div>
     <div id="toast-container"></div>
 
@@ -146,7 +175,21 @@
             <label>Nombre:</label><input type="text" id="nombre" required>
             <label>Apellido:</label><input type="text" id="apellido" required>
             <label>Ingreso:</label><input type="date" id="fechaIngreso" required>
-            <label>Área:</label><select id="area" required><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="Cambistas">Cambistas</option></select>
+            <label>Área:</label>
+            <select id="area" required>
+                <option value="Mesas">Mesas</option>
+                <option value="Maquinas">Maquinas</option>
+                <option value="Boveda">Boveda</option>
+            </select>
+            <!-- Contenedor para Sub Área -->
+            <div id="subAreaContainer" style="display:none; margin-top:5px; margin-bottom:15px; background-color:#f0f9ff; padding:8px; border-radius:5px;">
+                <label style="color:#2980b9;">Sub-Área:</label>
+                <select id="subArea">
+                    <option value="">-- Ninguna --</option>
+                    <option value="Cambistas">Cambistas</option>
+                </select>
+            </div>
+            
             <label>Contrato:</label><select id="tipoContrato" required><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select>
             <button type="submit">Guardar</button>
         </form></div></div>
@@ -192,7 +235,21 @@
             <label>Nombre:</label><input type="text" id="editNombre" required>
             <label>Apellido:</label><input type="text" id="editApellido" required>
             <label>Ingreso:</label><input type="date" id="editFechaIngreso" required>
-            <label>Área:</label><select id="editArea" required><option value="Mesas">Mesas</option><option value="Maquinas">Maquinas</option><option value="Boveda">Boveda</option><option value="Cambistas">Cambistas</option></select>
+            <label>Área:</label>
+            <select id="editArea" required>
+                <option value="Mesas">Mesas</option>
+                <option value="Maquinas">Maquinas</option>
+                <option value="Boveda">Boveda</option>
+            </select>
+            
+            <div id="editSubAreaContainer" style="display:none; margin-top:5px; margin-bottom:15px; background-color:#f0f9ff; padding:8px; border-radius:5px;">
+                <label style="color:#2980b9;">Sub-Área:</label>
+                <select id="editSubArea">
+                    <option value="">-- Ninguna --</option>
+                    <option value="Cambistas">Cambistas</option>
+                </select>
+            </div>
+            
             <label>Contrato:</label><select id="editTipoContrato" required><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select>
             <button type="submit">Guardar</button>
         </form></div></div>
@@ -239,7 +296,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // *** REEMPLAZA ESTAS URLS CON LAS TUYAS ***
             const SCRIPT_URL_SOCIOS = 'https://script.google.com/macros/s/AKfycbyr447pMQtsKoBfp8qTcB1uyE3rORhgPPmZM6Fgia3BgmIvtlZ_h04uGZrmx_HwubHQ/exec'; 
             const SCRIPT_URL_RECAUDACIONES = 'https://script.google.com/macros/s/AKfycbz_kCb4aEe437zHGbRqnjCibw1NtAqfCbTNmsVPn9jaZOPBFaZ6-FwmiTLqVxq39X1P/exec'; 
 
@@ -249,25 +305,73 @@
                 balancePropinaBruta: document.getElementById('balancePropinaBruta'), balanceDescuentos: document.getElementById('balanceDescuentos'), balancePropinaNeta: document.getElementById('balancePropinaNeta'), balanceAnticipos: document.getElementById('balanceAnticipos'), balanceSaldo: document.getElementById('balanceSaldo'),
                 totalGeneralPropinaNetaDistribucion: document.getElementById('totalGeneralPropinaNetaDistribucion'), puntoPlantaDisplay: document.getElementById('puntoPlantaDisplay'), distribucionPlantaContainer: document.getElementById('distribucionPlantaContainer'), distribucionPartTimeContainer: document.getElementById('distribucionPartTimeContainer'),
                 sociosListContainer: document.getElementById('sociosListContainer'), descuentosListContainer: document.getElementById('descuentosListContainer'), showRegisterSocioModalBtn: document.getElementById('showRegisterSocioModalBtn'),
-                ultimaDistribucionReport: document.getElementById('ultimaDistribucionReport'), ultimaDistFecha: document.getElementById('ultimaDistFecha'), ultimaDistNeta: document.getElementById('ultimaDistNeta'), ultimaDistPunto: document.getElementById('ultimaDistPunto'), cargarDatosDistribucionBtn: document.getElementById('cargarDatosDistribucionBtn'),
+                ultimaDistribucionReport: document.getElementById('ultimaDistribucionReport'), ultimaDistFecha: document.getElementById('ultimaDistFecha'), ultimaDistNeta: document.getElementById('ultimaDistNeta'), ultimaDistPunto: document.getElementById('ultimaDistPunto'),
                 totalPuntosDisplay: document.getElementById('totalPuntosDisplay'), loadAllAnticiposBtn: document.getElementById('loadAllAnticiposBtn'), uploadAllAnticiposBtn: document.getElementById('uploadAllAnticiposBtn'), saveAllAnticiposAndDistribucionBtn: document.getElementById('saveAllAnticiposAndDistribucionBtn'),
                 filtroNombre: document.getElementById('filtroNombre'), filtroArea: document.getElementById('filtroArea'), filtroContrato: document.getElementById('filtroContrato'), filtroNombreGestion: document.getElementById('filtroNombreGestion'), filtroAreaGestion: document.getElementById('filtroAreaGestion'), filtroContratoGestion: document.getElementById('filtroContratoGestion'),
-                addAnticipoBtn: document.getElementById('addAnticipoBtn'), addDescuentoBtn: document.getElementById('addDescuentoBtn') 
+                addAnticipoBtn: document.getElementById('addAnticipoBtn'), addDescuentoBtn: document.getElementById('addDescuentoBtn'),
+                scrollToTopBtn: document.getElementById('scrollToTopBtn')
             };
 
             let isSyncing = false, sociosData = [], montosData = [], recaudacionPorDia = {}, ultimaDistribucionData = null, flatpickrInstance = null;
             
+            // --- UTILIDADES ---
             const formatDisplayDate = (d) => { if(!d) return ''; const [y, m, day] = d.includes('T') ? d.split('T')[0].split('-') : d.split('-'); return `${day}-${m}-${y}`; };
             const normalizeRemoteDate = (s) => { if(!s) return ''; const str=String(s); return str.match(/^\d{4}-\d{2}-\d{2}/) ? str.substring(0,10) : (new Date(str).toISOString().split('T')[0]); };
-            
             const showToast = (msg, t='success') => { const d=document.createElement('div'); d.className=`toast ${t}`; d.textContent=msg; ui.toastContainer.appendChild(d); setTimeout(()=>d.classList.add('show'),10); setTimeout(()=>{d.classList.remove('show');d.remove()},4000); };
             const formatNumber = (n) => new Intl.NumberFormat('es-CL').format(Math.round(n)||0);
             const parseNumber = (s) => parseFloat(String(s).replace(/\./g,'').replace(',','.'))||0;
+            const parseMoney = (val) => { if (!val) return 0; if (typeof val === 'number') return val; const v = String(val).replace(/\./g, '').replace(',', '.'); return parseFloat(v) || 0; };
             const getStorage = (k) => JSON.parse(localStorage.getItem(k))||(k.includes('anticipos')?{}:k.includes('descuentos')?[]:{});
             const setStorage = (k,v) => localStorage.setItem(k,JSON.stringify(v));
             function setupNumericInputFormatting(el) { if(el) el.addEventListener('input', e=>{ let v=e.target.value.replace(/\./g,''); e.target.value=isNaN(v)||v.trim()===''?'':formatNumber(v); }); }
 
-            // Lógica Puntos
+            // --- LÓGICA SCROLL TOP ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    ui.scrollToTopBtn.classList.add('show');
+                } else {
+                    ui.scrollToTopBtn.classList.remove('show');
+                }
+            });
+            ui.scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- GESTIÓN DE MODALES ---
+            function openModal(templateId, callback) {
+                const template = document.getElementById(templateId);
+                if (!template) return;
+                const clone = template.content.cloneNode(true);
+                const modal = clone.querySelector('.modal');
+                ui.modalContainer.innerHTML = '';
+                ui.modalContainer.appendChild(modal);
+                modal.style.display = 'flex';
+                
+                const closeBtn = modal.querySelector('.close-button');
+                const cancelBtn = modal.querySelector('.cancel-btn');
+                const close = () => { modal.style.display = 'none'; ui.modalContainer.innerHTML = ''; };
+                
+                if (closeBtn) closeBtn.onclick = close;
+                if (cancelBtn) cancelBtn.onclick = close;
+                window.onclick = (e) => { if (e.target == modal) close(); };
+
+                if (callback) {
+                    const form = modal.querySelector('form');
+                    callback(form || modal, modal);
+                }
+            }
+
+            function confirmAction(message, onConfirm) {
+                openModal('templateConfirmDeleteModal', (content, modal) => {
+                    modal.querySelector('#confirmDeleteText').textContent = message;
+                    modal.querySelector('.confirm-delete-btn').onclick = () => {
+                        onConfirm();
+                        modal.style.display = 'none';
+                    };
+                });
+            }
+
+            // --- LÓGICA DE NEGOCIO ---
             function calcularPuntosLogica(fechaIngreso, area) {
                 let anioIng = 0, mesIng = 0, diaIng = 0;
                 if (!fechaIngreso) { const now = new Date(); anioIng = now.getFullYear(); mesIng = now.getMonth(); diaIng = now.getDate(); } 
@@ -281,25 +385,31 @@
                 if (mesActual < mesIng || (mesActual === mesIng && diaActual < diaIng)) { anos--; }
                 if (anos < 0) anos = 0;
                 const puntosTeoricos = 4 + (anos * 2);
-                let tope = 12; const a = (area || '').toLowerCase();
-                if (a.includes('mesa')) tope = 20; else if (a.includes('boveda') || a.includes('bóveda')) tope = 10; else if (a.includes('cambista')) tope = 8; else if (a.includes('maquina') || a.includes('máquina')) tope = 12;
+                
+                let tope = 12; 
+                const a = (area || '').toLowerCase();
+                
+                // Prioridad en Cambistas (sub-area de mesas o area sola)
+                if (a.includes('cambista')) tope = 8;
+                else if (a.includes('mesa')) tope = 20; 
+                else if (a.includes('boveda') || a.includes('bóveda')) tope = 10; 
+                else if (a.includes('maquina') || a.includes('máquina')) tope = 12;
+                
                 const puntosFinales = Math.min(puntosTeoricos, tope);
                 return { puntos: puntosFinales, anos: anos, tope: tope, teoricos: puntosTeoricos };
             }
 
-            // LIMPIADOR DE DINERO
-            function parseMoney(val) {
-                if (!val) return 0;
-                if (typeof val === 'number') return val;
-                // Si es string "1.500.000" -> 1500000
-                const v = String(val).replace(/\./g, '').replace(',', '.');
-                return parseFloat(v) || 0;
-            }
+            const isPartTime = (s) => (s.TipoContrato||'').toLowerCase().trim()==='part-time';
 
-            const renderDescuentos = (list) => {
-                ui.descuentosListContainer.innerHTML = list.length ? list.map(d =>
-                    `<div class="descuento-item"><div class="descuento-item-info"><span class="monto">$${formatNumber(d.cantidad)} - ${d.descripcion}</span><span class="categoria">${d.categoria}</span></div><div class="descuento-item-actions"><button class="edit-descuento-btn" data-id="${d.id}">✏️</button><button class="delete-descuento-btn" data-id="${d.id}">🗑️</button></div></div>`
-                ).join('') : '<p>Sin descuentos.</p>';
+            const recalculatePartTimeAssignable = (socioId) => {
+                const pt = getStorage('part_time_data_v3');
+                if(!pt[socioId]) return;
+                let monto = 0;
+                (pt[socioId].diasTrabajados || []).forEach(dia => {
+                     monto += (recaudacionPorDia[dia] || 0);
+                });
+                pt[socioId].montoAsignable = monto;
+                setStorage('part_time_data_v3', pt);
             };
 
             const updateAllUI = () => {
@@ -307,7 +417,6 @@
                 const desc = getStorage('descuentos_operacionales_v1'), totalDesc = desc.reduce((s,d)=>s+d.cantidad,0), neta = bruto-totalDesc;
                 const ants = getStorage('anticipos_data_v3'); let totalAnts = 0; Object.values(ants).forEach(l=>totalAnts+=l.reduce((s,a)=>s+a.cantidad,0));
                 
-                // ACTUALIZAR TEXTOS
                 ui.balancePropinaBruta.textContent=`$${formatNumber(bruto)}`; 
                 ui.balanceDescuentos.textContent=`$${formatNumber(totalDesc)}`;
                 ui.balancePropinaNeta.textContent=`$${formatNumber(neta)}`; 
@@ -338,7 +447,12 @@
                 } else ui.ultimaDistribucionReport.style.display='none';
             };
 
-            const isPartTime = (s) => (s.TipoContrato||'').toLowerCase().trim()==='part-time';
+            const renderDescuentos = (list) => {
+                ui.descuentosListContainer.innerHTML = list.length ? list.map(d =>
+                    `<div class="descuento-item"><div class="descuento-item-info"><span class="monto">$${formatNumber(d.cantidad)} - ${d.descripcion}</span><span class="categoria">${d.categoria}</span></div><div class="descuento-item-actions"><button class="edit-descuento-btn" data-id="${d.id}">✏️</button><button class="delete-descuento-btn" data-id="${d.id}">🗑️</button></div></div>`
+                ).join('') : '<p>Sin descuentos.</p>';
+            };
+
             const renderSociosFiltrados = () => {
                 const fN=ui.filtroNombre.value.toLowerCase(), fA=ui.filtroArea.value, fC=ui.filtroContrato.value;
                 const fNG=ui.filtroNombreGestion.value.toLowerCase(), fAG=ui.filtroAreaGestion.value, fCG=ui.filtroContratoGestion.value;
@@ -350,23 +464,29 @@
                 ui.sociosListContainer.innerHTML = gest.length ? '' : '<p>Sin socios.</p>';
                 if(gest.length) {
                     const grp = gest.reduce((a,s)=>{ (a[s.Area]=a[s.Area]||[]).push(s); return a;},{});
-                    ['Mesas','Maquinas','Boveda','Cambistas'].forEach(area => { if(grp[area]) {
+                    // Orden dinámico para incluir sub-áreas creadas
+                    const areasOrdenadas = Object.keys(grp).sort();
+                    
+                    areasOrdenadas.forEach(area => {
                         const div=document.createElement('div'); div.innerHTML=`<h3 style="margin-top:30px; border-bottom:1px solid #ddd">${area}</h3>`;
                         grp[area].forEach(s=>div.appendChild(createCard(s, 'manage')));
                         ui.sociosListContainer.appendChild(div);
-                    }});
+                    });
                 }
+                
                 ui.distribucionPlantaContainer.innerHTML='<h3>Planta</h3>'; ui.distribucionPartTimeContainer.innerHTML='<h3>Part-Time</h3>';
                 const renderArea = (list, cont) => {
                     if(!list.length) { cont.innerHTML+='<p style="color:#777;">Sin socios.</p>'; return; }
                     const grp = list.reduce((a,s)=>{ (a[s.Area]=a[s.Area]||[]).push(s); return a;},{});
-                    ['Mesas','Maquinas','Boveda','Cambistas'].forEach(area => { if(grp[area]) {
+                    
+                    // Orden dinámico aquí también
+                    Object.keys(grp).sort().forEach(area => {
                         const totalAreaPts = grp[area].reduce((acc, s) => acc + (s.puntosAsignadosFinales || 0), 0);
                         cont.innerHTML+=`<div class="area-header">${area} <span style="float:right">Puntos: ${Math.round(totalAreaPts)}</span></div>`;
                         const grid = document.createElement('div'); grid.className='area-section-grid';
                         grp[area].forEach(s=>grid.appendChild(createCard(s, 'dist')));
                         cont.appendChild(grid);
-                    }});
+                    });
                 };
                 renderArea(dist.filter(s=>!isPartTime(s)), ui.distribucionPlantaContainer);
                 renderArea(dist.filter(isPartTime), ui.distribucionPartTimeContainer);
@@ -415,31 +535,19 @@
             async function syncData() { 
                 if(isSyncing)return; isSyncing=true; ui.syncIndicator.classList.add('visible'); ui.balancePropinaBruta.innerHTML='<span style="color:#f39c12;">...</span>';
                 try{ 
-                    // FETCH RECAUDACIONES FORZADO PARA LEER DATA DE CUALQUIER FORMA
-                    // Agregamos timestamp para evitar caché
                     const urlRec = SCRIPT_URL_RECAUDACIONES + (SCRIPT_URL_RECAUDACIONES.includes('?') ? '&' : '?') + 'action=get&t=' + new Date().getTime();
-                    
-                    const recRes = await fetch(urlRec);
-                    const recJson = await recRes.json();
-                    
-                    // Detectar si viene como array directo o como {data: []} o {result: []}
+                    const recRes = await fetch(urlRec); const recJson = await recRes.json();
                     let listaRec = [];
-                    if (Array.isArray(recJson)) {
-                        listaRec = recJson;
-                    } else if (recJson.data && Array.isArray(recJson.data)) {
-                        listaRec = recJson.data;
-                    } else if (recJson.result && Array.isArray(recJson.result)) {
-                        listaRec = recJson.result;
-                    }
+                    if (Array.isArray(recJson)) listaRec = recJson;
+                    else if (recJson.data && Array.isArray(recJson.data)) listaRec = recJson.data;
+                    else if (recJson.result && Array.isArray(recJson.result)) listaRec = recJson.result;
                     
                     montosData = listaRec; 
                     recaudacionPorDia={}; 
                     if(Array.isArray(montosData)) {
                         montosData.forEach(r=>{ 
-                            // PARSEO SEGURO DE MONTO
                             if(r.fecha && r.monto) {
                                 let m = parseMoney(r.monto);
-                                // Normalizar fecha de recaudacion tambien
                                 let fRec = normalizeRemoteDate(r.fecha);
                                 recaudacionPorDia[fRec]=(recaudacionPorDia[fRec]||0)+m; 
                             }
@@ -449,44 +557,415 @@
                     const rS = await apiCall(SCRIPT_URL_SOCIOS,'getSocios'); 
                     sociosData=rS.map(s=>({...s, propinaAsignada:0})); 
                     
-                    const pt=getStorage('part_time_data_v3'); sociosData.filter(isPartTime).forEach(s=>{ if(!pt[s.ID]) pt[s.ID]={diasTrabajados:[],montoAsignable:0}; let m=0; (pt[s.ID].diasTrabajados||[]).forEach(d=>{ m+=(recaudacionPorDia[d]||0); }); pt[s.ID].montoAsignable=m; }); setStorage('part_time_data_v3',pt);
+                    const pt=getStorage('part_time_data_v3'); 
+                    sociosData.filter(isPartTime).forEach(s=>{ 
+                        if(!pt[s.ID]) pt[s.ID]={diasTrabajados:[],montoAsignable:0}; 
+                        let m=0; (pt[s.ID].diasTrabajados||[]).forEach(d=>{ m+=(recaudacionPorDia[d]||0); }); 
+                        pt[s.ID].montoAsignable=m; 
+                    }); 
+                    setStorage('part_time_data_v3',pt);
+                    
                     try{ultimaDistribucionData=await apiCall(SCRIPT_URL_SOCIOS,'getUltimaDistribucion');}catch(e){} 
                     updateAllUI(); showToast('Sincronizado'); 
                 }catch(e){ ui.balancePropinaBruta.textContent="Error"; console.error(e); showToast("Error Sincronizando", 'danger'); } finally{isSyncing=false;ui.syncIndicator.classList.remove('visible');} 
             }
 
-            // Listeners
+            // --- MANEJADORES DE ACCIÓN ---
+            function setupAreaSelects(form, mainId, subId, subContainerId) {
+                const mainSelect = form.querySelector(`#${mainId}`);
+                const subSelect = form.querySelector(`#${subId}`);
+                const subContainer = form.querySelector(`#${subContainerId}`);
+
+                const toggle = () => {
+                    if (mainSelect.value === 'Mesas') {
+                        subContainer.style.display = 'block';
+                    } else {
+                        subContainer.style.display = 'none';
+                        subSelect.value = '';
+                    }
+                };
+
+                mainSelect.addEventListener('change', toggle);
+                // Inicializar estado
+                toggle();
+            }
+
+            function handleShowEditSocioModal(socioId) {
+                const socio = sociosData.find(s => s.ID == socioId);
+                if (!socio) return;
+                openModal('templateEditSocioModal', (form) => {
+                    // Configurar lógica de sub-áreas
+                    setupAreaSelects(form, 'editArea', 'editSubArea', 'editSubAreaContainer');
+
+                    form.editSocioId.value = socio.ID;
+                    form.editNombre.value = socio.Nombre;
+                    form.editApellido.value = socio.Apellido;
+                    form.editFechaIngreso.value = normalizeRemoteDate(socio.FechaIngreso);
+                    
+                    // Parsear Área para separar Sub-Área si existe
+                    if (socio.Area.includes(' - Cambistas')) {
+                        form.editArea.value = 'Mesas';
+                        // Disparar evento change manualmente para mostrar el contenedor
+                        form.editArea.dispatchEvent(new Event('change'));
+                        form.editSubArea.value = 'Cambistas';
+                    } else {
+                        form.editArea.value = socio.Area;
+                        form.editArea.dispatchEvent(new Event('change'));
+                    }
+
+                    form.editTipoContrato.value = socio.TipoContrato;
+                    
+                    form.onsubmit = async (e) => {
+                        e.preventDefault();
+                        let finalArea = form.editArea.value;
+                        if (finalArea === 'Mesas' && form.editSubArea.value) {
+                            finalArea += ' - ' + form.editSubArea.value;
+                        }
+
+                        try {
+                            await apiCall(SCRIPT_URL_SOCIOS, 'updateSocio', 'POST', {
+                                socioId: socio.ID,
+                                updates: {
+                                    Nombre: form.editNombre.value,
+                                    Apellido: form.editApellido.value,
+                                    FechaIngreso: form.editFechaIngreso.value,
+                                    Area: finalArea,
+                                    TipoContrato: form.editTipoContrato.value
+                                }
+                            });
+                            showToast('Socio actualizado');
+                            document.querySelector('.modal').style.display = 'none';
+                            syncData();
+                        } catch (error) {
+                            showToast(error.message, 'danger');
+                        }
+                    };
+                });
+            }
+
+            function handleEditAnt(socioId, index) {
+                const ants = getStorage('anticipos_data_v3');
+                const anticipo = ants[socioId][index];
+                if (!anticipo) return;
+                openModal('templateEditAnticipoModal', (form) => {
+                    setupNumericInputFormatting(form.editAnticipoCantidad);
+                    form.editSocioId.value = socioId;
+                    form.editAnticipoIndex.value = index;
+                    form.editAnticipoFecha.value = normalizeRemoteDate(anticipo.fecha);
+                    form.editAnticipoCantidad.value = formatNumber(anticipo.cantidad);
+                    
+                    form.onsubmit = (e) => {
+                        e.preventDefault();
+                        ants[socioId][index] = {
+                            fecha: form.editAnticipoFecha.value,
+                            cantidad: parseNumber(form.editAnticipoCantidad.value)
+                        };
+                        setStorage('anticipos_data_v3', ants);
+                        updateAllUI();
+                        document.querySelector('.modal').style.display = 'none';
+                        showToast('Anticipo editado');
+                    };
+                });
+            }
+
+            function handleShowDescuentoModal(id = null) {
+                const descuentos = getStorage('descuentos_operacionales_v1');
+                const descuento = id ? descuentos.find(d => d.id == id) : null;
+                
+                openModal('templateAddDescuentoModal', (form) => {
+                    setupNumericInputFormatting(form.descuentoCantidad);
+                    if (descuento) {
+                        form.descuentoId.value = descuento.id;
+                        form.descuentoCategoria.value = descuento.categoria;
+                        form.descuentoDescripcion.value = descuento.descripcion;
+                        form.descuentoCantidad.value = formatNumber(descuento.cantidad);
+                    }
+                    
+                    form.onsubmit = (e) => {
+                        e.preventDefault();
+                        const nuevoDescuento = {
+                            id: descuento ? descuento.id : Date.now().toString(),
+                            categoria: form.descuentoCategoria.value,
+                            descripcion: form.descuentoDescripcion.value,
+                            cantidad: parseNumber(form.descuentoCantidad.value)
+                        };
+                        
+                        let newList;
+                        if (descuento) {
+                            newList = descuentos.map(d => d.id == descuento.id ? nuevoDescuento : d);
+                        } else {
+                            newList = [...descuentos, nuevoDescuento];
+                        }
+                        
+                        setStorage('descuentos_operacionales_v1', newList);
+                        updateAllUI();
+                        document.querySelector('.modal').style.display = 'none';
+                        showToast('Descuento guardado');
+                    };
+                });
+            }
+
+            function handleDownloadAnticipos(socioId) {
+                const socio = sociosData.find(s => s.ID == socioId);
+                const ants = getStorage('anticipos_data_v3')[socioId] || [];
+                if (!ants.length) { showToast('Sin anticipos', 'warning'); return; }
+                
+                let text = `Anticipos: ${socio.Nombre} ${socio.Apellido}\n\n`;
+                ants.forEach(a => {
+                    text += `${formatDisplayDate(a.fecha)}: $${formatNumber(a.cantidad)}\n`;
+                });
+                text += `\nTotal: $${formatNumber(ants.reduce((s, a) => s + a.cantidad, 0))}`;
+                
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `Anticipos_${socio.Nombre.replace(/\s+/g,'_')}.txt`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+            async function handleSaveDistribucionFinal(){
+                const neta=parseNumber(ui.balancePropinaNeta.textContent);
+                const punto=parseFloat(localStorage.getItem('lastPuntoPlantaValue'))||0;
+                
+                if(punto<=0){showToast('Falta calcular punto planta','warning');return;}
+                
+                const ants=getStorage('anticipos_data_v3');
+                const saldoAnt=getStorage('saldo_anterior_v1');
+                const detalleAnts=[];
+                
+                const distribucion=sociosData.map(s=>{
+                    const l=ants[s.ID]||[];
+                    const sumA=l.reduce((x,y)=>x+y.cantidad,0);
+                    l.forEach(a=>detalleAnts.push({id:s.ID,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad)}));
+                    return{
+                        ID:s.ID,
+                        NombreCompleto:`${s.Nombre} ${s.Apellido}`,
+                        Area:s.Area,
+                        TipoContrato:s.TipoContrato,
+                        PuntosAntiguedad:s.infoCalculo.puntos,
+                        PuntosFinales:s.puntosAsignadosFinales,
+                        PropinaAsignada:Math.round(s.propinaAsignada),
+                        Anticipos:Math.round(sumA),
+                        SaldoFinal:Math.round(s.propinaAsignada-sumA+(saldoAnt[s.ID]||0))
+                    };
+                });
+
+                try{
+                    showToast('Guardando en la nube...', 'warning');
+                    const res=await apiCall(SCRIPT_URL_SOCIOS,'guardarDistribucion','POST',{
+                        resumen:{
+                            fecha:new Date().toISOString().split('T')[0],
+                            propinaNeta:neta,
+                            puntoPlanta:punto,
+                            totalPuntos:parseFloat((ui.totalPuntosDisplay.innerText.match(/[\d\.]+/)||['0'])[0]),
+                            totalAnticipos:detalleAnts.reduce((a,b)=>a+b.monto,0)
+                        },
+                        distribucion,
+                        descuentos:getStorage('descuentos_operacionales_v1'),
+                        detalleAnticipos:detalleAnts
+                    });
+                    showToast(`Guardado. Hoja: ${res.sheetName}`);
+                    localStorage.removeItem('anticipos_data_v3');
+                    syncData();
+                }catch(e){
+                    showToast(e.message,'danger');
+                }
+            }
+
+            async function handleUploadAllAnticipos(){
+                const all=getStorage('anticipos_data_v3'),list=[];
+                Object.keys(all).forEach(id=>{
+                    const s=sociosData.find(x=>x.ID===id);
+                    if(s)all[id].forEach(a=>list.push({id,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad)}));
+                });
+                if(!list.length){showToast('Nada que subir','warning');return;}
+                try{showToast('Subiendo...');await apiCall(SCRIPT_URL_SOCIOS,'registrarTodosLosAnticipos','POST',{detalleAnticipos:list});showToast('Éxito');}catch(e){showToast(e.message,'danger');}
+            }
+            
+            function handleEditSaldoAnterior(id){
+                openModal('templateEditSaldoAnteriorModal',f=>{
+                    setupNumericInputFormatting(f.editSaldoMonto);
+                    f.editSaldoMonto.value=formatNumber(getStorage('saldo_anterior_v1')[id]||0);
+                    f.editSaldoSocioId.value=id;
+                    f.onsubmit=e=>{
+                        e.preventDefault();
+                        const l=getStorage('saldo_anterior_v1');
+                        l[id]=parseNumber(f.editSaldoMonto.value);
+                        setStorage('saldo_anterior_v1',l);
+                        updateAllUI();
+                        document.querySelector('.modal').style.display='none';
+                    }
+                });
+            }
+
+            function openPuntoPlanta(){
+                openModal('templatePuntoPlantaModal',(div,m)=>{
+                    const bruto=Object.values(recaudacionPorDia).reduce((a,b)=>a+b,0);
+                    const neta=bruto-getStorage('descuentos_operacionales_v1').reduce((s,d)=>s+d.cantidad,0);
+                    m.querySelector('#propinaNetaModal').textContent=`$${formatNumber(neta)}`;
+                    let tp=0;
+                    const abs=getStorage('planta_absences_v1');
+                    sociosData.forEach(s=>{
+                        if(isPartTime(s)){tp+=s.infoCalculo.puntos;}
+                        else{
+                            let dp=0;(abs[s.ID]||[]).forEach(d=>dp+=(recaudacionPorDia[d]||0));
+                            let f=bruto>0?(1-(dp/bruto)):1; if(f<0)f=0;
+                            tp+=(s.infoCalculo.puntos*f);
+                        }
+                    });
+                    m.querySelector('#totalPuntosGeneralDisplay').textContent=Math.round(tp);
+                    const inp=m.querySelector('#divisorManualInput');
+                    inp.value=Math.round(tp);
+                    const cal=()=>{const v=neta/parseNumber(inp.value);m.querySelector('#valorPuntoCalculadoDisplay').textContent=v>0?`$${formatNumber(v)}`:'$0';};
+                    inp.oninput=cal; cal();
+                    m.querySelector('#calcularPuntoPlantaInternoBtn').onclick=()=>{
+                        localStorage.setItem('lastPuntoPlantaValue',neta/parseNumber(inp.value));
+                        updateAllUI();m.style.display='none';
+                    };
+                });
+            }
+
+            function abrirCalendarModal(id,mode){
+                const s=sociosData.find(x=>x.ID===id);
+                openModal('templateCalendarModal',(d,m)=>{
+                    m.querySelector('#calendarModalTitle').textContent=mode==='PT'?'Días PT':'Ausencias';
+                    const info=m.querySelector('#montoDescuentoInfo');
+                    let dias=mode==='PT'?(getStorage('part_time_data_v3')[id]||{}).diasTrabajados||[]:getStorage('planta_absences_v1')[id]||[];
+                    m.querySelector('#selectedDaysCount').textContent=dias.length;
+                    const upd=(sel)=>{
+                        let t=0; sel.forEach(d=>t+=(recaudacionPorDia[flatpickrInstance.formatDate(d,"Y-m-d")]||0));
+                        info.style.display='block';
+                        info.style.color=mode==='PT'?'#27ae60':'#c0392b';
+                        info.textContent=`Total: $${formatNumber(t)}`;
+                        m.querySelector('#selectedDaysCount').textContent=sel.length;
+                    };
+                    flatpickrInstance=flatpickr(m.querySelector('#flatpickrInput'),{
+                        mode:"multiple",dateFormat:"Y-m-d",defaultDate:dias,locale:"es",
+                        onChange:upd,onOpen:()=>upd(flatpickrInstance.selectedDates)
+                    });
+                    m.querySelector('#saveCalendarBtn').onclick=()=>{
+                        const sel=flatpickrInstance.selectedDates.map(d=>flatpickrInstance.formatDate(d,"Y-m-d"));
+                        if(mode==='PT'){
+                            const pt=getStorage('part_time_data_v3');
+                            pt[id]={...(pt[id]||{}),diasTrabajados:sel};
+                            setStorage('part_time_data_v3',pt);
+                            recalculatePartTimeAssignable(s.ID);
+                        }else{
+                            const abs=getStorage('planta_absences_v1');
+                            abs[id]=sel;
+                            setStorage('planta_absences_v1',abs);
+                        }
+                        updateAllUI();showToast('Guardado');m.style.display='none';
+                    };
+                });
+            }
+
+            function abrirPuntosPT(id){
+                openModal('templatePartTimePointsModal',(f,m)=>{
+                    const pt=getStorage('part_time_data_v3')[id]||{};
+                    m.querySelector('#partTimeModalBasePoints').textContent=sociosData.find(x=>x.ID===id).infoCalculo.puntos;
+                    m.querySelector('#partTimeModalAssignableAmount').textContent=`$${formatNumber(pt.montoAsignable||0)}`;
+                    m.querySelector('#calculatePartTimePointsInternoBtn').onclick=()=>{
+                        const d=parseNumber(m.querySelector('#partTimeMultiplicador').value);
+                        if(d>0){
+                            pt.puntosCalculados=(pt.montoAsignable||0)/d;
+                            const st=getStorage('part_time_data_v3');
+                            st[id]=pt;
+                            setStorage('part_time_data_v3',st);
+                            updateAllUI();m.style.display='none';
+                        }
+                    };
+                });
+            }
+
+            // --- LISTENERS GENERALES ---
             ui.menuToggle.onclick=e=>{e.stopPropagation();ui.sideMenu.classList.toggle('open'); ui.menuToggle.classList.toggle('active');};
             document.addEventListener('click', e=>{ 
                 if(ui.sideMenu.classList.contains('open') && !ui.sideMenu.contains(e.target) && !ui.menuToggle.contains(e.target)) { ui.sideMenu.classList.remove('open'); ui.menuToggle.classList.remove('active'); }
                 const edit=e.target.closest('.edit-btn'); if(edit) handleShowEditSocioModal(edit.dataset.socioId);
-                const del=e.target.closest('.delete-btn'); if(del) confirmAction('¿Eliminar?',async()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
+                const del=e.target.closest('.delete-btn'); if(del) confirmAction('¿Eliminar Socio permanentemente?',async()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
                 const cal=e.target.closest('.calendar-btn'); if(cal) abrirCalendarModal(cal.dataset.socioId, 'PT');
                 const calP=e.target.closest('.calendar-discount-btn'); if(calP) abrirCalendarModal(calP.dataset.socioId, 'PLANTA');
                 const cpt=e.target.closest('.calculate-btn'); if(cpt) abrirPuntosPT(cpt.dataset.socioId);
                 const edA=e.target.closest('.edit-anticipo-btn'); if(edA) handleEditAnt(edA.dataset.socioId, edA.dataset.anticipoIndex);
-                const dlA=e.target.closest('.delete-anticipo-btn'); if(dlA) confirmAction('¿Borrar?',()=>{ const l=getStorage('anticipos_data_v3'); l[dlA.dataset.socioId].splice(dlA.dataset.anticipoIndex,1); setStorage('anticipos_data_v3',l); updateAllUI(); });
+                const dlA=e.target.closest('.delete-anticipo-btn'); if(dlA) confirmAction('¿Borrar anticipo?',()=>{ const l=getStorage('anticipos_data_v3'); l[dlA.dataset.socioId].splice(dlA.dataset.anticipoIndex,1); setStorage('anticipos_data_v3',l); updateAllUI(); });
                 const edD=e.target.closest('.edit-descuento-btn'); if(edD) handleShowDescuentoModal(edD.dataset.id);
-                const dlD=e.target.closest('.delete-descuento-btn'); if(dlD) confirmAction('¿Borrar?',()=>{ const l=getStorage('descuentos_operacionales_v1').filter(x=>x.id!=dlD.dataset.id); setStorage('descuentos_operacionales_v1',l); updateAllUI(); });
+                const dlD=e.target.closest('.delete-descuento-btn'); if(dlD) confirmAction('¿Borrar descuento?',()=>{ const l=getStorage('descuentos_operacionales_v1').filter(x=>x.id!=dlD.dataset.id); setStorage('descuentos_operacionales_v1',l); updateAllUI(); });
                 const up=e.target.closest('.upload-anticipos-btn'); if(up) handleUploadAllAnticipos();
                 const down=e.target.closest('.download-anticipos-btn'); if(down) handleDownloadAnticipos(down.dataset.socioId);
                 const esal=e.target.closest('.edit-saldo-anterior-btn'); if(esal) handleEditSaldoAnterior(esal.dataset.socioId);
             });
+
             document.querySelectorAll('.menu-link').forEach(l=>l.onclick=e=>{if(l.target!=='_blank'){e.preventDefault();document.querySelectorAll('.content-panel').forEach(p=>p.classList.remove('active'));document.getElementById(l.dataset.target).classList.add('active');if(window.innerWidth<=991){ui.sideMenu.classList.remove('open');ui.menuToggle.classList.remove('active');}}});
             [ui.filtroNombre,ui.filtroArea,ui.filtroContrato,ui.filtroNombreGestion,ui.filtroAreaGestion,ui.filtroContratoGestion].forEach(el=>el.addEventListener('input',renderSociosFiltrados));
-            ui.syncDataBtn.onclick=syncData; ui.showRegisterSocioModalBtn.onclick=()=>openModal('templateRegisterSocioModal',f=>f.onsubmit=async e=>{e.preventDefault();try{await apiCall(SCRIPT_URL_SOCIOS,'addSocio','POST',{socio:{Nombre:f.nombre.value, Apellido:f.apellido.value, FechaIngreso:f.fechaIngreso.value, Area:f.area.value, TipoContrato:f.tipoContrato.value}});showToast('Guardado');document.querySelector('.modal').style.display='none';syncData();}catch(e){showToast(e.message,'danger');}});
+            
+            // --- BOTONES PRINCIPALES ---
+            ui.syncDataBtn.onclick=syncData;
+            
+            ui.resetAnticiposLocalBtn.onclick = () => confirmAction('¿Borrar TODOS los anticipos locales? Esto no se puede deshacer.', () => {
+                localStorage.removeItem('anticipos_data_v3');
+                updateAllUI();
+                showToast('Anticipos locales borrados');
+            });
+
+            ui.resetPuntoPlantaBtn.onclick = () => confirmAction('¿Resetear valor punto planta?', () => {
+                localStorage.removeItem('lastPuntoPlantaValue');
+                updateAllUI();
+                showToast('Punto planta reseteado');
+            });
+
+            ui.resetPartTimeDataBtn.onclick = () => confirmAction('¿Borrar cálculos Part-Time y Ausencias?', () => {
+                localStorage.removeItem('part_time_data_v3');
+                localStorage.removeItem('planta_absences_v1');
+                updateAllUI();
+                showToast('Datos de tiempo reiniciados');
+            });
+
+            ui.saveAllAnticiposAndDistribucionBtn.onclick = () => confirmAction('¿Desea cerrar la distribución y guardar en Google Sheets?', handleSaveDistribucionFinal);
+
+            // Registro de Socio: Manejo de Sub-Área
+            ui.showRegisterSocioModalBtn.onclick=()=>openModal('templateRegisterSocioModal',f=>{
+                setupAreaSelects(f, 'area', 'subArea', 'subAreaContainer');
+
+                f.onsubmit=async e=>{
+                    e.preventDefault();
+                    let finalArea = f.area.value;
+                    if (finalArea === 'Mesas' && f.subArea.value) {
+                        finalArea += ' - ' + f.subArea.value;
+                    }
+                    try{
+                        await apiCall(SCRIPT_URL_SOCIOS,'addSocio','POST',{
+                            socio:{
+                                Nombre:f.nombre.value, 
+                                Apellido:f.apellido.value, 
+                                FechaIngreso:f.fechaIngreso.value, 
+                                Area:finalArea, 
+                                TipoContrato:f.tipoContrato.value
+                            }
+                        });
+                        showToast('Guardado');
+                        document.querySelector('.modal').style.display='none';
+                        syncData();
+                    }catch(e){
+                        showToast(e.message,'danger');
+                    }
+                }
+            });
+            
             ui.addAnticipoBtn.onclick=()=>openModal('templateAddAnticipoModal',(f,m)=>{m.querySelector('#sociosAnticipoList').innerHTML=sociosData.map(s=>`<option value="${s.Nombre} ${s.Apellido}" data-id="${s.ID}">`).join(''); m.querySelector('#anticipoSocioInput').oninput=e=>{const o=[...m.querySelectorAll('option')].find(x=>x.value===e.target.value); if(o) m.querySelector('#anticipoSocioId').value=o.dataset.id;}; setupNumericInputFormatting(f.anticipoCantidad); f.onsubmit=e=>{e.preventDefault();const id=e.target.anticipoSocioId.value;if(id){const l=getStorage('anticipos_data_v3');if(!l[id])l[id]=[];l[id].push({fecha:f.anticipoFecha.value,cantidad:parseNumber(f.anticipoCantidad.value)});setStorage('anticipos_data_v3',l);updateAllUI();m.style.display='none';}}});
+            
             ui.addDescuentoBtn.onclick=()=>handleShowDescuentoModal();
             document.querySelector('.show-punto-planta-btn').onclick=openPuntoPlanta;
+            
             ui.loadAllAnticiposBtn.onclick=async()=>{try{showToast('Cargando...');const d=await apiCall(SCRIPT_URL_SOCIOS,'getAllAnticiposDesdeSheets','POST');if(!Object.keys(d).length){showToast('Nada pendiente');return;}const l=getStorage('anticipos_data_v3');for(const id in d){if(!l[id])l[id]=[];const ex=new Set(l[id].map(a=>`${a.fecha}_${Math.round(a.cantidad)}`));d[id].forEach(r=>{const f=normalizeRemoteDate(r.fecha),k=`${f}_${Math.round(r.cantidad)}`;if(!ex.has(k)){l[id].push({fecha:f,cantidad:Math.round(r.cantidad)});ex.add(k);}});}setStorage('anticipos_data_v3',l);updateAllUI();showToast('Listo');}catch(e){showToast(e.message,'danger');}}
-            async function handleUploadAllAnticipos(){const all=getStorage('anticipos_data_v3'),list=[];Object.keys(all).forEach(id=>{const s=sociosData.find(x=>x.ID===id);if(s)all[id].forEach(a=>list.push({id,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad)}));});if(!list.length){showToast('Nada que subir','warning');return;}try{showToast('Subiendo...');await apiCall(SCRIPT_URL_SOCIOS,'registrarTodosLosAnticipos','POST',{detalleAnticipos:list});showToast('Éxito');}catch(e){showToast(e.message,'danger');}}
-            async function handleSaveDistribucionFinal(){confirmAction('¿Guardar Distribución?',async()=>{const neta=parseNumber(ui.balancePropinaNeta.textContent),punto=parseFloat(localStorage.getItem('lastPuntoPlantaValue'))||0;if(punto<=0){showToast('Falta punto planta','warning');return;}const ants=getStorage('anticipos_data_v3'),saldoAnt=getStorage('saldo_anterior_v1'),detalleAnts=[],distribucion=sociosData.map(s=>{const l=ants[s.ID]||[],sumA=l.reduce((x,y)=>x+y.cantidad,0);l.forEach(a=>detalleAnts.push({id:s.ID,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad)}));return{ID:s.ID,NombreCompleto:`${s.Nombre} ${s.Apellido}`,Area:s.Area,TipoContrato:s.TipoContrato,PuntosAntiguedad:s.infoCalculo.puntos,PuntosFinales:s.puntosAsignadosFinales,PropinaAsignada:Math.round(s.propinaAsignada),Anticipos:Math.round(sumA),SaldoFinal:Math.round(s.propinaAsignada-sumA+(saldoAnt[s.ID]||0))};});try{showToast('Guardando...');const res=await apiCall(SCRIPT_URL_SOCIOS,'guardarDistribucion','POST',{resumen:{fecha:new Date().toISOString().split('T')[0],propinaNeta:neta,puntoPlanta:punto,totalPuntos:parseFloat((ui.totalPuntosDisplay.innerText.match(/[\d\.]+/)||['0'])[0]),totalAnticipos:detalleAnts.reduce((a,b)=>a+b.monto,0)},distribucion,descuentos:getStorage('descuentos_operacionales_v1'),detalleAnticipos:detalleAnts});showToast(`Hoja: ${res.sheetName}`);localStorage.removeItem('anticipos_data_v3');syncData();}catch(e){showToast(e.message,'danger');}});}
-            function handleEditSaldoAnterior(id){openModal('templateEditSaldoAnteriorModal',f=>{setupNumericInputFormatting(f.editSaldoMonto);f.editSaldoMonto.value=formatNumber(getStorage('saldo_anterior_v1')[id]||0);f.editSaldoSocioId.value=id;f.onsubmit=e=>{e.preventDefault();const l=getStorage('saldo_anterior_v1');l[id]=parseNumber(f.editSaldoMonto.value);setStorage('saldo_anterior_v1',l);updateAllUI();document.querySelector('.modal').style.display='none';}});}
-            function openPuntoPlanta(){openModal('templatePuntoPlantaModal',(div,m)=>{const bruto=Object.values(recaudacionPorDia).reduce((a,b)=>a+b,0),neta=bruto-getStorage('descuentos_operacionales_v1').reduce((s,d)=>s+d.cantidad,0);m.querySelector('#propinaNetaModal').textContent=`$${formatNumber(neta)}`;let tp=0;const abs=getStorage('planta_absences_v1');sociosData.forEach(s=>{if(isPartTime(s)){tp+=s.infoCalculo.puntos;}else{let dp=0;(abs[s.ID]||[]).forEach(d=>dp+=(recaudacionPorDia[d]||0));let f=bruto>0?(1-(dp/bruto)):1;if(f<0)f=0;tp+=(s.infoCalculo.puntos*f);}});m.querySelector('#totalPuntosGeneralDisplay').textContent=Math.round(tp);const inp=m.querySelector('#divisorManualInput');inp.value=Math.round(tp);const cal=()=>{const v=neta/parseNumber(inp.value);m.querySelector('#valorPuntoCalculadoDisplay').textContent=v>0?`$${formatNumber(v)}`:'$0';};inp.oninput=cal;cal();m.querySelector('#calcularPuntoPlantaInternoBtn').onclick=()=>{localStorage.setItem('lastPuntoPlantaValue',neta/parseNumber(inp.value));updateAllUI();m.style.display='none';};});}
-            function abrirCalendarModal(id,mode){const s=sociosData.find(x=>x.ID===id);openModal('templateCalendarModal',(d,m)=>{m.querySelector('#calendarModalTitle').textContent=mode==='PT'?'Días PT':'Ausencias';const info=m.querySelector('#montoDescuentoInfo');let dias=mode==='PT'?(getStorage('part_time_data_v3')[id]||{}).diasTrabajados||[]:getStorage('planta_absences_v1')[id]||[];m.querySelector('#selectedDaysCount').textContent=dias.length;const upd=(sel)=>{let t=0;sel.forEach(d=>t+=(recaudacionPorDia[flatpickrInstance.formatDate(d,"Y-m-d")]||0));info.style.display='block';info.style.color=mode==='PT'?'#27ae60':'#c0392b';info.textContent=`Total: $${formatNumber(t)}`;m.querySelector('#selectedDaysCount').textContent=sel.length;};flatpickrInstance=flatpickr(m.querySelector('#flatpickrInput'),{mode:"multiple",dateFormat:"Y-m-d",defaultDate:dias,locale:"es",onChange:upd,onOpen:()=>upd(flatpickrInstance.selectedDates)});m.querySelector('#saveCalendarBtn').onclick=()=>{const sel=flatpickrInstance.selectedDates.map(d=>flatpickrInstance.formatDate(d,"Y-m-d"));if(mode==='PT'){const pt=getStorage('part_time_data_v3');pt[id]={...(pt[id]||{}),diasTrabajados:sel};setStorage('part_time_data_v3',pt);recalcularMontoAsignableParaSocio(s);}else{const abs=getStorage('planta_absences_v1');abs[id]=sel;setStorage('planta_absences_v1',abs);}updateAllUI();showToast('Guardado');m.style.display='none';};});}
-            function abrirPuntosPT(id){openModal('templatePartTimePointsModal',(f,m)=>{const pt=getStorage('part_time_data_v3')[id]||{};m.querySelector('#partTimeModalBasePoints').textContent=sociosData.find(x=>x.ID===id).infoCalculo.puntos;m.querySelector('#partTimeModalAssignableAmount').textContent=`$${formatNumber(pt.montoAsignable)}`;m.querySelector('#calculatePartTimePointsInternoBtn').onclick=()=>{const d=parseNumber(m.querySelector('#partTimeMultiplicador').value);if(d>0){pt.puntosCalculados=pt.montoAsignable/d;const st=getStorage('part_time_data_v3');st[id]=pt;setStorage('part_time_data_v3',st);updateAllUI();m.style.display='none';}};});}
+            
+            ui.uploadAllAnticiposBtn.onclick = handleUploadAllAnticipos;
 
-            syncData(); setInterval(syncData, 3600000);
+            // Iniciar
+            syncData(); 
+            setInterval(syncData, 3600000);
         });
     </script>
 </body>
