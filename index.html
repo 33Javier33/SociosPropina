@@ -801,28 +801,36 @@
                     const areasOrdenadas = Object.keys(grp).sort();
                     
                     areasOrdenadas.forEach(area => {
-                        const div=document.createElement('div'); div.innerHTML=`<h3 style="margin-top:30px; border-bottom:1px solid #ddd">${area}</h3>`;
+                        const wrapper = document.createElement('div');
+                        const headerId = `manage-header-${area.replace(/\s+/g,'-')}`;
+                        const gridId = `manage-grid-${area.replace(/\s+/g,'-')}`;
+
+                        wrapper.innerHTML = `<div class="area-header collapsed" data-target="${gridId}">${area}</div>`;
+                        
+                        const grid = document.createElement('div');
+                        grid.className = 'area-section-grid collapsed';
+                        grid.id = gridId;
                         
                         const list = grp[area];
-                        // Separar Planta y Part-Time para mostrar ordenado
                         const planta = list.filter(s => s.TipoContrato === 'Planta');
                         const partTime = list.filter(s => s.TipoContrato === 'Part-Time');
                         const others = list.filter(s => s.TipoContrato !== 'Planta' && s.TipoContrato !== 'Part-Time');
 
                         if (planta.length > 0) {
-                            div.innerHTML += '<div class="contract-subtitle">🌿 Planta</div>';
-                            planta.forEach(s=>div.appendChild(createCard(s, 'manage')));
+                            const sub = document.createElement('div'); sub.className='contract-subtitle'; sub.textContent='🌿 Planta'; grid.appendChild(sub);
+                            planta.forEach(s=>grid.appendChild(createCard(s, 'manage')));
                         }
                         if (partTime.length > 0) {
-                            div.innerHTML += '<div class="contract-subtitle">⏳ Part-Time</div>';
-                            partTime.forEach(s=>div.appendChild(createCard(s, 'manage')));
+                            const sub = document.createElement('div'); sub.className='contract-subtitle'; sub.textContent='⏳ Part-Time'; grid.appendChild(sub);
+                            partTime.forEach(s=>grid.appendChild(createCard(s, 'manage')));
                         }
                         if (others.length > 0) {
-                             div.innerHTML += '<div class="contract-subtitle">Otros</div>';
-                             others.forEach(s=>div.appendChild(createCard(s, 'manage')));
+                             const sub = document.createElement('div'); sub.className='contract-subtitle'; sub.textContent='Otros'; grid.appendChild(sub);
+                             others.forEach(s=>grid.appendChild(createCard(s, 'manage')));
                         }
 
-                        ui.sociosListContainer.appendChild(div);
+                        wrapper.appendChild(grid);
+                        ui.sociosListContainer.appendChild(wrapper);
                     });
                 }
                 
@@ -843,10 +851,10 @@
                         const headerId = `area-header-${parentArea.replace(/\s+/g,'-')}-${suffix}`;
                         const gridId = `area-grid-${parentArea.replace(/\s+/g,'-')}-${suffix}`;
                         
-                        cont.innerHTML += `<div class="area-header" data-target="${gridId}">${parentArea} <span style="float:right">Puntos: ${Math.round(totalAreaPts)}</span></div>`;
+                        cont.innerHTML += `<div class="area-header collapsed" data-target="${gridId}">${parentArea} <span style="float:right">Puntos: ${Math.round(totalAreaPts)}</span></div>`;
                         
                         const grid = document.createElement('div'); 
-                        grid.className = 'area-section-grid';
+                        grid.className = 'area-section-grid collapsed';
                         grid.id = gridId;
                         
                         const mainGroup = sociosInGroup.filter(s => s.Area === parentArea);
@@ -1343,7 +1351,7 @@
 
             // Iniciar
             syncData(); 
-            setInterval(syncData, 3600000);
+            setInterval(syncData, 300000); // 300000 ms = 5 minutos
         });
     </script>
 </body>
