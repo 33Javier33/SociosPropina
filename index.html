@@ -136,6 +136,31 @@
         .type-breakdown div { margin-bottom: 3px; font-size: 0.9em; }
         .type-breakdown strong { color: var(--primary-hover-color); }
 
+        .contract-subtitle {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            border-bottom: 1px solid #eee;
+            margin: 10px 0 5px 0;
+            padding-bottom: 3px;
+            font-weight: 600;
+        }
+
+        .alpha-sort-btn {
+            background-color: #8e44ad;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        .alpha-sort-btn.active {
+            background-color: #9b59b6;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            border: 2px solid #6c3483;
+        }
+
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
 </head>
@@ -217,6 +242,7 @@
                         <div><label>Área:</label><select id="filtroAreaGestion" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="GastosComision">GastosComision</option></select></div>
                         <div><label>Contrato:</label><select id="filtroContratoGestion" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
                     </div>
+                    <button id="alphaSortBtnGestion" class="alpha-sort-btn">🔤 A-Z</button>
                 </div>
                 <div class="socios-list-container"><div id="sociosListContainer"></div></div>
             </div>
@@ -229,6 +255,7 @@
                         <div><label>Área:</label><select id="filtroArea" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="GastosComision">GastosComision</option></select></div>
                         <div><label>Contrato:</label><select id="filtroContrato" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
                     </div>
+                    <button id="alphaSortBtnDist" class="alpha-sort-btn">🔤 A-Z</button>
                 </div>
                 <div class="general-total" id="totalGeneralPropinaNetaDistribucion"></div>
                 <div id="totalPuntosDisplay" style="text-align:center; font-weight:bold; background-color:#eafaf1; padding:10px; border-radius:8px; margin: 15px 0; border: 1px solid #c3e6cb;"></div>
@@ -403,11 +430,14 @@
                 histPromedio: document.getElementById('histPromedio'),
                 histTotalValorPunto: document.getElementById('histTotalValorPunto'),
                 historialTableBody: document.getElementById('historialTableBody'),
-                historialValorPuntoDistribucion: document.getElementById('historialValorPuntoDistribucion')
+                historialValorPuntoDistribucion: document.getElementById('historialValorPuntoDistribucion'),
+                alphaSortBtnGestion: document.getElementById('alphaSortBtnGestion'),
+                alphaSortBtnDist: document.getElementById('alphaSortBtnDist')
             };
 
             let isSyncing = false, sociosData = [], montosData = [], recaudacionPorDia = {}, ultimaDistribucionData = null, flatpickrInstance = null, historialRawData = [];
-            let globalValorPunto = 0; // NUEVA VARIABLE GLOBAL PARA EL VALOR PUNTO
+            let globalValorPunto = 0; 
+            let isAlphaSort = false; // Estado del ordenamiento alfabético
             
             // --- UTILIDADES ---
             const formatDisplayDate = (d) => { if(!d) return ''; const [y, m, day] = d.includes('T') ? d.split('T')[0].split('-') : d.split('-'); return `${day}-${m}-${y}`; };
@@ -431,6 +461,16 @@
             ui.scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
+            // --- ORDENAMIENTO ALFABÉTICO ---
+            const toggleAlphaSort = () => {
+                isAlphaSort = !isAlphaSort;
+                ui.alphaSortBtnGestion.classList.toggle('active', isAlphaSort);
+                ui.alphaSortBtnDist.classList.toggle('active', isAlphaSort);
+                renderSociosFiltrados();
+            };
+            ui.alphaSortBtnGestion.onclick = toggleAlphaSort;
+            ui.alphaSortBtnDist.onclick = toggleAlphaSort;
 
             // --- HISTORIAL AGRUPADO ---
             let flatpickrHistorial = flatpickr(ui.historialFechaFiltro, {
@@ -635,7 +675,6 @@
                 let pPlanta=0, pPT=0; 
                 const ptData = getStorage('part_time_data_v3'), plantaAbs = getStorage('planta_absences_v1');
                 
-                // USAR LA VARIABLE GLOBAL EN LUGAR DE LOCALSTORAGE
                 const valPunto = globalValorPunto; 
 
                 sociosData.forEach(s => {
@@ -670,7 +709,16 @@
                 
                 const filterFn = (s, n, a, c) => `${s.Nombre} ${s.Apellido}`.toLowerCase().includes(n) && (a==='todos'||s.Area.startsWith(a)) && (c==='todos'||s.TipoContrato===c);
                 
-                renderSocios(sociosData.filter(s=>filterFn(s,fNG,fAG,fCG)), sociosData.filter(s=>filterFn(s,fN,fA,fC)));
+                let filteredGestion = sociosData.filter(s=>filterFn(s,fNG,fAG,fCG));
+                let filteredDist = sociosData.filter(s=>filterFn(s,fN,fA,fC));
+
+                if (isAlphaSort) {
+                    const sortFn = (a, b) => (a.Nombre + a.Apellido).localeCompare(b.Nombre + b.Apellido);
+                    filteredGestion.sort(sortFn);
+                    filteredDist.sort(sortFn);
+                }
+
+                renderSocios(filteredGestion, filteredDist);
             };
 
             const renderSocios = (gest, dist) => {
@@ -681,7 +729,26 @@
                     
                     areasOrdenadas.forEach(area => {
                         const div=document.createElement('div'); div.innerHTML=`<h3 style="margin-top:30px; border-bottom:1px solid #ddd">${area}</h3>`;
-                        grp[area].forEach(s=>div.appendChild(createCard(s, 'manage')));
+                        
+                        const list = grp[area];
+                        // Separar Planta y Part-Time para mostrar ordenado
+                        const planta = list.filter(s => s.TipoContrato === 'Planta');
+                        const partTime = list.filter(s => s.TipoContrato === 'Part-Time');
+                        const others = list.filter(s => s.TipoContrato !== 'Planta' && s.TipoContrato !== 'Part-Time');
+
+                        if (planta.length > 0) {
+                            div.innerHTML += '<div class="contract-subtitle">🌿 Planta</div>';
+                            planta.forEach(s=>div.appendChild(createCard(s, 'manage')));
+                        }
+                        if (partTime.length > 0) {
+                            div.innerHTML += '<div class="contract-subtitle">⏳ Part-Time</div>';
+                            partTime.forEach(s=>div.appendChild(createCard(s, 'manage')));
+                        }
+                        if (others.length > 0) {
+                             div.innerHTML += '<div class="contract-subtitle">Otros</div>';
+                             others.forEach(s=>div.appendChild(createCard(s, 'manage')));
+                        }
+
                         ui.sociosListContainer.appendChild(div);
                     });
                 }
