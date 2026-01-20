@@ -53,7 +53,6 @@
         .saldo-disponible { color: #27ae60; font-weight: 700; font-size: 1.2em; }
         .saldo-disponible.negative { color: #c0392b !important; }
         
-        /* --- ESTILOS BOTÓN VOLVER ARRIBA --- */
         .scroll-to-top {
             position: fixed;
             bottom: 30px;
@@ -77,7 +76,7 @@
         }
         .scroll-to-top.show { opacity: 1; visibility: visible; }
         .scroll-to-top:hover { transform: translateY(-5px); background-color: var(--primary-hover-color); }
-        .scroll-to-top span { margin-top: -5px; } /* Ajuste visual flecha */
+        .scroll-to-top span { margin-top: -5px; }
 
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
@@ -126,7 +125,7 @@
                     <h3>Filtrar Socios</h3>
                     <div class="filtros-grid">
                         <div><label>Nombre:</label><input type="text" id="filtroNombreGestion" placeholder="Ej: Juan" style="margin-bottom:0;"></div>
-                        <div><label>Área:</label><select id="filtroAreaGestion" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="Cambistas">Cambistas</option></select></div>
+                        <div><label>Área:</label><select id="filtroAreaGestion" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option></select></div>
                         <div><label>Contrato:</label><select id="filtroContratoGestion" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
                     </div>
                 </div>
@@ -138,7 +137,7 @@
                     <h3>Filtros</h3>
                     <div class="filtros-grid">
                         <div><label>Nombre:</label><input type="text" id="filtroNombre" placeholder="Ej: Juan" style="margin-bottom:0;"></div>
-                        <div><label>Área:</label><select id="filtroArea" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="Cambistas">Cambistas</option></select></div>
+                        <div><label>Área:</label><select id="filtroArea" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option></select></div>
                         <div><label>Contrato:</label><select id="filtroContrato" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
                     </div>
                 </div>
@@ -204,7 +203,7 @@
                 <p class="saldo-disponible">Disp: <span id="infoSaldoDisponible">$0</span></p>
             </div>
             <label>Fecha:</label><input type="date" id="anticipoFecha" required>
-            <label>Monto:</label><input type="text" id="anticipoCantidad" required>
+            <label>Monto:</label><input type="text" id="anticipoCantidad" inputmode="numeric" required>
             <button type="submit">Guardar</button>
         </form></div></div>
     </template>
@@ -213,7 +212,7 @@
         <div class="modal"><div class="modal-content"><span class="close-button">&times;</span><h3>Valor Punto</h3>
             <p><strong>Neta:</strong> <span id="propinaNetaModal">$0</span></p>
             <p><strong>Total Puntos:</strong> <span id="totalPuntosGeneralDisplay" style="color:#28a745;">0</span></p><hr>
-            <label>Divisor Manual:</label><input type="text" id="divisorManualInput" placeholder="0.00">
+            <label>Divisor Manual:</label><input type="text" id="divisorManualInput" inputmode="decimal" placeholder="0.00">
             <p><strong>Valor:</strong> <strong id="valorPuntoCalculadoDisplay" style="color:var(--primary-color);">$0</strong></p>
             <button type="button" id="calcularPuntoPlantaInternoBtn">Guardar</button>
         </div></div>
@@ -224,7 +223,7 @@
             <input type="hidden" id="descuentoId">
             <label>Categoría:</label><select id="descuentoCategoria" required><option value="Caja Chica">Caja Chica</option><option value="Falla Operacional">Falla Operacional</option><option value="Gastos Materiales">Gastos Materiales</option><option value="Otro">Otro</option></select>
             <label>Descripción:</label><textarea id="descuentoDescripcion" rows="2" required></textarea>
-            <label>Monto:</label><input type="text" id="descuentoCantidad" required>
+            <label>Monto:</label><input type="text" id="descuentoCantidad" inputmode="numeric" required>
             <button type="submit">Guardar</button>
         </form></div></div>
     </template>
@@ -259,7 +258,7 @@
         <div class="modal"><div class="modal-content"><span class="close-button">&times;</span><h3>Editar Anticipo</h3><form id="editAnticipoForm">
             <input type="hidden" id="editSocioId"><input type="hidden" id="editAnticipoIndex">
             <label>Fecha:</label><input type="date" id="editAnticipoFecha" required>
-            <label>Monto:</label><input type="text" id="editAnticipoCantidad" required>
+            <label>Monto:</label><input type="text" id="editAnticipoCantidad" inputmode="numeric" required>
             <button type="submit">Guardar</button>
         </form></div></div>
     </template>
@@ -267,7 +266,7 @@
     <template id="templateEditSaldoAnteriorModal">
         <div class="modal"><div class="modal-content"><span class="close-button">&times;</span><h3>Saldo Anterior</h3><form id="editSaldoAnteriorForm">
             <input type="hidden" id="editSaldoSocioId">
-            <label>Monto:</label><input type="text" id="editSaldoMonto" required placeholder="0">
+            <label>Monto:</label><input type="text" id="editSaldoMonto" inputmode="numeric" required placeholder="0">
             <button type="submit">Guardar</button>
         </form></div></div>
     </template>
@@ -289,7 +288,7 @@
         <div class="modal"><div class="modal-content"><span class="close-button">&times;</span><h3>Calcular Puntos</h3>
             <p>Puntos Base: <span id="partTimeModalBasePoints">0</span></p>
             <p>Asignable: <span id="partTimeModalAssignableAmount">$0</span></p><hr>
-            <label>Divisor:</label><input type="text" id="partTimeMultiplicador" required>
+            <label>Divisor:</label><input type="text" id="partTimeMultiplicador" inputmode="decimal" required>
             <button type="button" id="calculatePartTimePointsInternoBtn">Calcular</button>
         </div></div>
     </template>
