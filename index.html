@@ -14,9 +14,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
         :root{--menu-width:250px;--primary-color:#3498db;--primary-hover-color:#2980b9;--secondary-color:#2ecc71;--danger-color:#e74c3c;--warning-color:#f39c12;--light-bg:#eef2f6;--white-bg:#fff;--text-dark:#2c3e50;--text-light:#555;--border-color:#e0e6ed}body{font-family:'Poppins',sans-serif;margin:0;background-color:var(--light-bg);color:#333}.menu-toggle{position:fixed;top:15px;left:15px;z-index:1002;width:40px;height:40px;background-color:var(--primary-color);border:none;border-radius:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.1);transition:left .3s ease}.menu-toggle span{display:block;width:22px;height:2px;background-color:#fff;margin:2px 0;transition:all .3s ease}.side-menu.open+.main-container .menu-toggle{left:calc(var(--menu-width) + 15px)}.menu-toggle.active span:nth-child(1){transform:translateY(6px) rotate(45deg)}.menu-toggle.active span:nth-child(2){opacity:0}.menu-toggle.active span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}.side-menu{position:fixed;top:0;left:0;width:var(--menu-width);height:100%;background-color:var(--text-dark);z-index:1001;transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column;padding-top:60px;box-shadow:5px 0 15px rgba(0,0,0,.1)}.side-menu.open{transform:translateX(0)}.side-menu .menu-header{color:#fff;font-size:1.5em;font-weight:700;text-align:center;padding:20px 10px;border-bottom:1px solid #4a627a}.side-menu a{color:#fff;text-decoration:none;padding:15px 20px;display:block;font-size:1em;transition:background-color .2s ease,padding-left .2s ease;border-bottom:1px solid #3e5268}.side-menu a:hover,.side-menu a.active-link{background-color:var(--primary-color);padding-left:25px}.main-container{transition:margin-left .3s ease;padding:15px}.container{max-width:960px;margin:10px auto;background-color:var(--white-bg);padding:20px;border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,.07)}h1{color:var(--text-dark);text-align:center;margin-bottom:20px;font-weight:700;font-size:1.8em;padding-top:55px}
         h2{color:var(--primary-color);margin:0 0 20px;font-weight:600;font-size:1.5em;border-bottom:2px solid var(--border-color);padding-bottom:10px;display:flex;justify-content:space-between;align-items:center}#sync-indicator{font-size:.6em;font-weight:400;color:var(--text-light);opacity:0;transition:opacity .3s}#sync-indicator.visible{opacity:1}h3{color:var(--primary-color);margin-top:25px;margin-bottom:10px;font-size:1.4em}.content-panel{display:none}.content-panel.active{display:block;animation:fadeIn .5s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}label{display:block;margin-bottom:7px;font-weight:600;color:var(--text-light)}input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:10px;margin-bottom:18px;border:1px solid #dcdcdc;border-radius:6px;box-sizing:border-box;font-size:1em}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:0;box-shadow:0 0 0 3px rgba(52,152,219,.2)}button{background-color:var(--secondary-color);color:#fff;padding:10px 15px;border:none;border-radius:6px;cursor:pointer;font-size:1em;font-weight:600;width:100%;transition:background-color .3s ease,transform .2s ease;margin-top:8px}button:hover{background-color:#27ae60;transform:translateY(-1px)}button:disabled{background-color:#bdc3c7;cursor:not-allowed}button.cancel-btn{background-color:#95a5a6}.socios-list-container{margin-top:30px;border-top:2px solid var(--border-color)}.socio-card{padding:15px;background-color:#f7f9fc;border-radius:8px;margin-bottom:10px;border:1px solid #dbe9f5}.socio-card-info p{margin:4px 0;color:var(--text-light)}.socio-card-info p strong{color:var(--text-dark)}.socio-card-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px;border-top:1px solid #e0e6ed;padding-top:10px}.socio-card-actions button{width:auto;font-size:.9em;padding:6px 10px}.socio-card-actions .edit-btn{background-color:var(--primary-color)}.socio-card-actions .delete-btn{background-color:var(--danger-color)}.socio-distribucion-card{background-color:#f7f9fc;border:1px solid #dbe9f5;border-radius:10px;padding:18px;box-shadow:0 4px 15px rgba(0,0,0,.06)}.anticipos-list-container{margin-top:15px;padding-top:10px;border-top:1px dashed var(--border-color)}.anticipos-list-container h4{margin:0 0 10px;font-size:1em;color:var(--text-dark)}.anticipo-item,.descuento-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:.9em;border-bottom:1px solid #eef2f6}.anticipo-item:last-child,.descuento-item:last-child{border-bottom:none}.anticipo-item-info,.descuento-item-info{display:flex;flex-direction:column;flex-grow:1}.anticipo-item-info span,.descuento-item-info span{color:var(--text-light)}.anticipo-item-info .monto,.descuento-item-info .monto{font-weight:600;color:var(--text-dark)}.descuento-item-info .categoria{font-size:0.85em;font-style:italic;color:var(--primary-color)}.anticipo-item-actions,.descuento-item-actions{display:flex;gap:5px}.anticipo-item-actions button,.descuento-item-actions button{font-size:.8em;padding:4px 8px;margin:0;width:auto}.anticipo-item-actions .edit-anticipo-btn,.descuento-item-actions .edit-descuento-btn{background-color:var(--warning-color)}.anticipo-item-actions .delete-anticipo-btn,.descuento-item-actions .delete-descuento-btn{background-color:var(--danger-color)}.general-total{background-color:var(--secondary-color);color:#fff;padding:12px 15px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:1.3em;font-weight:700}
-        .action-button-group{display: grid;grid-template-columns: repeat(2, 1fr);gap: 10px;margin: 15px 0;}
+        
+        /* ESTILOS DE LA BARRA SUPERIOR DE BOTONES */
+        .action-button-group{display: grid;grid-template-columns: repeat(2, 1fr);gap: 10px;margin-bottom: 20px;}
         @media (min-width: 768px) { .action-button-group { grid-template-columns: repeat(3, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
         @media (min-width: 992px) { .action-button-group { grid-template-columns: repeat(4, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
+        
         #addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:2001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px;gap: 10px}.modal-content .modal-actions button{flex:1}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}#toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;align-items:center;gap:10px}.toast{background-color:var(--text-dark);color:#fff;padding:12px 20px;border-radius:25px;box-shadow:0 4px 15px rgba(0,0,0,.1);font-size:.9em;font-weight:500;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background-color:var(--secondary-color)}.toast.danger{background-color:var(--danger-color)}.toast.warning{background-color:var(--warning-color); color: #fff;}
         .part-time-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;border-top:1px solid var(--border-color);padding-top:10px}.part-time-actions button{width:100%;padding:8px;font-size:.85em}.part-time-actions .calendar-btn{background-color:#f39c12}.part-time-actions .calculate-btn{background-color:#1abc9c}.distribucion-part-time-container .puntos-calculados-pt{font-weight:700;color:#16a085}
         .socio-distribucion-card .individual-actions {display: flex;gap: 10px;margin-top: 15px;padding-top: 10px;border-top: 1px solid #e0e6ed;}
@@ -30,11 +33,21 @@
         #saveAllAnticiposAndDistribucionBtn {background-color: #27ae60;} #saveAllAnticiposAndDistribucionBtn:hover {background-color: #1e8449;}
         #resetPartTimeDataBtn {background-color: #e74c3c; width: 100%; margin-bottom: 15px;} #resetPartTimeDataBtn:hover {background-color: #c0392b;}
         .side-menu a.arqueo-link {background-color: #e67e22;} .side-menu a.arqueo-link:hover {background-color: #d35400; padding-left: 25px;}
-        .filtros-container{margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--light-bg);}
-        .filtros-container h3 {margin-top: 0; margin-bottom: 10px; border-bottom: none; color: var(--text-dark); font-size: 1.2em;}
+        
+        /* FILTROS MODIFICADOS */
+        .filtros-container{margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--light-bg); transition: all 0.3s;}
+        .filtros-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+        .filtros-header h3 {margin: 0; border-bottom: none; color: var(--text-dark); font-size: 1.2em;}
+        .filtros-header::after { content: '▼'; font-size: 0.8em; color: var(--text-light); transition: transform 0.3s; }
+        
+        .filtros-container.collapsed .filtros-header::after { transform: rotate(-90deg); }
+        .filtros-content { display: block; margin-top: 15px; animation: slideDown 0.3s ease-out; }
+        .filtros-container.collapsed .filtros-content { display: none; }
+
         .filtros-grid {display: grid; grid-template-columns: 1fr; gap: 15px;}
         @media (min-width: 600px) { .filtros-grid { grid-template-columns: 1fr 1fr; } }
-        @media (min-width: 992px) { .filtros-grid { grid-template-columns: 1fr 1fr 1fr; } }
+        @media (min-width: 992px) { .filtros-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } } /* 4 columnas ahora */
+        
         .socio-card-info p.puntos-info {font-size: 0.9em;color: var(--text-dark);background-color: #eafaf1;padding: 5px 8px;border-radius: 4px;margin: 6px 0;border-left: 3px solid var(--secondary-color);}
         .socio-card-info p.puntos-info strong {font-weight: 700;}
         .socio-card-info p.fecha-ingreso-info {font-size: 0.9em;color: var(--primary-color);margin: 4px 0;}
@@ -160,6 +173,20 @@
             box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
             border: 2px solid #6c3483;
         }
+        
+        /* Banner Total Anticipos */
+        .total-anticipos-banner {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ffeeba;
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 1.1em;
+            display: none; /* Se oculta por defecto */
+        }
 
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
@@ -235,39 +262,54 @@
             <div id="registroContent" class="content-panel">
                 <h2>Gestionar Socios</h2>
                 <button type="button" id="showRegisterSocioModalBtn" style="background-color: var(--primary-color); margin-bottom: 20px;">➕ Nuevo Socio</button>
-                <div id="filtrosGestion" class="filtros-container">
-                    <h3>Filtrar Socios</h3>
-                    <div class="filtros-grid">
-                        <div><label>Nombre:</label><input type="text" id="filtroNombreGestion" placeholder="Ej: Juan" style="margin-bottom:0;"></div>
-                        <div><label>Área:</label><select id="filtroAreaGestion" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="GastosComision">GastosComision</option></select></div>
-                        <div><label>Contrato:</label><select id="filtroContratoGestion" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
+                <div id="filtrosGestion" class="filtros-container collapsed">
+                    <div class="filtros-header">
+                        <h3>Filtrar Socios</h3>
                     </div>
-                    <button id="alphaSortBtnGestion" class="alpha-sort-btn">🔤 A-Z</button>
+                    <div class="filtros-content">
+                        <div class="filtros-grid">
+                            <div><label>Nombre:</label><input type="text" id="filtroNombreGestion" placeholder="Ej: Juan" style="margin-bottom:0;"></div>
+                            <div><label>Área:</label><select id="filtroAreaGestion" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="GastosComision">GastosComision</option></select></div>
+                            <div><label>Contrato:</label><select id="filtroContratoGestion" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
+                        </div>
+                        <button id="alphaSortBtnGestion" class="alpha-sort-btn">🔤 A-Z</button>
+                    </div>
                 </div>
                 <div class="socios-list-container"><div id="sociosListContainer"></div></div>
             </div>
             <div id="distribucionContent" class="content-panel">
                 <h2>Distribución de Propina</h2>
-                <div id="filtrosDistribucion" class="filtros-container">
-                    <h3>Filtros</h3>
-                    <div class="filtros-grid">
-                        <div><label>Nombre:</label><input type="text" id="filtroNombre" placeholder="Ej: Juan" style="margin-bottom:0;"></div>
-                        <div><label>Área:</label><select id="filtroArea" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="GastosComision">GastosComision</option></select></div>
-                        <div><label>Contrato:</label><select id="filtroContrato" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
-                    </div>
-                    <button id="alphaSortBtnDist" class="alpha-sort-btn">🔤 A-Z</button>
-                </div>
-                <div class="general-total" id="totalGeneralPropinaNetaDistribucion"></div>
-                <div id="totalPuntosDisplay" style="text-align:center; font-weight:bold; background-color:#eafaf1; padding:10px; border-radius:8px; margin: 15px 0; border: 1px solid #c3e6cb;"></div>
                 
-                <div id="historialValorPuntoDistribucion" style="text-align:center; margin-bottom: 15px; font-size: 1.1em; background-color: #f0f9ff; padding: 10px; border-radius: 8px; border: 1px solid #b3e5fc; color: var(--primary-color);"></div>
-                
+                <!-- BOTONES DE ACCIÓN (Barra Superior) -->
                 <div class="action-button-group">
                     <button type="button" id="addAnticipoBtn">Nuevo Anticipo</button>
                     <button type="button" id="loadAllAnticiposBtn">📥 Cargar de Sheets</button>
                     <button type="button" id="uploadAllAnticiposBtn" style="background-color: #f39c12;">⬆️ Subir a Sheets</button>
                     <button type="button" id="saveAllAnticiposAndDistribucionBtn" style="background-color: #27ae60;">💾 Guardar Distribución</button>
                 </div>
+
+                <div id="filtrosDistribucion" class="filtros-container collapsed">
+                    <div class="filtros-header">
+                        <h3>Filtros</h3>
+                    </div>
+                    <div class="filtros-content">
+                        <div class="filtros-grid">
+                            <div><label>Nombre:</label><input type="text" id="filtroNombre" placeholder="Ej: Juan" style="margin-bottom:0;"></div>
+                            <div><label>Área:</label><select id="filtroArea" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="GastosComision">GastosComision</option></select></div>
+                            <div><label>Contrato:</label><select id="filtroContrato" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
+                            <div><label>Anticipos:</label><select id="filtroAnticipoStatus" style="margin-bottom:0;"><option value="todos">Todos</option><option value="con">Con Anticipos</option><option value="sin">Sin Anticipos</option></select></div>
+                        </div>
+                        <button id="alphaSortBtnDist" class="alpha-sort-btn">🔤 A-Z</button>
+                    </div>
+                </div>
+                
+                <div id="totalAnticiposFiltradosDisplay" class="total-anticipos-banner"></div>
+
+                <div class="general-total" id="totalGeneralPropinaNetaDistribucion"></div>
+                <div id="totalPuntosDisplay" style="text-align:center; font-weight:bold; background-color:#eafaf1; padding:10px; border-radius:8px; margin: 15px 0; border: 1px solid #c3e6cb;"></div>
+                
+                <div id="historialValorPuntoDistribucion" style="text-align:center; margin-bottom: 15px; font-size: 1.1em; background-color: #f0f9ff; padding: 10px; border-radius: 8px; border: 1px solid #b3e5fc; color: var(--primary-color);"></div>
+                
                 <button type="button" id="resetPartTimeDataBtn">🔴 Reset PT y Ausencias</button>
                 <div id="distribucionPlantaContainer"></div>
                 <div id="distribucionPartTimeContainer"></div>
@@ -422,6 +464,7 @@
                 ultimaDistribucionReport: document.getElementById('ultimaDistribucionReport'), ultimaDistFecha: document.getElementById('ultimaDistFecha'), ultimaDistNeta: document.getElementById('ultimaDistNeta'), ultimaDistPunto: document.getElementById('ultimaDistPunto'),
                 loadAllAnticiposBtn: document.getElementById('loadAllAnticiposBtn'), uploadAllAnticiposBtn: document.getElementById('uploadAllAnticiposBtn'), saveAllAnticiposAndDistribucionBtn: document.getElementById('saveAllAnticiposAndDistribucionBtn'),
                 filtroNombre: document.getElementById('filtroNombre'), filtroArea: document.getElementById('filtroArea'), filtroContrato: document.getElementById('filtroContrato'), filtroNombreGestion: document.getElementById('filtroNombreGestion'), filtroAreaGestion: document.getElementById('filtroAreaGestion'), filtroContratoGestion: document.getElementById('filtroContratoGestion'),
+                filtroAnticipoStatus: document.getElementById('filtroAnticipoStatus'), totalAnticiposFiltradosDisplay: document.getElementById('totalAnticiposFiltradosDisplay'),
                 addAnticipoBtn: document.getElementById('addAnticipoBtn'), addDescuentoBtn: document.getElementById('addDescuentoBtn'),
                 scrollToTopBtn: document.getElementById('scrollToTopBtn'),
                 historialFechaFiltro: document.getElementById('historialFechaFiltro'),
@@ -706,11 +749,41 @@
             const renderSociosFiltrados = () => {
                 const fN=ui.filtroNombre.value.toLowerCase(), fA=ui.filtroArea.value, fC=ui.filtroContrato.value;
                 const fNG=ui.filtroNombreGestion.value.toLowerCase(), fAG=ui.filtroAreaGestion.value, fCG=ui.filtroContratoGestion.value;
+                const fAnt = ui.filtroAnticipoStatus.value;
                 
-                const filterFn = (s, n, a, c) => `${s.Nombre} ${s.Apellido}`.toLowerCase().includes(n) && (a==='todos'||s.Area.startsWith(a)) && (c==='todos'||s.TipoContrato===c);
+                const antsData = getStorage('anticipos_data_v3');
+                const hasAnticipos = (id) => (antsData[id] && antsData[id].length > 0);
+
+                const filterFn = (s, n, a, c, checkAnticipos = false) => {
+                    let matches = `${s.Nombre} ${s.Apellido}`.toLowerCase().includes(n) && 
+                                  (a==='todos'||s.Area.startsWith(a)) && 
+                                  (c==='todos'||s.TipoContrato===c);
+                    
+                    if (checkAnticipos) {
+                        const antCheck = fAnt === 'todos' ||
+                                         (fAnt === 'con' && hasAnticipos(s.ID)) ||
+                                         (fAnt === 'sin' && !hasAnticipos(s.ID));
+                        matches = matches && antCheck;
+                    }
+                    return matches;
+                };
                 
                 let filteredGestion = sociosData.filter(s=>filterFn(s,fNG,fAG,fCG));
-                let filteredDist = sociosData.filter(s=>filterFn(s,fN,fA,fC));
+                let filteredDist = sociosData.filter(s=>filterFn(s,fN,fA,fC, true));
+
+                // Calcular Total Anticipos de la vista filtrada
+                let totalAntFiltered = 0;
+                filteredDist.forEach(s => {
+                    const userAnts = antsData[s.ID] || [];
+                    totalAntFiltered += userAnts.reduce((a,b) => a + b.cantidad, 0);
+                });
+
+                if(totalAntFiltered > 0 || fAnt === 'con') {
+                    ui.totalAnticiposFiltradosDisplay.style.display = 'block';
+                    ui.totalAnticiposFiltradosDisplay.innerHTML = `Total Anticipos (Filtrados): $${formatNumber(totalAntFiltered)}`;
+                } else {
+                    ui.totalAnticiposFiltradosDisplay.style.display = 'none';
+                }
 
                 if (isAlphaSort) {
                     const sortFn = (a, b) => (a.Nombre + a.Apellido).localeCompare(b.Nombre + b.Apellido);
@@ -1182,6 +1255,13 @@
                     }
                     return; // Detener propagación
                 }
+                
+                // --- LÓGICA MINIMIZAR FILTROS (NUEVO) ---
+                const filterHeader = e.target.closest('.filtros-header');
+                if (filterHeader) {
+                    const container = filterHeader.closest('.filtros-container');
+                    container.classList.toggle('collapsed');
+                }
 
                 const edit=e.target.closest('.edit-btn'); if(edit) handleShowEditSocioModal(edit.dataset.socioId);
                 const del=e.target.closest('.delete-btn'); if(del) confirmAction('¿Eliminar Socio permanentemente?',async()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
@@ -1198,7 +1278,7 @@
             });
 
             document.querySelectorAll('.menu-link').forEach(l=>l.onclick=e=>{if(l.target!=='_blank'){e.preventDefault();document.querySelectorAll('.content-panel').forEach(p=>p.classList.remove('active'));document.getElementById(l.dataset.target).classList.add('active');if(window.innerWidth<=991){ui.sideMenu.classList.remove('open');ui.menuToggle.classList.remove('active');}}});
-            [ui.filtroNombre,ui.filtroArea,ui.filtroContrato,ui.filtroNombreGestion,ui.filtroAreaGestion,ui.filtroContratoGestion].forEach(el=>el.addEventListener('input',renderSociosFiltrados));
+            [ui.filtroNombre,ui.filtroArea,ui.filtroContrato,ui.filtroAnticipoStatus,ui.filtroNombreGestion,ui.filtroAreaGestion,ui.filtroContratoGestion].forEach(el=>el.addEventListener('input',renderSociosFiltrados));
             
             // --- BOTONES PRINCIPALES ---
             ui.syncDataBtn.onclick=syncData;
