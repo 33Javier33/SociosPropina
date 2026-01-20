@@ -40,8 +40,49 @@
         .socio-card-info p.puntos-info strong {font-weight: 700;}
         .socio-card-info p.fecha-ingreso-info {font-size: 0.9em;color: var(--primary-color);margin: 4px 0;}
         .distribucion-planta-container, .distribucion-part-time-container { display: block; margin-top: 15px; }
-        .area-section-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-bottom: 30px; }
-        .area-header { background-color: #eef2f6; color: var(--text-dark); padding: 8px 15px; border-left: 4px solid var(--primary-color); border-radius: 4px; margin-bottom: 15px; font-size: 1.1em; font-weight: 700; }
+        
+        /* ESTILOS AREA ACORDEÓN */
+        .area-section-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-bottom: 30px; transition: all 0.3s ease; }
+        .area-section-grid.collapsed { display: none; }
+        .area-header { 
+            background-color: #eef2f6; 
+            color: var(--text-dark); 
+            padding: 8px 15px; 
+            border-left: 4px solid var(--primary-color); 
+            border-radius: 4px; 
+            margin-bottom: 15px; 
+            font-size: 1.1em; 
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+        .area-header::before {
+            content: '▼';
+            font-size: 0.7em;
+            margin-right: 8px;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+        .area-header.collapsed::before {
+            transform: rotate(-90deg);
+        }
+        /* ESTILO PARA EL SUB-AREA SEPARATOR (CAMBISTAS) */
+        .sub-area-title {
+            grid-column: 1 / -1; /* Ocupa todo el ancho */
+            color: var(--primary-color);
+            background-color: #f0f9ff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 700;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            border-left: 3px solid var(--secondary-color);
+            font-size: 0.95em;
+        }
+        
         .calendar-discount-btn { background-color: #e67e22; width: 100%; margin-top: 8px; font-size: 0.85em; }
         .calendar-discount-btn:hover { background-color: #d35400; }
         .ausencias-info { color: #c0392b; font-weight: 600; font-size: 0.9em; margin-bottom: 5px; display: block;}
@@ -78,6 +119,9 @@
         .scroll-to-top:hover { transform: translateY(-5px); background-color: var(--primary-hover-color); }
         .scroll-to-top span { margin-top: -5px; }
 
+        .confirm-delete-btn { background-color: var(--danger-color); color: #fff; }
+        .confirm-delete-btn:hover { background-color: #c0392b; }
+
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
 </head>
@@ -97,7 +141,6 @@
                 <h2><span>Balance General</span><span id="sync-indicator"></span></h2>
                 <div style="display: flex; gap: 10px; margin-bottom: 20px;">
                     <button type="button" id="syncDataBtn" style="background-color: #34495e; flex: 1;">🔄 Sincronizar</button>
-                    <!-- BOTÓN CORREGIDO: NOMBRE CLARO -->
                     <button type="button" id="resetAnticiposLocalBtn" style="background-color: var(--danger-color); flex: 1;">🗑️ Borrar Anticipos (Local)</button>
                 </div>
                 <div id="balanceReport">
@@ -126,7 +169,7 @@
                     <h3>Filtrar Socios</h3>
                     <div class="filtros-grid">
                         <div><label>Nombre:</label><input type="text" id="filtroNombreGestion" placeholder="Ej: Juan" style="margin-bottom:0;"></div>
-                        <div><label>Área:</label><select id="filtroAreaGestion" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option></select></div>
+                        <div><label>Área:</label><select id="filtroAreaGestion" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="GastosComision">GastosComision</option></select></div>
                         <div><label>Contrato:</label><select id="filtroContratoGestion" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
                     </div>
                 </div>
@@ -138,7 +181,7 @@
                     <h3>Filtros</h3>
                     <div class="filtros-grid">
                         <div><label>Nombre:</label><input type="text" id="filtroNombre" placeholder="Ej: Juan" style="margin-bottom:0;"></div>
-                        <div><label>Área:</label><select id="filtroArea" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option></select></div>
+                        <div><label>Área:</label><select id="filtroArea" style="margin-bottom:0;"><option value="todos">Todas</option><option value="Mesas">Mesas</option><option value="Maquinas">Máquinas</option><option value="Boveda">Boveda</option><option value="GastosComision">GastosComision</option></select></div>
                         <div><label>Contrato:</label><select id="filtroContrato" style="margin-bottom:0;"><option value="todos">Todos</option><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select></div>
                     </div>
                 </div>
@@ -180,6 +223,7 @@
                 <option value="Mesas">Mesas</option>
                 <option value="Maquinas">Maquinas</option>
                 <option value="Boveda">Boveda</option>
+                <option value="GastosComision">GastosComision</option>
             </select>
             <!-- Contenedor para Sub Área -->
             <div id="subAreaContainer" style="display:none; margin-top:5px; margin-bottom:15px; background-color:#f0f9ff; padding:8px; border-radius:5px;">
@@ -240,6 +284,7 @@
                 <option value="Mesas">Mesas</option>
                 <option value="Maquinas">Maquinas</option>
                 <option value="Boveda">Boveda</option>
+                <option value="GastosComision">GastosComision</option>
             </select>
             
             <div id="editSubAreaContainer" style="display:none; margin-top:5px; margin-bottom:15px; background-color:#f0f9ff; padding:8px; border-radius:5px;">
@@ -273,7 +318,14 @@
     </template>
 
     <template id="templateConfirmDeleteModal">
-        <div class="modal"><div class="modal-content"><h3>Confirmar</h3><p id="confirmDeleteText"></p><div class="modal-actions"><button class="cancel-btn">Cancelar</button><button class="delete-btn confirm-delete-btn">Confirmar</button></div></div></div>
+        <div class="modal"><div class="modal-content">
+            <h3>Confirmar</h3>
+            <p id="confirmDeleteText"></p>
+            <div class="modal-actions">
+                <button class="cancel-btn">Cancelar</button>
+                <button class="confirm-delete-btn">Confirmar</button>
+            </div>
+        </div></div>
     </template>
     
     <template id="templateCalendarModal">
@@ -373,6 +425,11 @@
 
             // --- LÓGICA DE NEGOCIO ---
             function calcularPuntosLogica(fechaIngreso, area) {
+                const a = (area || '').trim(); 
+                if (a === 'GastosComision') {
+                    return { puntos: 1, anos: 0, tope: 1, teoricos: 1 };
+                }
+
                 let anioIng = 0, mesIng = 0, diaIng = 0;
                 if (!fechaIngreso) { const now = new Date(); anioIng = now.getFullYear(); mesIng = now.getMonth(); diaIng = now.getDate(); } 
                 else {
@@ -387,13 +444,12 @@
                 const puntosTeoricos = 4 + (anos * 2);
                 
                 let tope = 12; 
-                const a = (area || '').toLowerCase();
+                const aLower = a.toLowerCase();
                 
-                // Prioridad en Cambistas (sub-area de mesas o area sola)
-                if (a.includes('cambista')) tope = 8;
-                else if (a.includes('mesa')) tope = 20; 
-                else if (a.includes('boveda') || a.includes('bóveda')) tope = 10; 
-                else if (a.includes('maquina') || a.includes('máquina')) tope = 12;
+                if (aLower.includes('cambista')) tope = 8;
+                else if (aLower.includes('mesa')) tope = 20; 
+                else if (aLower.includes('boveda') || aLower.includes('bóveda')) tope = 10; 
+                else if (aLower.includes('maquina') || aLower.includes('máquina')) tope = 12;
                 
                 const puntosFinales = Math.min(puntosTeoricos, tope);
                 return { puntos: puntosFinales, anos: anos, tope: tope, teoricos: puntosTeoricos };
@@ -464,7 +520,6 @@
                 ui.sociosListContainer.innerHTML = gest.length ? '' : '<p>Sin socios.</p>';
                 if(gest.length) {
                     const grp = gest.reduce((a,s)=>{ (a[s.Area]=a[s.Area]||[]).push(s); return a;},{});
-                    // Orden dinámico para incluir sub-áreas creadas
                     const areasOrdenadas = Object.keys(grp).sort();
                     
                     areasOrdenadas.forEach(area => {
@@ -475,21 +530,64 @@
                 }
                 
                 ui.distribucionPlantaContainer.innerHTML='<h3>Planta</h3>'; ui.distribucionPartTimeContainer.innerHTML='<h3>Part-Time</h3>';
-                const renderArea = (list, cont) => {
+                const renderArea = (list, cont, suffix) => {
                     if(!list.length) { cont.innerHTML+='<p style="color:#777;">Sin socios.</p>'; return; }
-                    const grp = list.reduce((a,s)=>{ (a[s.Area]=a[s.Area]||[]).push(s); return a;},{});
                     
-                    // Orden dinámico aquí también
-                    Object.keys(grp).sort().forEach(area => {
-                        const totalAreaPts = grp[area].reduce((acc, s) => acc + (s.puntosAsignadosFinales || 0), 0);
-                        cont.innerHTML+=`<div class="area-header">${area} <span style="float:right">Puntos: ${Math.round(totalAreaPts)}</span></div>`;
-                        const grid = document.createElement('div'); grid.className='area-section-grid';
-                        grp[area].forEach(s=>grid.appendChild(createCard(s, 'dist')));
+                    // AGRUPACIÓN POR ÁREA PADRE (ANTES DEL GUIÓN)
+                    const groupedByParent = {};
+                    list.forEach(s => {
+                        const parent = s.Area.split(' - ')[0]; // Ej: "Mesas" de "Mesas - Cambistas"
+                        if (!groupedByParent[parent]) groupedByParent[parent] = [];
+                        groupedByParent[parent].push(s);
+                    });
+
+                    Object.keys(groupedByParent).sort().forEach(parentArea => {
+                        const sociosInGroup = groupedByParent[parentArea];
+                        
+                        // Suma total de puntos del grupo (incluyendo sub-áreas)
+                        const totalAreaPts = sociosInGroup.reduce((acc, s) => acc + (s.puntosAsignadosFinales || 0), 0);
+                        
+                        const headerId = `area-header-${parentArea.replace(/\s+/g,'-')}-${suffix}`;
+                        const gridId = `area-grid-${parentArea.replace(/\s+/g,'-')}-${suffix}`;
+                        
+                        cont.innerHTML += `<div class="area-header" data-target="${gridId}">${parentArea} <span style="float:right">Puntos: ${Math.round(totalAreaPts)}</span></div>`;
+                        
+                        const grid = document.createElement('div'); 
+                        grid.className = 'area-section-grid';
+                        grid.id = gridId;
+                        
+                        // Separar grupo principal de sub-grupos
+                        const mainGroup = sociosInGroup.filter(s => s.Area === parentArea);
+                        const subGroups = sociosInGroup.filter(s => s.Area !== parentArea);
+                        
+                        // Renderizar grupo principal
+                        mainGroup.forEach(s => grid.appendChild(createCard(s, 'dist')));
+                        
+                        // Renderizar sub-grupos (si existen) con separador
+                        if (subGroups.length > 0) {
+                            // Agrupar sub-grupos por nombre completo
+                            const subGrouped = {};
+                            subGroups.forEach(s => {
+                                if(!subGrouped[s.Area]) subGrouped[s.Area] = [];
+                                subGrouped[s.Area].push(s);
+                            });
+                            
+                            Object.keys(subGrouped).sort().forEach(subAreaName => {
+                                const cleanSubName = subAreaName.split(' - ')[1] || subAreaName;
+                                const sep = document.createElement('div');
+                                sep.className = 'sub-area-title';
+                                sep.textContent = `▼ ${cleanSubName}`;
+                                grid.appendChild(sep);
+                                
+                                subGrouped[subAreaName].forEach(s => grid.appendChild(createCard(s, 'dist')));
+                            });
+                        }
+
                         cont.appendChild(grid);
                     });
                 };
-                renderArea(dist.filter(s=>!isPartTime(s)), ui.distribucionPlantaContainer);
-                renderArea(dist.filter(isPartTime), ui.distribucionPartTimeContainer);
+                renderArea(dist.filter(s=>!isPartTime(s)), ui.distribucionPlantaContainer, 'PLANTA');
+                renderArea(dist.filter(isPartTime), ui.distribucionPartTimeContainer, 'PT');
                 updatePropinaUI();
             };
 
@@ -884,6 +982,19 @@
             ui.menuToggle.onclick=e=>{e.stopPropagation();ui.sideMenu.classList.toggle('open'); ui.menuToggle.classList.toggle('active');};
             document.addEventListener('click', e=>{ 
                 if(ui.sideMenu.classList.contains('open') && !ui.sideMenu.contains(e.target) && !ui.menuToggle.contains(e.target)) { ui.sideMenu.classList.remove('open'); ui.menuToggle.classList.remove('active'); }
+                
+                // --- LÓGICA MINIMIZAR ÁREA (ACORDEÓN) ---
+                const areaHeader = e.target.closest('.area-header');
+                if (areaHeader) {
+                    const targetId = areaHeader.dataset.target;
+                    const grid = document.getElementById(targetId);
+                    if (grid) {
+                        grid.classList.toggle('collapsed');
+                        areaHeader.classList.toggle('collapsed');
+                    }
+                    return; // Detener propagación
+                }
+
                 const edit=e.target.closest('.edit-btn'); if(edit) handleShowEditSocioModal(edit.dataset.socioId);
                 const del=e.target.closest('.delete-btn'); if(del) confirmAction('¿Eliminar Socio permanentemente?',async()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
                 const cal=e.target.closest('.calendar-btn'); if(cal) abrirCalendarModal(cal.dataset.socioId, 'PT');
@@ -904,7 +1015,6 @@
             // --- BOTONES PRINCIPALES ---
             ui.syncDataBtn.onclick=syncData;
             
-            // NUEVO COMPORTAMIENTO: MENSAJE CLARO DE BORRADO DE ANTICIPOS
             ui.resetAnticiposLocalBtn.onclick = () => confirmAction(
                 '¿Borrar SOLO los ANTICIPOS guardados en este dispositivo? \n\nNota: NO se borrarán los socios, solo los montos de dinero pendientes.', 
                 () => {
