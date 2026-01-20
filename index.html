@@ -17,7 +17,7 @@
         .action-button-group{display: grid;grid-template-columns: repeat(2, 1fr);gap: 10px;margin: 15px 0;}
         @media (min-width: 768px) { .action-button-group { grid-template-columns: repeat(3, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
         @media (min-width: 992px) { .action-button-group { grid-template-columns: repeat(4, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
-        .show-punto-planta-btn{background-color:#9b59b6}#addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:2001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px;gap: 10px}.modal-content .modal-actions button{flex:1}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}#toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;align-items:center;gap:10px}.toast{background-color:var(--text-dark);color:#fff;padding:12px 20px;border-radius:25px;box-shadow:0 4px 15px rgba(0,0,0,.1);font-size:.9em;font-weight:500;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background-color:var(--secondary-color)}.toast.danger{background-color:var(--danger-color)}.toast.warning{background-color:var(--warning-color); color: #fff;}
+        #addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:2001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px;gap: 10px}.modal-content .modal-actions button{flex:1}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}#toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;align-items:center;gap:10px}.toast{background-color:var(--text-dark);color:#fff;padding:12px 20px;border-radius:25px;box-shadow:0 4px 15px rgba(0,0,0,.1);font-size:.9em;font-weight:500;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background-color:var(--secondary-color)}.toast.danger{background-color:var(--danger-color)}.toast.warning{background-color:var(--warning-color); color: #fff;}
         .part-time-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;border-top:1px solid var(--border-color);padding-top:10px}.part-time-actions button{width:100%;padding:8px;font-size:.85em}.part-time-actions .calendar-btn{background-color:#f39c12}.part-time-actions .calculate-btn{background-color:#1abc9c}.distribucion-part-time-container .puntos-calculados-pt{font-weight:700;color:#16a085}
         .socio-distribucion-card .individual-actions {display: flex;gap: 10px;margin-top: 15px;padding-top: 10px;border-top: 1px solid #e0e6ed;}
         .socio-distribucion-card .individual-actions button {flex: 1;padding: 8px 10px;font-size: 0.9em;margin-top: 0; }
@@ -28,7 +28,6 @@
         #loadAllAnticiposBtn {background-color: #34495e;} #loadAllAnticiposBtn:hover {background-color: #2c3e50;}
         #uploadAllAnticiposBtn {background-color: #e67e22;} #uploadAllAnticiposBtn:hover {background-color: #d35400;}
         #saveAllAnticiposAndDistribucionBtn {background-color: #27ae60;} #saveAllAnticiposAndDistribucionBtn:hover {background-color: #1e8449;}
-        #resetPuntoPlantaBtn {background-color: #c0392b;} #resetPuntoPlantaBtn:hover {background-color: #a93226;}
         #resetPartTimeDataBtn {background-color: #e74c3c; width: 100%; margin-bottom: 15px;} #resetPartTimeDataBtn:hover {background-color: #c0392b;}
         .side-menu a.arqueo-link {background-color: #e67e22;} .side-menu a.arqueo-link:hover {background-color: #d35400; padding-left: 25px;}
         .filtros-container{margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--light-bg);}
@@ -69,9 +68,8 @@
         .area-header.collapsed::before {
             transform: rotate(-90deg);
         }
-        /* ESTILO PARA EL SUB-AREA SEPARATOR (CAMBISTAS) */
         .sub-area-title {
-            grid-column: 1 / -1; /* Ocupa todo el ancho */
+            grid-column: 1 / -1; 
             color: var(--primary-color);
             background-color: #f0f9ff;
             padding: 8px 12px;
@@ -122,6 +120,22 @@
         .confirm-delete-btn { background-color: var(--danger-color); color: #fff; }
         .confirm-delete-btn:hover { background-color: #c0392b; }
 
+        /* --- ESTILOS HISTORIAL (MODIFICADO PARA 3 COLUMNAS) --- */
+        .table-responsive { overflow-x: auto; margin-top: 15px; }
+        .styled-table { width: 100%; border-collapse: collapse; font-size: 0.95em; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+        .styled-table thead tr { background-color: var(--text-dark); color: #ffffff; text-align: left; }
+        .styled-table th, .styled-table td { padding: 12px 15px; border-bottom: 1px solid #dddddd; vertical-align: top; }
+        .styled-table tbody tr:nth-of-type(even) { background-color: #f3f3f3; }
+        .styled-table tbody tr:last-of-type { border-bottom: 2px solid var(--primary-color); }
+        
+        .summary-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px; }
+        @media (max-width: 600px) { .summary-cards { grid-template-columns: 1fr; } }
+        .summary-card { background: white; padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); text-align: center; }
+        .summary-card h4 { margin: 0 0 5px; color: var(--text-light); font-size: 0.9em; }
+        .summary-card p { margin: 0; font-size: 1.3em; font-weight: 700; color: var(--text-dark); }
+        .type-breakdown div { margin-bottom: 3px; font-size: 0.9em; }
+        .type-breakdown strong { color: var(--primary-hover-color); }
+
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
 </head>
@@ -130,6 +144,7 @@
         <div class="menu-header">Menú</div>
         <a href="https://arqueo-teal.vercel.app/" class="menu-link arqueo-link" target="_blank">💰 Ir a Arqueo (Hoja de Cálculo)</a>
         <a href="#" class="menu-link active-link" data-target="balanceContent">Balance General</a>
+        <a href="#" class="menu-link" data-target="historialContent">📜 Historial Recaudación</a>
         <a href="#" class="menu-link" data-target="registroContent">Gestionar Socios</a>
         <a href="#" class="menu-link" data-target="distribucionContent">Distribución de Propina</a>
     </nav>
@@ -162,6 +177,36 @@
                     <p><strong>Punto Planta:</strong> <span id="ultimaDistPunto">$0</span></p>
                 </div>
             </div>
+
+            <div id="historialContent" class="content-panel">
+                <h2>Historial de Recaudaciones</h2>
+                <div class="filtros-container">
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <input type="text" id="historialFechaFiltro" placeholder="Filtrar por rango de fechas">
+                        <button id="btnFiltrarHistorial" style="width:auto; margin-top:0;">🔎</button>
+                    </div>
+                </div>
+                <div class="summary-cards">
+                    <div class="summary-card"><h4>Total Periodo</h4><p id="histTotalPeriodo">$0</p></div>
+                    <div class="summary-card"><h4>Promedio Diario</h4><p id="histPromedio">$0</p></div>
+                    <div class="summary-card"><h4>Total Valor Punto</h4><p id="histTotalValorPunto">$0</p></div>
+                </div>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Monto Total</th>
+                                <th>Divisor</th>
+                                <th>Valor Punto</th>
+                                <th>Desglose por Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historialTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
             <div id="registroContent" class="content-panel">
                 <h2>Gestionar Socios</h2>
                 <button type="button" id="showRegisterSocioModalBtn" style="background-color: var(--primary-color); margin-bottom: 20px;">➕ Nuevo Socio</button>
@@ -187,10 +232,10 @@
                 </div>
                 <div class="general-total" id="totalGeneralPropinaNetaDistribucion"></div>
                 <div id="totalPuntosDisplay" style="text-align:center; font-weight:bold; background-color:#eafaf1; padding:10px; border-radius:8px; margin: 15px 0; border: 1px solid #c3e6cb;"></div>
-                <div class="punto-planta-display-general" id="puntoPlantaDisplay"></div>
+                
+                <div id="historialValorPuntoDistribucion" style="text-align:center; margin-bottom: 15px; font-size: 1.1em; background-color: #f0f9ff; padding: 10px; border-radius: 8px; border: 1px solid #b3e5fc; color: var(--primary-color);"></div>
+                
                 <div class="action-button-group">
-                    <button type="button" class="show-punto-planta-btn">Calcular Valor Punto</button>
-                    <button type="button" id="resetPuntoPlantaBtn">🔴 Reset Valor Punto</button>
                     <button type="button" id="addAnticipoBtn">Nuevo Anticipo</button>
                     <button type="button" id="loadAllAnticiposBtn">📥 Cargar de Sheets</button>
                     <button type="button" id="uploadAllAnticiposBtn" style="background-color: #f39c12;">⬆️ Subir a Sheets</button>
@@ -251,16 +296,6 @@
             <label>Monto:</label><input type="text" id="anticipoCantidad" inputmode="numeric" required>
             <button type="submit">Guardar</button>
         </form></div></div>
-    </template>
-
-    <template id="templatePuntoPlantaModal">
-        <div class="modal"><div class="modal-content"><span class="close-button">&times;</span><h3>Valor Punto</h3>
-            <p><strong>Neta:</strong> <span id="propinaNetaModal">$0</span></p>
-            <p><strong>Total Puntos:</strong> <span id="totalPuntosGeneralDisplay" style="color:#28a745;">0</span></p><hr>
-            <label>Divisor Manual:</label><input type="text" id="divisorManualInput" inputmode="decimal" placeholder="0.00">
-            <p><strong>Valor:</strong> <strong id="valorPuntoCalculadoDisplay" style="color:var(--primary-color);">$0</strong></p>
-            <button type="button" id="calcularPuntoPlantaInternoBtn">Guardar</button>
-        </div></div>
     </template>
     
     <template id="templateAddDescuentoModal">
@@ -353,18 +388,26 @@
 
             const ui = {
                 menuToggle: document.getElementById('menuToggle'), sideMenu: document.getElementById('sideMenu'), mainContainer: document.getElementById('mainContainer'), toastContainer: document.getElementById('toast-container'), modalContainer: document.getElementById('modal-container'), syncIndicator: document.getElementById('sync-indicator'),
-                syncDataBtn: document.getElementById('syncDataBtn'), resetAnticiposLocalBtn: document.getElementById('resetAnticiposLocalBtn'), resetPuntoPlantaBtn: document.getElementById('resetPuntoPlantaBtn'), resetPartTimeDataBtn: document.getElementById('resetPartTimeDataBtn'),
+                syncDataBtn: document.getElementById('syncDataBtn'), resetAnticiposLocalBtn: document.getElementById('resetAnticiposLocalBtn'), resetPartTimeDataBtn: document.getElementById('resetPartTimeDataBtn'),
                 balancePropinaBruta: document.getElementById('balancePropinaBruta'), balanceDescuentos: document.getElementById('balanceDescuentos'), balancePropinaNeta: document.getElementById('balancePropinaNeta'), balanceAnticipos: document.getElementById('balanceAnticipos'), balanceSaldo: document.getElementById('balanceSaldo'),
-                totalGeneralPropinaNetaDistribucion: document.getElementById('totalGeneralPropinaNetaDistribucion'), puntoPlantaDisplay: document.getElementById('puntoPlantaDisplay'), distribucionPlantaContainer: document.getElementById('distribucionPlantaContainer'), distribucionPartTimeContainer: document.getElementById('distribucionPartTimeContainer'),
+                totalGeneralPropinaNetaDistribucion: document.getElementById('totalGeneralPropinaNetaDistribucion'), totalPuntosDisplay: document.getElementById('totalPuntosDisplay'), distribucionPlantaContainer: document.getElementById('distribucionPlantaContainer'), distribucionPartTimeContainer: document.getElementById('distribucionPartTimeContainer'),
                 sociosListContainer: document.getElementById('sociosListContainer'), descuentosListContainer: document.getElementById('descuentosListContainer'), showRegisterSocioModalBtn: document.getElementById('showRegisterSocioModalBtn'),
                 ultimaDistribucionReport: document.getElementById('ultimaDistribucionReport'), ultimaDistFecha: document.getElementById('ultimaDistFecha'), ultimaDistNeta: document.getElementById('ultimaDistNeta'), ultimaDistPunto: document.getElementById('ultimaDistPunto'),
-                totalPuntosDisplay: document.getElementById('totalPuntosDisplay'), loadAllAnticiposBtn: document.getElementById('loadAllAnticiposBtn'), uploadAllAnticiposBtn: document.getElementById('uploadAllAnticiposBtn'), saveAllAnticiposAndDistribucionBtn: document.getElementById('saveAllAnticiposAndDistribucionBtn'),
+                loadAllAnticiposBtn: document.getElementById('loadAllAnticiposBtn'), uploadAllAnticiposBtn: document.getElementById('uploadAllAnticiposBtn'), saveAllAnticiposAndDistribucionBtn: document.getElementById('saveAllAnticiposAndDistribucionBtn'),
                 filtroNombre: document.getElementById('filtroNombre'), filtroArea: document.getElementById('filtroArea'), filtroContrato: document.getElementById('filtroContrato'), filtroNombreGestion: document.getElementById('filtroNombreGestion'), filtroAreaGestion: document.getElementById('filtroAreaGestion'), filtroContratoGestion: document.getElementById('filtroContratoGestion'),
                 addAnticipoBtn: document.getElementById('addAnticipoBtn'), addDescuentoBtn: document.getElementById('addDescuentoBtn'),
-                scrollToTopBtn: document.getElementById('scrollToTopBtn')
+                scrollToTopBtn: document.getElementById('scrollToTopBtn'),
+                historialFechaFiltro: document.getElementById('historialFechaFiltro'),
+                btnFiltrarHistorial: document.getElementById('btnFiltrarHistorial'),
+                histTotalPeriodo: document.getElementById('histTotalPeriodo'),
+                histPromedio: document.getElementById('histPromedio'),
+                histTotalValorPunto: document.getElementById('histTotalValorPunto'),
+                historialTableBody: document.getElementById('historialTableBody'),
+                historialValorPuntoDistribucion: document.getElementById('historialValorPuntoDistribucion')
             };
 
-            let isSyncing = false, sociosData = [], montosData = [], recaudacionPorDia = {}, ultimaDistribucionData = null, flatpickrInstance = null;
+            let isSyncing = false, sociosData = [], montosData = [], recaudacionPorDia = {}, ultimaDistribucionData = null, flatpickrInstance = null, historialRawData = [];
+            let globalValorPunto = 0; // NUEVA VARIABLE GLOBAL PARA EL VALOR PUNTO
             
             // --- UTILIDADES ---
             const formatDisplayDate = (d) => { if(!d) return ''; const [y, m, day] = d.includes('T') ? d.split('T')[0].split('-') : d.split('-'); return `${day}-${m}-${y}`; };
@@ -388,6 +431,115 @@
             ui.scrollToTopBtn.addEventListener('click', () => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
+
+            // --- HISTORIAL AGRUPADO ---
+            let flatpickrHistorial = flatpickr(ui.historialFechaFiltro, {
+                mode: "range",
+                dateFormat: "Y-m-d",
+                locale: "es"
+            });
+
+            ui.btnFiltrarHistorial.onclick = () => renderHistorial(historialRawData);
+
+            function renderHistorial(data) {
+                if (!data || !data.length) {
+                    ui.historialTableBody.innerHTML = '<tr><td colspan="5">Sin datos</td></tr>';
+                    ui.histTotalPeriodo.textContent = '$0';
+                    ui.histPromedio.textContent = '$0';
+                    ui.histTotalValorPunto.textContent = '$0';
+                    if(ui.historialValorPuntoDistribucion) ui.historialValorPuntoDistribucion.textContent = '';
+                    globalValorPunto = 0; // Reset
+                    updateAllUI(); // Update UI with 0
+                    return;
+                }
+
+                const agrupado = {};
+                data.forEach(item => {
+                    const fecha = normalizeRemoteDate(item.fecha);
+                    const divisor = item.divisor || 'N/A';
+                    const clave = `${fecha}_${divisor}`; 
+
+                    if (!agrupado[clave]) {
+                        agrupado[clave] = {
+                            fecha: fecha,
+                            divisor: divisor,
+                            montoTotal: 0,
+                            tipos: {}, 
+                        };
+                    }
+
+                    const montoItem = parseMoney(item.monto);
+                    agrupado[clave].montoTotal += montoItem;
+                    
+                    const tipoDetectado = item.Tipo || item.tipo || 'General';
+                    
+                    if (!agrupado[clave].tipos[tipoDetectado]) {
+                        agrupado[clave].tipos[tipoDetectado] = 0;
+                    }
+                    agrupado[clave].tipos[tipoDetectado] += montoItem;
+                });
+
+                let listaAgrupada = Object.values(agrupado);
+
+                const dates = flatpickrHistorial.selectedDates;
+                if (dates.length === 2) {
+                    const start = dates[0].toISOString().split('T')[0];
+                    const end = dates[1].toISOString().split('T')[0];
+                    listaAgrupada = listaAgrupada.filter(d => d.fecha >= start && d.fecha <= end);
+                } else {
+                    const thirtyDaysAgo = new Date();
+                    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+                    const isoAgo = thirtyDaysAgo.toISOString().split('T')[0];
+                    listaAgrupada = listaAgrupada.filter(d => d.fecha >= isoAgo);
+                }
+
+                listaAgrupada.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
+
+                let total = 0;
+                let totalValorPuntoAcumulado = 0;
+
+                const htmlRows = listaAgrupada.map(row => {
+                    total += row.montoTotal;
+                    
+                    const desgloseHtml = Object.entries(row.tipos)
+                        .map(([t, m]) => `<div><strong>${t}:</strong> $${formatNumber(m)}</div>`)
+                        .join('');
+
+                    // CÁLCULO VALOR PUNTO
+                    let valorPuntoStr = '-';
+                    const divNum = parseFloat(row.divisor);
+                    if (divNum > 0) {
+                        const valorPunto = row.montoTotal / divNum;
+                        totalValorPuntoAcumulado += valorPunto;
+                        valorPuntoStr = `$${formatNumber(valorPunto)}`;
+                    }
+
+                    return `<tr>
+                        <td>${formatDisplayDate(row.fecha)}</td>
+                        <td style="font-weight:bold; color:var(--text-dark);">$${formatNumber(row.montoTotal)}</td>
+                        <td>${row.divisor !== 'N/A' ? formatNumber(row.divisor) : '-'}</td>
+                        <td style="font-weight:bold; color:var(--primary-color);">${valorPuntoStr}</td>
+                        <td class="type-breakdown">${desgloseHtml}</td>
+                    </tr>`;
+                }).join('');
+
+                ui.histTotalPeriodo.textContent = `$${formatNumber(total)}`;
+                ui.histPromedio.textContent = listaAgrupada.length ? `$${formatNumber(total / listaAgrupada.length)}` : '$0';
+                ui.histTotalValorPunto.textContent = `$${formatNumber(totalValorPuntoAcumulado)}`; 
+                
+                // ACTUALIZACIÓN GLOBAL
+                globalValorPunto = totalValorPuntoAcumulado;
+                
+                // MOSTRAR EN DISTRIBUCIÓN
+                if(ui.historialValorPuntoDistribucion) {
+                    ui.historialValorPuntoDistribucion.innerHTML = `Total Valor Punto (Historial): <strong>$${formatNumber(globalValorPunto)}</strong>`;
+                }
+
+                ui.historialTableBody.innerHTML = htmlRows;
+                
+                // RECALCULAR DISTRIBUCIÓN
+                updateAllUI();
+            }
 
             // --- GESTIÓN DE MODALES ---
             function openModal(templateId, callback) {
@@ -481,7 +633,10 @@
                 ui.totalGeneralPropinaNetaDistribucion.textContent=`Propina a Distribuir: $${formatNumber(neta)}`;
 
                 let pPlanta=0, pPT=0; 
-                const ptData = getStorage('part_time_data_v3'), plantaAbs = getStorage('planta_absences_v1'), valPunto = parseFloat(localStorage.getItem('lastPuntoPlantaValue'))||0;
+                const ptData = getStorage('part_time_data_v3'), plantaAbs = getStorage('planta_absences_v1');
+                
+                // USAR LA VARIABLE GLOBAL EN LUGAR DE LOCALSTORAGE
+                const valPunto = globalValorPunto; 
 
                 sociosData.forEach(s => {
                     const calc = calcularPuntosLogica(s.FechaIngreso, s.Area);
@@ -496,7 +651,7 @@
                 });
 
                 ui.totalPuntosDisplay.innerHTML=`Total Puntos: <strong>${Math.round(pPlanta+pPT)}</strong> (Planta: ${Math.round(pPlanta)} + PT: ${Math.round(pPT)})`;
-                ui.puntoPlantaDisplay.innerHTML = valPunto>0 ? `<p style="text-align:center;font-weight:bold;background:#f0f9ff;padding:10px;">Valor Punto: $${formatNumber(valPunto)}</p>` : '';
+                
                 renderSociosFiltrados(); renderDescuentos(desc);
                 if(ultimaDistribucionData?.resumen) {
                     ui.ultimaDistFecha.textContent=ultimaDistribucionData.resumen.fecha; ui.ultimaDistNeta.textContent=`$${formatNumber(ultimaDistribucionData.resumen.propinaNeta)}`; ui.ultimaDistPunto.textContent=`$${formatNumber(ultimaDistribucionData.resumen.puntoPlanta)}`; ui.ultimaDistribucionReport.style.display='block';
@@ -512,7 +667,9 @@
             const renderSociosFiltrados = () => {
                 const fN=ui.filtroNombre.value.toLowerCase(), fA=ui.filtroArea.value, fC=ui.filtroContrato.value;
                 const fNG=ui.filtroNombreGestion.value.toLowerCase(), fAG=ui.filtroAreaGestion.value, fCG=ui.filtroContratoGestion.value;
-                const filterFn = (s, n, a, c) => `${s.Nombre} ${s.Apellido}`.toLowerCase().includes(n) && (a==='todos'||s.Area===a) && (c==='todos'||s.TipoContrato===c);
+                
+                const filterFn = (s, n, a, c) => `${s.Nombre} ${s.Apellido}`.toLowerCase().includes(n) && (a==='todos'||s.Area.startsWith(a)) && (c==='todos'||s.TipoContrato===c);
+                
                 renderSocios(sociosData.filter(s=>filterFn(s,fNG,fAG,fCG)), sociosData.filter(s=>filterFn(s,fN,fA,fC)));
             };
 
@@ -533,20 +690,16 @@
                 const renderArea = (list, cont, suffix) => {
                     if(!list.length) { cont.innerHTML+='<p style="color:#777;">Sin socios.</p>'; return; }
                     
-                    // AGRUPACIÓN POR ÁREA PADRE (ANTES DEL GUIÓN)
                     const groupedByParent = {};
                     list.forEach(s => {
-                        const parent = s.Area.split(' - ')[0]; // Ej: "Mesas" de "Mesas - Cambistas"
+                        const parent = s.Area.split(' - ')[0]; 
                         if (!groupedByParent[parent]) groupedByParent[parent] = [];
                         groupedByParent[parent].push(s);
                     });
 
                     Object.keys(groupedByParent).sort().forEach(parentArea => {
                         const sociosInGroup = groupedByParent[parentArea];
-                        
-                        // Suma total de puntos del grupo (incluyendo sub-áreas)
                         const totalAreaPts = sociosInGroup.reduce((acc, s) => acc + (s.puntosAsignadosFinales || 0), 0);
-                        
                         const headerId = `area-header-${parentArea.replace(/\s+/g,'-')}-${suffix}`;
                         const gridId = `area-grid-${parentArea.replace(/\s+/g,'-')}-${suffix}`;
                         
@@ -556,16 +709,12 @@
                         grid.className = 'area-section-grid';
                         grid.id = gridId;
                         
-                        // Separar grupo principal de sub-grupos
                         const mainGroup = sociosInGroup.filter(s => s.Area === parentArea);
                         const subGroups = sociosInGroup.filter(s => s.Area !== parentArea);
                         
-                        // Renderizar grupo principal
                         mainGroup.forEach(s => grid.appendChild(createCard(s, 'dist')));
                         
-                        // Renderizar sub-grupos (si existen) con separador
                         if (subGroups.length > 0) {
-                            // Agrupar sub-grupos por nombre completo
                             const subGrouped = {};
                             subGroups.forEach(s => {
                                 if(!subGrouped[s.Area]) subGrouped[s.Area] = [];
@@ -641,6 +790,7 @@
                     else if (recJson.result && Array.isArray(recJson.result)) listaRec = recJson.result;
                     
                     montosData = listaRec; 
+                    historialRawData = listaRec; 
                     recaudacionPorDia={}; 
                     if(Array.isArray(montosData)) {
                         montosData.forEach(r=>{ 
@@ -664,7 +814,9 @@
                     setStorage('part_time_data_v3',pt);
                     
                     try{ultimaDistribucionData=await apiCall(SCRIPT_URL_SOCIOS,'getUltimaDistribucion');}catch(e){} 
-                    updateAllUI(); showToast('Sincronizado'); 
+                    
+                    renderHistorial(historialRawData); // ESTO AHORA TRIGGER UPDATEALLUI
+                    showToast('Sincronizado'); 
                 }catch(e){ ui.balancePropinaBruta.textContent="Error"; console.error(e); showToast("Error Sincronizando", 'danger'); } finally{isSyncing=false;ui.syncIndicator.classList.remove('visible');} 
             }
 
@@ -684,7 +836,6 @@
                 };
 
                 mainSelect.addEventListener('change', toggle);
-                // Inicializar estado
                 toggle();
             }
 
@@ -692,7 +843,6 @@
                 const socio = sociosData.find(s => s.ID == socioId);
                 if (!socio) return;
                 openModal('templateEditSocioModal', (form) => {
-                    // Configurar lógica de sub-áreas
                     setupAreaSelects(form, 'editArea', 'editSubArea', 'editSubAreaContainer');
 
                     form.editSocioId.value = socio.ID;
@@ -700,10 +850,8 @@
                     form.editApellido.value = socio.Apellido;
                     form.editFechaIngreso.value = normalizeRemoteDate(socio.FechaIngreso);
                     
-                    // Parsear Área para separar Sub-Área si existe
                     if (socio.Area.includes(' - Cambistas')) {
                         form.editArea.value = 'Mesas';
-                        // Disparar evento change manualmente para mostrar el contenedor
                         form.editArea.dispatchEvent(new Event('change'));
                         form.editSubArea.value = 'Cambistas';
                     } else {
@@ -825,9 +973,9 @@
 
             async function handleSaveDistribucionFinal(){
                 const neta=parseNumber(ui.balancePropinaNeta.textContent);
-                const punto=parseFloat(localStorage.getItem('lastPuntoPlantaValue'))||0;
+                const punto=globalValorPunto;
                 
-                if(punto<=0){showToast('Falta calcular punto planta','warning');return;}
+                if(punto<=0){showToast('Valor punto es 0 (Revisa historial)','warning');return;}
                 
                 const ants=getStorage('anticipos_data_v3');
                 const saldoAnt=getStorage('saldo_anterior_v1');
@@ -895,33 +1043,6 @@
                         updateAllUI();
                         document.querySelector('.modal').style.display='none';
                     }
-                });
-            }
-
-            function openPuntoPlanta(){
-                openModal('templatePuntoPlantaModal',(div,m)=>{
-                    const bruto=Object.values(recaudacionPorDia).reduce((a,b)=>a+b,0);
-                    const neta=bruto-getStorage('descuentos_operacionales_v1').reduce((s,d)=>s+d.cantidad,0);
-                    m.querySelector('#propinaNetaModal').textContent=`$${formatNumber(neta)}`;
-                    let tp=0;
-                    const abs=getStorage('planta_absences_v1');
-                    sociosData.forEach(s=>{
-                        if(isPartTime(s)){tp+=s.infoCalculo.puntos;}
-                        else{
-                            let dp=0;(abs[s.ID]||[]).forEach(d=>dp+=(recaudacionPorDia[d]||0));
-                            let f=bruto>0?(1-(dp/bruto)):1; if(f<0)f=0;
-                            tp+=(s.infoCalculo.puntos*f);
-                        }
-                    });
-                    m.querySelector('#totalPuntosGeneralDisplay').textContent=Math.round(tp);
-                    const inp=m.querySelector('#divisorManualInput');
-                    inp.value=Math.round(tp);
-                    const cal=()=>{const v=neta/parseNumber(inp.value);m.querySelector('#valorPuntoCalculadoDisplay').textContent=v>0?`$${formatNumber(v)}`:'$0';};
-                    inp.oninput=cal; cal();
-                    m.querySelector('#calcularPuntoPlantaInternoBtn').onclick=()=>{
-                        localStorage.setItem('lastPuntoPlantaValue',neta/parseNumber(inp.value));
-                        updateAllUI();m.style.display='none';
-                    };
                 });
             }
 
@@ -1024,11 +1145,7 @@
                 }
             );
 
-            ui.resetPuntoPlantaBtn.onclick = () => confirmAction('¿Resetear valor punto planta?', () => {
-                localStorage.removeItem('lastPuntoPlantaValue');
-                updateAllUI();
-                showToast('Punto planta reseteado');
-            });
+            // ui.resetPuntoPlantaBtn eliminado porque ya no hay valor punto manual
 
             ui.resetPartTimeDataBtn.onclick = () => confirmAction('¿Borrar cálculos Part-Time y Ausencias?', () => {
                 localStorage.removeItem('part_time_data_v3');
@@ -1071,7 +1188,7 @@
             ui.addAnticipoBtn.onclick=()=>openModal('templateAddAnticipoModal',(f,m)=>{m.querySelector('#sociosAnticipoList').innerHTML=sociosData.map(s=>`<option value="${s.Nombre} ${s.Apellido}" data-id="${s.ID}">`).join(''); m.querySelector('#anticipoSocioInput').oninput=e=>{const o=[...m.querySelectorAll('option')].find(x=>x.value===e.target.value); if(o) m.querySelector('#anticipoSocioId').value=o.dataset.id;}; setupNumericInputFormatting(f.anticipoCantidad); f.onsubmit=e=>{e.preventDefault();const id=e.target.anticipoSocioId.value;if(id){const l=getStorage('anticipos_data_v3');if(!l[id])l[id]=[];l[id].push({fecha:f.anticipoFecha.value,cantidad:parseNumber(f.anticipoCantidad.value)});setStorage('anticipos_data_v3',l);updateAllUI();m.style.display='none';}}});
             
             ui.addDescuentoBtn.onclick=()=>handleShowDescuentoModal();
-            document.querySelector('.show-punto-planta-btn').onclick=openPuntoPlanta;
+            // Eliminado el listener de show-punto-planta-btn
             
             ui.loadAllAnticiposBtn.onclick=async()=>{try{showToast('Cargando...');const d=await apiCall(SCRIPT_URL_SOCIOS,'getAllAnticiposDesdeSheets','POST');if(!Object.keys(d).length){showToast('Nada pendiente');return;}const l=getStorage('anticipos_data_v3');for(const id in d){if(!l[id])l[id]=[];const ex=new Set(l[id].map(a=>`${a.fecha}_${Math.round(a.cantidad)}`));d[id].forEach(r=>{const f=normalizeRemoteDate(r.fecha),k=`${f}_${Math.round(r.cantidad)}`;if(!ex.has(k)){l[id].push({fecha:f,cantidad:Math.round(r.cantidad)});ex.add(k);}});}setStorage('anticipos_data_v3',l);updateAllUI();showToast('Listo');}catch(e){showToast(e.message,'danger');}}
             
