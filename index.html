@@ -847,7 +847,7 @@
             }
 
             async function syncData() { 
-                if(isSyncing)return; isSyncing=true; ui.syncIndicator.classList.add('visible'); ui.balancePropinaBruta.innerHTML='<span style="color:#f39c12;">...</span>';
+                if(isSyncing)return; isSyncing=true; ui.syncIndicator.classList.add('visible'); ui.balancePropinaBruta.innerHTML='<span style="color:#f39c12; font-size: 0.6em;">↻ Actualizando datos...</span>';
                 try{ 
                     const urlRec = SCRIPT_URL_RECAUDACIONES + (SCRIPT_URL_RECAUDACIONES.includes('?') ? '&' : '?') + 'action=get&t=' + new Date().getTime();
                     const recRes = await fetch(urlRec); const recJson = await recRes.json();
