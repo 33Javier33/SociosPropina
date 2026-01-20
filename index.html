@@ -97,7 +97,8 @@
                 <h2><span>Balance General</span><span id="sync-indicator"></span></h2>
                 <div style="display: flex; gap: 10px; margin-bottom: 20px;">
                     <button type="button" id="syncDataBtn" style="background-color: #34495e; flex: 1;">🔄 Sincronizar</button>
-                    <button type="button" id="resetAnticiposLocalBtn" style="background-color: var(--danger-color); flex: 1;">🗑️ Limpiar Locales</button>
+                    <!-- BOTÓN CORREGIDO: NOMBRE CLARO -->
+                    <button type="button" id="resetAnticiposLocalBtn" style="background-color: var(--danger-color); flex: 1;">🗑️ Borrar Anticipos (Local)</button>
                 </div>
                 <div id="balanceReport">
                     <p><strong>Total Recaudado:</strong> <span id="balancePropinaBruta">$0</span></p>
@@ -903,11 +904,15 @@
             // --- BOTONES PRINCIPALES ---
             ui.syncDataBtn.onclick=syncData;
             
-            ui.resetAnticiposLocalBtn.onclick = () => confirmAction('¿Borrar TODOS los anticipos locales? Esto no se puede deshacer.', () => {
-                localStorage.removeItem('anticipos_data_v3');
-                updateAllUI();
-                showToast('Anticipos locales borrados');
-            });
+            // NUEVO COMPORTAMIENTO: MENSAJE CLARO DE BORRADO DE ANTICIPOS
+            ui.resetAnticiposLocalBtn.onclick = () => confirmAction(
+                '¿Borrar SOLO los ANTICIPOS guardados en este dispositivo? \n\nNota: NO se borrarán los socios, solo los montos de dinero pendientes.', 
+                () => {
+                    localStorage.removeItem('anticipos_data_v3');
+                    updateAllUI();
+                    showToast('Anticipos locales borrados');
+                }
+            );
 
             ui.resetPuntoPlantaBtn.onclick = () => confirmAction('¿Resetear valor punto planta?', () => {
                 localStorage.removeItem('lastPuntoPlantaValue');
