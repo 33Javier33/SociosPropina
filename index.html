@@ -20,7 +20,46 @@
         @media (min-width: 768px) { .action-button-group { grid-template-columns: repeat(3, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
         @media (min-width: 992px) { .action-button-group { grid-template-columns: repeat(4, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
         
-        #addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:2001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px;gap: 10px}.modal-content .modal-actions button{flex:1}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}#toast-container{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:3000;display:flex;flex-direction:column;align-items:center;gap:10px}.toast{background-color:var(--text-dark);color:#fff;padding:12px 20px;border-radius:25px;box-shadow:0 4px 15px rgba(0,0,0,.1);font-size:.9em;font-weight:500;opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}.toast.show{opacity:1;transform:translateY(0)}.toast.success{background-color:var(--secondary-color)}.toast.danger{background-color:var(--danger-color)}.toast.warning{background-color:var(--warning-color); color: #fff;}
+        #addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:2001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px;gap: 10px}.modal-content .modal-actions button{flex:1}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}
+
+        /* NOTIFICACIONES (TOAST) */
+        #toast-container {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .toast {
+            background-color: var(--text-dark);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.2);
+            font-size: .9em;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity .3s ease, transform .3s ease;
+            cursor: pointer;
+        }
+        .toast.show { opacity: 1; transform: translateY(0); }
+        .toast.success { background-color: var(--secondary-color); }
+        .toast.danger { background-color: var(--danger-color); }
+        .toast.warning { background-color: var(--warning-color); color: #fff; }
+
+        /* Estilo para que el texto del modal de confirmación respete los saltos de línea */
+        #confirmDeleteText {
+            white-space: pre-line;
+            line-height: 1.6;
+            font-size: 1.05em;
+            color: var(--text-dark);
+        }
+
         .part-time-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;border-top:1px solid var(--border-color);padding-top:10px}.part-time-actions button{width:100%;padding:8px;font-size:.85em}.part-time-actions .calendar-btn{background-color:#f39c12}.part-time-actions .calculate-btn{background-color:#1abc9c}.distribucion-part-time-container .puntos-calculados-pt{font-weight:700;color:#16a085}
         .socio-distribucion-card .individual-actions {display: flex;gap: 10px;margin-top: 15px;padding-top: 10px;border-top: 1px solid #e0e6ed;}
         .socio-distribucion-card .individual-actions button {flex: 1;padding: 8px 10px;font-size: 0.9em;margin-top: 0; }
@@ -485,7 +524,33 @@
             // --- UTILIDADES ---
             const formatDisplayDate = (d) => { if(!d) return ''; const [y, m, day] = d.includes('T') ? d.split('T')[0].split('-') : d.split('-'); return `${day}-${m}-${y}`; };
             const normalizeRemoteDate = (s) => { if(!s) return ''; const str=String(s); return str.match(/^\d{4}-\d{2}-\d{2}/) ? str.substring(0,10) : (new Date(str).toISOString().split('T')[0]); };
-            const showToast = (msg, t='success') => { const d=document.createElement('div'); d.className=`toast ${t}`; d.textContent=msg; ui.toastContainer.appendChild(d); setTimeout(()=>d.classList.add('show'),10); setTimeout(()=>{d.classList.remove('show');d.remove()},4000); };
+            
+            // MODIFICADO: showToast ahora acepta duración y tiene onclick para cerrar
+            const showToast = (msg, t='success', duration=4000) => {
+                const d = document.createElement('div');
+                d.className = `toast ${t}`;
+                d.textContent = msg;
+                
+                // Clic para cerrar inmediatamente
+                d.onclick = () => {
+                    d.classList.remove('show');
+                    setTimeout(() => d.remove(), 300);
+                };
+
+                ui.toastContainer.appendChild(d);
+                
+                // Pequeño delay para permitir la transición CSS
+                setTimeout(() => d.classList.add('show'), 10);
+                
+                // Autocierre basado en la duración
+                setTimeout(() => {
+                    if (d.parentNode) {
+                        d.classList.remove('show');
+                        setTimeout(() => d.remove(), 300);
+                    }
+                }, duration);
+            };
+
             const formatNumber = (n) => new Intl.NumberFormat('es-CL').format(Math.round(n)||0);
             const parseNumber = (s) => parseFloat(String(s).replace(/\./g,'').replace(',','.'))||0;
             const parseMoney = (val) => { if (!val) return 0; if (typeof val === 'number') return val; const v = String(val).replace(/\./g, '').replace(',', '.'); return parseFloat(v) || 0; };
@@ -1277,7 +1342,30 @@
                 const calP=e.target.closest('.calendar-discount-btn'); if(calP) abrirCalendarModal(calP.dataset.socioId, 'PLANTA');
                 const cpt=e.target.closest('.calculate-btn'); if(cpt) abrirPuntosPT(cpt.dataset.socioId);
                 const edA=e.target.closest('.edit-anticipo-btn'); if(edA) handleEditAnt(edA.dataset.socioId, edA.dataset.anticipoIndex);
-                const dlA=e.target.closest('.delete-anticipo-btn'); if(dlA) confirmAction('¿Borrar anticipo?',()=>{ const l=getStorage('anticipos_data_v3'); l[dlA.dataset.socioId].splice(dlA.dataset.anticipoIndex,1); setStorage('anticipos_data_v3',l); updateAllUI(); });
+                
+                // LÓGICA MEJORADA: BORRAR ANTICIPO CON DETALLE
+                const dlA = e.target.closest('.delete-anticipo-btn'); 
+                if (dlA) {
+                    const sId = dlA.dataset.socioId;
+                    const idx = dlA.dataset.anticipoIndex;
+                    const socio = sociosData.find(s => s.ID == sId);
+                    const ants = getStorage('anticipos_data_v3')[sId];
+                    const ant = ants ? ants[idx] : null;
+
+                    if (socio && ant) {
+                        const mensaje = `¿Estás seguro de eliminar el anticipo de:\n\n👤 ${socio.Nombre} ${socio.Apellido}\n💰 $${formatNumber(ant.cantidad)}?`;
+                        
+                        confirmAction(mensaje, () => {
+                            ants.splice(idx, 1);
+                            const allAnts = getStorage('anticipos_data_v3');
+                            allAnts[sId] = ants;
+                            setStorage('anticipos_data_v3', allAnts);
+                            updateAllUI();
+                            showToast('Anticipo eliminado', 'warning');
+                        });
+                    }
+                }
+
                 const edD=e.target.closest('.edit-descuento-btn'); if(edD) handleShowDescuentoModal(edD.dataset.id);
                 const dlD=e.target.closest('.delete-descuento-btn'); if(dlD) confirmAction('¿Borrar descuento?',()=>{ const l=getStorage('descuentos_operacionales_v1').filter(x=>x.id!=dlD.dataset.id); setStorage('descuentos_operacionales_v1',l); updateAllUI(); });
                 const up=e.target.closest('.upload-anticipos-btn'); if(up) handleUploadAllAnticipos();
@@ -1299,8 +1387,6 @@
                     showToast('Anticipos locales borrados');
                 }
             );
-
-            // ui.resetPuntoPlantaBtn eliminado porque ya no hay valor punto manual
 
             ui.resetPartTimeDataBtn.onclick = () => confirmAction('¿Borrar cálculos Part-Time y Ausencias?', () => {
                 localStorage.removeItem('part_time_data_v3');
@@ -1343,15 +1429,70 @@
             ui.addAnticipoBtn.onclick=()=>openModal('templateAddAnticipoModal',(f,m)=>{m.querySelector('#sociosAnticipoList').innerHTML=sociosData.map(s=>`<option value="${s.Nombre} ${s.Apellido}" data-id="${s.ID}">`).join(''); m.querySelector('#anticipoSocioInput').oninput=e=>{const o=[...m.querySelectorAll('option')].find(x=>x.value===e.target.value); if(o) m.querySelector('#anticipoSocioId').value=o.dataset.id;}; setupNumericInputFormatting(f.anticipoCantidad); f.onsubmit=e=>{e.preventDefault();const id=e.target.anticipoSocioId.value;if(id){const l=getStorage('anticipos_data_v3');if(!l[id])l[id]=[];l[id].push({fecha:f.anticipoFecha.value,cantidad:parseNumber(f.anticipoCantidad.value)});setStorage('anticipos_data_v3',l);updateAllUI();m.style.display='none';}}});
             
             ui.addDescuentoBtn.onclick=()=>handleShowDescuentoModal();
-            // Eliminado el listener de show-punto-planta-btn
             
-            ui.loadAllAnticiposBtn.onclick=async()=>{try{showToast('Cargando...');const d=await apiCall(SCRIPT_URL_SOCIOS,'getAllAnticiposDesdeSheets','POST');if(!Object.keys(d).length){showToast('Nada pendiente');return;}const l=getStorage('anticipos_data_v3');for(const id in d){if(!l[id])l[id]=[];const ex=new Set(l[id].map(a=>`${a.fecha}_${Math.round(a.cantidad)}`));d[id].forEach(r=>{const f=normalizeRemoteDate(r.fecha),k=`${f}_${Math.round(r.cantidad)}`;if(!ex.has(k)){l[id].push({fecha:f,cantidad:Math.round(r.cantidad)});ex.add(k);}});}setStorage('anticipos_data_v3',l);updateAllUI();showToast('Listo');}catch(e){showToast(e.message,'danger');}}
+            async function cargarAnticiposDesdeSheets(esAutomatico = false) {
+                try {
+                    if (!esAutomatico) showToast('Cargando anticipos...');
+                    const d = await apiCall(SCRIPT_URL_SOCIOS, 'getAllAnticiposDesdeSheets', 'POST');
+                    
+                    if (!Object.keys(d).length) {
+                        if (!esAutomatico) showToast('Nada pendiente');
+                        return;
+                    }
+
+                    const l = getStorage('anticipos_data_v3');
+                    let nuevosDetalles = [];
+
+                    for (const id in d) {
+                        if (!l[id]) l[id] = [];
+                        const ex = new Set(l[id].map(a => `${a.fecha}_${Math.round(a.cantidad)}`));
+                        
+                        // Buscamos el nombre del socio usando el ID
+                        const socio = sociosData.find(s => s.ID === id);
+                        const nombreSocio = socio ? `${socio.Nombre} ${socio.Apellido}` : 'Socio Desconocido';
+
+                        d[id].forEach(r => {
+                            const f = normalizeRemoteDate(r.fecha);
+                            const k = `${f}_${Math.round(r.cantidad)}`;
+                            if (!ex.has(k)) {
+                                l[id].push({ fecha: f, cantidad: Math.round(r.cantidad) });
+                                ex.add(k);
+                                // Guardamos el detalle para el mensaje
+                                nuevosDetalles.push(`${nombreSocio}: $${formatNumber(r.cantidad)}`);
+                            }
+                        });
+                    }
+
+                    if (nuevosDetalles.length > 0) {
+                        setStorage('anticipos_data_v3', l);
+                        updateAllUI();
+                        
+                        let mensaje = '';
+                        if (nuevosDetalles.length <= 3) {
+                            mensaje = `📥 Recibido: ${nuevosDetalles.join(', ')}`;
+                        } else {
+                            mensaje = `📥 Recibido: ${nuevosDetalles.slice(0, 3).join(', ')} y ${nuevosDetalles.length - 3} más.`;
+                        }
+                        
+                        // Enviamos 60000 (60 seg) como tercer argumento para que dure 1 minuto
+                        showToast(mensaje, 'success', 60000); 
+                    } else {
+                        if (!esAutomatico) showToast('Listo (Sin cambios nuevos)');
+                    }
+                } catch (e) {
+                    if (!esAutomatico) showToast(e.message, 'danger');
+                    console.error("Auto-fetch error:", e);
+                }
+            }
+
+            ui.loadAllAnticiposBtn.onclick = () => cargarAnticiposDesdeSheets(false);
             
             ui.uploadAllAnticiposBtn.onclick = handleUploadAllAnticipos;
 
             // Iniciar
             syncData(); 
             setInterval(syncData, 300000); // 300000 ms = 5 minutos
+            setInterval(() => cargarAnticiposDesdeSheets(true), 180000); // 180000 ms = 3 minutos
         });
     </script>
 </body>
