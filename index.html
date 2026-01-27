@@ -15,14 +15,12 @@
         :root{--menu-width:250px;--primary-color:#3498db;--primary-hover-color:#2980b9;--secondary-color:#2ecc71;--danger-color:#e74c3c;--warning-color:#f39c12;--light-bg:#eef2f6;--white-bg:#fff;--text-dark:#2c3e50;--text-light:#555;--border-color:#e0e6ed}body{font-family:'Poppins',sans-serif;margin:0;background-color:var(--light-bg);color:#333}.menu-toggle{position:fixed;top:15px;left:15px;z-index:1002;width:40px;height:40px;background-color:var(--primary-color);border:none;border-radius:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;box-shadow:0 4px 10px rgba(0,0,0,.1);transition:left .3s ease}.menu-toggle span{display:block;width:22px;height:2px;background-color:#fff;margin:2px 0;transition:all .3s ease}.side-menu.open+.main-container .menu-toggle{left:calc(var(--menu-width) + 15px)}.menu-toggle.active span:nth-child(1){transform:translateY(6px) rotate(45deg)}.menu-toggle.active span:nth-child(2){opacity:0}.menu-toggle.active span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}.side-menu{position:fixed;top:0;left:0;width:var(--menu-width);height:100%;background-color:var(--text-dark);z-index:1001;transform:translateX(-100%);transition:transform .3s ease;display:flex;flex-direction:column;padding-top:60px;box-shadow:5px 0 15px rgba(0,0,0,.1)}.side-menu.open{transform:translateX(0)}.side-menu .menu-header{color:#fff;font-size:1.5em;font-weight:700;text-align:center;padding:20px 10px;border-bottom:1px solid #4a627a}.side-menu a{color:#fff;text-decoration:none;padding:15px 20px;display:block;font-size:1em;transition:background-color .2s ease,padding-left .2s ease;border-bottom:1px solid #3e5268}.side-menu a:hover,.side-menu a.active-link{background-color:var(--primary-color);padding-left:25px}.main-container{transition:margin-left .3s ease;padding:15px}.container{max-width:960px;margin:10px auto;background-color:var(--white-bg);padding:20px;border-radius:12px;box-shadow:0 8px 25px rgba(0,0,0,.07)}h1{color:var(--text-dark);text-align:center;margin-bottom:20px;font-weight:700;font-size:1.8em;padding-top:55px}
         h2{color:var(--primary-color);margin:0 0 20px;font-weight:600;font-size:1.5em;border-bottom:2px solid var(--border-color);padding-bottom:10px;display:flex;justify-content:space-between;align-items:center}#sync-indicator{font-size:.6em;font-weight:400;color:var(--text-light);opacity:0;transition:opacity .3s}#sync-indicator.visible{opacity:1}h3{color:var(--primary-color);margin-top:25px;margin-bottom:10px;font-size:1.4em}.content-panel{display:none}.content-panel.active{display:block;animation:fadeIn .5s ease}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}label{display:block;margin-bottom:7px;font-weight:600;color:var(--text-light)}input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:10px;margin-bottom:18px;border:1px solid #dcdcdc;border-radius:6px;box-sizing:border-box;font-size:1em}input:focus,select:focus,textarea:focus{border-color:var(--primary-color);outline:0;box-shadow:0 0 0 3px rgba(52,152,219,.2)}button{background-color:var(--secondary-color);color:#fff;padding:10px 15px;border:none;border-radius:6px;cursor:pointer;font-size:1em;font-weight:600;width:100%;transition:background-color .3s ease,transform .2s ease;margin-top:8px}button:hover{background-color:#27ae60;transform:translateY(-1px)}button:disabled{background-color:#bdc3c7;cursor:not-allowed;transform: none !important;}button.cancel-btn{background-color:#95a5a6}.socios-list-container{margin-top:30px;border-top:2px solid var(--border-color)}.socio-card{padding:15px;background-color:#f7f9fc;border-radius:8px;margin-bottom:10px;border:1px solid #dbe9f5}.socio-card-info p{margin:4px 0;color:var(--text-light)}.socio-card-info p strong{color:var(--text-dark)}.socio-card-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px;border-top:1px solid #e0e6ed;padding-top:10px}.socio-card-actions button{width:auto;font-size:.9em;padding:6px 10px}.socio-card-actions .edit-btn{background-color:var(--primary-color)}.socio-card-actions .delete-btn{background-color:var(--danger-color)}.socio-distribucion-card{background-color:#f7f9fc;border:1px solid #dbe9f5;border-radius:10px;padding:18px;box-shadow:0 4px 15px rgba(0,0,0,.06)}.anticipos-list-container{margin-top:15px;padding-top:10px;border-top:1px dashed var(--border-color)}.anticipos-list-container h4{margin:0 0 10px;font-size:1em;color:var(--text-dark)}.anticipo-item,.descuento-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;font-size:.9em;border-bottom:1px solid #eef2f6}.anticipo-item:last-child,.descuento-item:last-child{border-bottom:none}.anticipo-item-info,.descuento-item-info{display:flex;flex-direction:column;flex-grow:1}.anticipo-item-info span,.descuento-item-info span{color:var(--text-light)}.anticipo-item-info .monto,.descuento-item-info .monto{font-weight:600;color:var(--text-dark)}.descuento-item-info .categoria{font-size:0.85em;font-style:italic;color:var(--primary-color)}.anticipo-item-actions,.descuento-item-actions{display:flex;gap:5px}.anticipo-item-actions button,.descuento-item-actions button{font-size:.8em;padding:4px 8px;margin:0;width:auto}.anticipo-item-actions .edit-anticipo-btn,.descuento-item-actions .edit-descuento-btn{background-color:var(--warning-color)}.anticipo-item-actions .delete-anticipo-btn,.descuento-item-actions .delete-descuento-btn{background-color:var(--danger-color)}.general-total{background-color:var(--secondary-color);color:#fff;padding:12px 15px;border-radius:8px;margin-bottom:15px;text-align:center;font-size:1.3em;font-weight:700}
         
-        /* ESTILOS DE LA BARRA SUPERIOR DE BOTONES */
         .action-button-group{display: grid;grid-template-columns: repeat(2, 1fr);gap: 10px;margin-bottom: 20px;}
         @media (min-width: 768px) { .action-button-group { grid-template-columns: repeat(3, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
         @media (min-width: 992px) { .action-button-group { grid-template-columns: repeat(4, 1fr); } #saveAllAnticiposAndDistribucionBtn { grid-column: span 2; } }
         
         #addAnticipoBtn{background-color:var(--primary-color)}.modal{display:none;position:fixed;z-index:2001;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);justify-content:center;align-items:center;animation:fadeInModal .3s}@keyframes fadeInModal{from{opacity:0}to{opacity:1}}.modal-content{background-color:#fefefe;padding:25px;border-radius:10px;width:90%;max-width:450px;text-align:center}.modal-content h3,.modal-content p,.modal-content label{text-align:left}.modal-content .modal-actions{display:flex;justify-content:space-around;margin-top:20px;gap: 10px}.modal-content .modal-actions button{flex:1}.close-button{position:absolute;top:10px;right:15px;color:#aaa;font-size:28px;font-weight:700;cursor:pointer}#balanceReport{padding:15px;border-radius:8px;background-color:#f8f9fa}#balanceReport p{margin:0;padding:8px 0;display:flex;justify-content:space-between;font-size:1.1em}#balanceReport p strong{color:var(--text-dark)}#balanceReport .balance-saldo.negative{color:var(--danger-color)}#balanceReport hr{border:0;border-top:1px solid var(--border-color);margin:8px 0}.anticipo-socio-info{background-color:#e6f7ff;border:1px solid #91d5ff;border-radius:8px;padding:15px;margin:20px 0}.anticipo-socio-info .saldo-disponible.negative span{color:var(--danger-color)}
 
-        /* NOTIFICACIONES (TOAST) */
         #toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 3000; display: flex; flex-direction: column; align-items: center; gap: 10px; }
         .toast { background-color: var(--text-dark); color: #fff; padding: 12px 20px; border-radius: 25px; box-shadow: 0 4px 15px rgba(0,0,0,.2); font-size: .9em; font-weight: 500; opacity: 0; transform: translateY(-20px); transition: opacity .3s ease, transform .3s ease; cursor: pointer; }
         .toast.show { opacity: 1; transform: translateY(0); }
@@ -30,7 +28,6 @@
         .toast.danger { background-color: var(--danger-color); }
         .toast.warning { background-color: var(--warning-color); color: #fff; }
 
-        /* Estilo para que el texto del modal de confirmación respete los saltos de línea */
         #confirmDeleteText { white-space: pre-line; line-height: 1.6; font-size: 1.05em; color: var(--text-dark); }
 
         .part-time-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px;border-top:1px solid var(--border-color);padding-top:10px}.part-time-actions button{width:100%;padding:8px;font-size:.85em}.part-time-actions .calendar-btn{background-color:#f39c12}.part-time-actions .calculate-btn{background-color:#1abc9c}.distribucion-part-time-container .puntos-calculados-pt{font-weight:700;color:#16a085}
@@ -46,7 +43,6 @@
         #resetPartTimeDataBtn {background-color: #e74c3c; width: 100%; margin-bottom: 15px;} #resetPartTimeDataBtn:hover {background-color: #c0392b;}
         .side-menu a.arqueo-link {background-color: #e67e22;} .side-menu a.arqueo-link:hover {background-color: #d35400; padding-left: 25px;}
         
-        /* FILTROS */
         .filtros-container{margin-bottom: 25px; padding: 15px; border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--light-bg); transition: all 0.3s;}
         .filtros-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
         .filtros-header h3 {margin: 0; border-bottom: none; color: var(--text-dark); font-size: 1.2em;}
@@ -58,7 +54,6 @@
         @media (min-width: 600px) { .filtros-grid { grid-template-columns: 1fr 1fr; } }
         @media (min-width: 992px) { .filtros-grid { grid-template-columns: 1fr 1fr 1fr 1fr; } }
         
-        /* TARJETAS Y AREAS */
         .socio-card-info p.puntos-info {font-size: 0.9em;color: var(--text-dark);background-color: #eafaf1;padding: 5px 8px;border-radius: 4px;margin: 6px 0;border-left: 3px solid var(--secondary-color);}
         .socio-card-info p.puntos-info strong {font-weight: 700;}
         .socio-card-info p.fecha-ingreso-info {font-size: 0.9em;color: var(--primary-color);margin: 4px 0;}
@@ -70,19 +65,8 @@
         .area-header.collapsed::before { transform: rotate(-90deg); }
         .sub-area-title { grid-column: 1 / -1; color: var(--primary-color); background-color: #f0f9ff; padding: 8px 12px; border-radius: 6px; font-weight: 700; margin-top: 10px; margin-bottom: 5px; border-left: 3px solid var(--secondary-color); font-size: 0.95em; }
         
-        /* ESTILOS DE ANIMACIÓN DE BOTÓN (NUEVO) */
         .btn-loading { position: relative; pointer-events: none; opacity: 0.8; }
-        .btn-spinner {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border: 2px solid #fff;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-            margin-left: 8px;
-            vertical-align: middle;
-        }
+        .btn-spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid #fff; border-radius: 50%; border-top-color: transparent; animation: spin 1s linear infinite; margin-left: 8px; vertical-align: middle; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
         .calendar-discount-btn { background-color: #e67e22; width: 100%; margin-top: 8px; font-size: 0.85em; }
@@ -104,7 +88,6 @@
         .confirm-delete-btn { background-color: var(--danger-color); color: #fff; }
         .confirm-delete-btn:hover { background-color: #c0392b; }
 
-        /* --- ESTILOS HISTORIAL --- */
         .table-responsive { overflow-x: auto; margin-top: 15px; }
         .styled-table { width: 100%; border-collapse: collapse; font-size: 0.95em; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
         .styled-table thead tr { background-color: var(--text-dark); color: #ffffff; text-align: left; }
@@ -125,6 +108,17 @@
         .alpha-sort-btn { background-color: #8e44ad; color: white; padding: 8px 12px; border: none; border-radius: 6px; cursor: pointer; margin-top: 5px; font-size: 0.9em; }
         .alpha-sort-btn.active { background-color: #9b59b6; box-shadow: inset 0 0 5px rgba(0,0,0,0.2); border: 2px solid #6c3483; }
         .total-anticipos-banner { background-color: #fff3cd; color: #856404; padding: 12px; border-radius: 8px; border: 1px solid #ffeeba; text-align: center; margin-bottom: 15px; font-weight: 700; font-size: 1.1em; display: none; }
+
+        /* NUEVOS ESTILOS PARA DESCUENTOS Y NOTAS */
+        .personal-discount-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #ffebeb; font-size: 0.9em; }
+        .personal-discount-info { display: flex; flex-direction: column; }
+        .personal-discount-info .pd-monto { color: var(--danger-color); font-weight: 700; }
+        .personal-discount-info .pd-motivo { font-size: 0.85em; color: #777; font-style: italic; }
+        .personal-discounts-list-container { margin-top: 10px; padding: 10px; background-color: #fff5f5; border: 1px solid #ffcccc; border-radius: 6px; display: none; }
+        .personal-discounts-list-container.has-items { display: block; }
+        .add-pd-btn { background-color: #e74c3c; color: white; font-size: 0.85em; margin-top: 5px; }
+        .add-pd-btn:hover { background-color: #c0392b; }
+        .total-desc-personales { color: var(--danger-color); font-weight: 700; }
 
         @media (min-width:992px){.menu-toggle{display:none}.side-menu{transform:translateX(0)}.main-container{margin-left:var(--menu-width)}.container h1{padding-top:0}}
     </style>
@@ -218,7 +212,6 @@
             <div id="distribucionContent" class="content-panel">
                 <h2>Distribución de Propina</h2>
                 
-                <!-- BOTONES DE ACCIÓN (Barra Superior) -->
                 <div class="action-button-group">
                     <button type="button" id="addAnticipoBtn">Nuevo Anticipo</button>
                     <button type="button" id="loadAllAnticiposBtn">📥 Cargar de Sheets</button>
@@ -255,12 +248,10 @@
         </div>
     </div>
     
-    <!-- Botón Flotante Volver Arriba -->
     <button id="scrollToTopBtn" class="scroll-to-top" title="Volver arriba">
         <span>&#8679;</span>
     </button>
     
-    <!-- Contenedor general para modales -->
     <div id="modal-container"></div>
     <div id="toast-container"></div>
 
@@ -277,7 +268,6 @@
                 <option value="Boveda">Boveda</option>
                 <option value="GastosComision">GastosComision</option>
             </select>
-            <!-- Contenedor para Sub Área -->
             <div id="subAreaContainer" style="display:none; margin-top:5px; margin-bottom:15px; background-color:#f0f9ff; padding:8px; border-radius:5px;">
                 <label style="color:#2980b9;">Sub-Área:</label>
                 <select id="subArea">
@@ -285,7 +275,6 @@
                     <option value="Cambistas">Cambistas</option>
                 </select>
             </div>
-            
             <label>Contrato:</label><select id="tipoContrato" required><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select>
             <button type="submit">Guardar</button>
         </form></div></div>
@@ -328,7 +317,6 @@
                 <option value="Boveda">Boveda</option>
                 <option value="GastosComision">GastosComision</option>
             </select>
-            
             <div id="editSubAreaContainer" style="display:none; margin-top:5px; margin-bottom:15px; background-color:#f0f9ff; padding:8px; border-radius:5px;">
                 <label style="color:#2980b9;">Sub-Área:</label>
                 <select id="editSubArea">
@@ -336,7 +324,6 @@
                     <option value="Cambistas">Cambistas</option>
                 </select>
             </div>
-            
             <label>Contrato:</label><select id="editTipoContrato" required><option value="Planta">Planta</option><option value="Part-Time">Part-Time</option></select>
             <button type="submit">Guardar</button>
         </form></div></div>
@@ -372,6 +359,7 @@
     
     <template id="templateCalendarModal">
         <div class="modal"><div class="modal-content"><span class="close-button">&times;</span><h3 id="calendarModalTitle">Días</h3>
+            <p id="calendarSubtitle" style="font-size: 0.85em; color: #555; margin-bottom: 10px;"></p>
             <input type="text" id="flatpickrInput" placeholder="Seleccionar...">
             <p style="text-align:center;">Seleccionados: <strong id="selectedDaysCount">0</strong></p>
             <p id="montoDescuentoInfo" style="text-align:center; display:none; font-weight:bold;"></p>
@@ -382,10 +370,19 @@
     <template id="templatePartTimePointsModal">
         <div class="modal"><div class="modal-content"><span class="close-button">&times;</span><h3>Calcular Puntos</h3>
             <p>Puntos Base: <span id="partTimeModalBasePoints">0</span></p>
-            <p>Asignable: <span id="partTimeModalAssignableAmount">$0</span></p><hr>
-            <label>Divisor:</label><input type="text" id="partTimeMultiplicador" inputmode="decimal" required>
+            <p>Recaudación de días seleccionados: <span id="partTimeModalAssignableAmount">$0</span></p><hr>
+            <label>Divisor / Multiplicador:</label><input type="text" id="partTimeMultiplicador" inputmode="decimal" required placeholder="Ej: 1500000">
             <button type="button" id="calculatePartTimePointsInternoBtn">Calcular</button>
         </div></div>
+    </template>
+
+    <template id="templatePersonalDiscountModal">
+        <div class="modal"><div class="modal-content"><span class="close-button">&times;</span><h3>Descuento Personal</h3><form id="personalDiscountForm">
+            <input type="hidden" id="pdSocioId">
+            <label>Monto a descontar:</label><input type="text" id="pdMonto" inputmode="numeric" required placeholder="Ej: 5000">
+            <label>Motivo / Nota:</label><textarea id="pdMotivo" rows="3" required placeholder="Ej: Llegada tarde, rotura de vaso..."></textarea>
+            <button type="submit" style="background-color: var(--danger-color);">Guardar Descuento</button>
+        </form></div></div>
     </template>
 
     <script>
@@ -405,228 +402,91 @@
                 filtroAnticipoStatus: document.getElementById('filtroAnticipoStatus'), totalAnticiposFiltradosDisplay: document.getElementById('totalAnticiposFiltradosDisplay'),
                 addAnticipoBtn: document.getElementById('addAnticipoBtn'), addDescuentoBtn: document.getElementById('addDescuentoBtn'),
                 scrollToTopBtn: document.getElementById('scrollToTopBtn'),
-                historialFechaFiltro: document.getElementById('historialFechaFiltro'),
-                btnFiltrarHistorial: document.getElementById('btnFiltrarHistorial'),
-                histTotalPeriodo: document.getElementById('histTotalPeriodo'),
-                histPromedio: document.getElementById('histPromedio'),
-                histTotalValorPunto: document.getElementById('histTotalValorPunto'),
-                historialTableBody: document.getElementById('historialTableBody'),
+                historialFechaFiltro: document.getElementById('historialFechaFiltro'), btnFiltrarHistorial: document.getElementById('btnFiltrarHistorial'),
+                histTotalPeriodo: document.getElementById('histTotalPeriodo'), histPromedio: document.getElementById('histPromedio'), histTotalValorPunto: document.getElementById('histTotalValorPunto'), historialTableBody: document.getElementById('historialTableBody'),
                 historialValorPuntoDistribucion: document.getElementById('historialValorPuntoDistribucion'),
-                alphaSortBtnGestion: document.getElementById('alphaSortBtnGestion'),
-                alphaSortBtnDist: document.getElementById('alphaSortBtnDist')
+                alphaSortBtnGestion: document.getElementById('alphaSortBtnGestion'), alphaSortBtnDist: document.getElementById('alphaSortBtnDist')
             };
 
             let isSyncing = false, sociosData = [], montosData = [], recaudacionPorDia = {}, ultimaDistribucionData = null, flatpickrInstance = null, historialRawData = [];
-            let globalValorPunto = 0; 
-            let isAlphaSort = false;
-            
-            // --- ESTADO DE SECCIONES ABIERTAS ---
+            let globalValorPunto = 0; let isAlphaSort = false;
             const openSections = new Set(); 
 
-            // --- UTILIDADES ---
             const formatDisplayDate = (d) => { if(!d) return ''; const [y, m, day] = d.includes('T') ? d.split('T')[0].split('-') : d.split('-'); return `${day}-${m}-${y}`; };
             const normalizeRemoteDate = (s) => { if(!s) return ''; const str=String(s); return str.match(/^\d{4}-\d{2}-\d{2}/) ? str.substring(0,10) : (new Date(str).toISOString().split('T')[0]); };
-            
-            const showToast = (msg, t='success', duration=4000) => {
-                const d = document.createElement('div');
-                d.className = `toast ${t}`;
-                d.textContent = msg;
-                d.onclick = () => { d.classList.remove('show'); setTimeout(() => d.remove(), 300); };
-                ui.toastContainer.appendChild(d);
-                setTimeout(() => d.classList.add('show'), 10);
-                setTimeout(() => { if (d.parentNode) { d.classList.remove('show'); setTimeout(() => d.remove(), 300); } }, duration);
-            };
-
+            const showToast = (msg, t='success', duration=4000) => { const d = document.createElement('div'); d.className = `toast ${t}`; d.textContent = msg; d.onclick = () => { d.classList.remove('show'); setTimeout(() => d.remove(), 300); }; ui.toastContainer.appendChild(d); setTimeout(() => d.classList.add('show'), 10); setTimeout(() => { if (d.parentNode) { d.classList.remove('show'); setTimeout(() => d.remove(), 300); } }, duration); };
             const formatNumber = (n) => new Intl.NumberFormat('es-CL').format(Math.round(n)||0);
             const parseNumber = (s) => parseFloat(String(s).replace(/\./g,'').replace(',','.'))||0;
             const parseMoney = (val) => { if (!val) return 0; if (typeof val === 'number') return val; const v = String(val).replace(/\./g, '').replace(',', '.'); return parseFloat(v) || 0; };
-            const getStorage = (k) => JSON.parse(localStorage.getItem(k))||(k.includes('anticipos')?{}:k.includes('descuentos')?[]:{});
+            const getStorage = (k) => JSON.parse(localStorage.getItem(k))||(k.includes('anticipos')?{}:k.includes('descuentos_personales')?{}:k.includes('absences')?{}:k.includes('descuentos')?[]:{});
             const setStorage = (k,v) => localStorage.setItem(k,JSON.stringify(v));
             function setupNumericInputFormatting(el) { if(el) el.addEventListener('input', e=>{ let v=e.target.value.replace(/\./g,''); e.target.value=isNaN(v)||v.trim()===''?'':formatNumber(v); }); }
+            const setBtnLoading = (btn, isLoading, text = 'Cargando...') => { if (!btn) return; if (isLoading) { if (!btn.dataset.originalContent) btn.dataset.originalContent = btn.innerHTML; btn.disabled = true; btn.innerHTML = `${text} <span class="btn-spinner"></span>`; btn.classList.add('btn-loading'); } else { if (btn.dataset.originalContent) btn.innerHTML = btn.dataset.originalContent; btn.disabled = false; btn.classList.remove('btn-loading'); } };
 
-            // --- HELPER DE ANIMACIÓN DE BOTÓN ---
-            const setBtnLoading = (btn, isLoading, text = 'Cargando...') => {
-                if (!btn) return;
-                if (isLoading) {
-                    if (!btn.dataset.originalContent) btn.dataset.originalContent = btn.innerHTML; // Guardar contenido original (incluye iconos)
-                    btn.disabled = true;
-                    btn.innerHTML = `${text} <span class="btn-spinner"></span>`;
-                    btn.classList.add('btn-loading');
-                } else {
-                    if (btn.dataset.originalContent) btn.innerHTML = btn.dataset.originalContent;
-                    btn.disabled = false;
-                    btn.classList.remove('btn-loading');
-                }
-            };
-
-            // --- LÓGICA SCROLL TOP ---
             window.addEventListener('scroll', () => { if (window.scrollY > 300) { ui.scrollToTopBtn.classList.add('show'); } else { ui.scrollToTopBtn.classList.remove('show'); } });
             ui.scrollToTopBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-
-            // --- ORDENAMIENTO ALFABÉTICO ---
             const toggleAlphaSort = () => { isAlphaSort = !isAlphaSort; ui.alphaSortBtnGestion.classList.toggle('active', isAlphaSort); ui.alphaSortBtnDist.classList.toggle('active', isAlphaSort); renderSociosFiltrados(); };
             ui.alphaSortBtnGestion.onclick = toggleAlphaSort; ui.alphaSortBtnDist.onclick = toggleAlphaSort;
-
-            // --- HISTORIAL AGRUPADO ---
+            
             let flatpickrHistorial = flatpickr(ui.historialFechaFiltro, { mode: "range", dateFormat: "Y-m-d", locale: "es" });
             ui.btnFiltrarHistorial.onclick = () => renderHistorial(historialRawData);
 
             function renderHistorial(data) {
-                if (!data || !data.length) {
-                    ui.historialTableBody.innerHTML = '<tr><td colspan="5">Sin datos</td></tr>'; ui.histTotalPeriodo.textContent = '$0'; ui.histPromedio.textContent = '$0'; ui.histTotalValorPunto.textContent = '$0'; if(ui.historialValorPuntoDistribucion) ui.historialValorPuntoDistribucion.textContent = ''; globalValorPunto = 0; updateAllUI(); return;
-                }
-                const agrupado = {};
-                data.forEach(item => {
-                    const fecha = normalizeRemoteDate(item.fecha); const divisor = item.divisor || 'N/A'; const clave = `${fecha}_${divisor}`; 
-                    if (!agrupado[clave]) { agrupado[clave] = { fecha: fecha, divisor: divisor, montoTotal: 0, tipos: {}, }; }
-                    const montoItem = parseMoney(item.monto); agrupado[clave].montoTotal += montoItem;
-                    const tipoDetectado = item.Tipo || item.tipo || 'General'; if (!agrupado[clave].tipos[tipoDetectado]) { agrupado[clave].tipos[tipoDetectado] = 0; } agrupado[clave].tipos[tipoDetectado] += montoItem;
-                });
-                let listaAgrupada = Object.values(agrupado);
-                const dates = flatpickrHistorial.selectedDates;
-                if (dates.length === 2) { const start = dates[0].toISOString().split('T')[0]; const end = dates[1].toISOString().split('T')[0]; listaAgrupada = listaAgrupada.filter(d => d.fecha >= start && d.fecha <= end); } 
-                else { const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30); const isoAgo = thirtyDaysAgo.toISOString().split('T')[0]; listaAgrupada = listaAgrupada.filter(d => d.fecha >= isoAgo); }
-                listaAgrupada.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
-                let total = 0; let totalValorPuntoAcumulado = 0;
-                const htmlRows = listaAgrupada.map(row => {
-                    total += row.montoTotal;
-                    const desgloseHtml = Object.entries(row.tipos).map(([t, m]) => `<div><strong>${t}:</strong> $${formatNumber(m)}</div>`).join('');
-                    let valorPuntoStr = '-'; const divNum = parseFloat(row.divisor); if (divNum > 0) { const valorPunto = row.montoTotal / divNum; totalValorPuntoAcumulado += valorPunto; valorPuntoStr = `$${formatNumber(valorPunto)}`; }
-                    return `<tr><td>${formatDisplayDate(row.fecha)}</td><td style="font-weight:bold; color:var(--text-dark);">$${formatNumber(row.montoTotal)}</td><td>${row.divisor !== 'N/A' ? formatNumber(row.divisor) : '-'}</td><td style="font-weight:bold; color:var(--primary-color);">${valorPuntoStr}</td><td class="type-breakdown">${desgloseHtml}</td></tr>`;
-                }).join('');
-                ui.histTotalPeriodo.textContent = `$${formatNumber(total)}`; ui.histPromedio.textContent = listaAgrupada.length ? `$${formatNumber(total / listaAgrupada.length)}` : '$0'; ui.histTotalValorPunto.textContent = `$${formatNumber(totalValorPuntoAcumulado)}`; 
-                globalValorPunto = totalValorPuntoAcumulado; if(ui.historialValorPuntoDistribucion) { ui.historialValorPuntoDistribucion.innerHTML = `Total Valor Punto (Historial): <strong>$${formatNumber(globalValorPunto)}</strong>`; }
-                ui.historialTableBody.innerHTML = htmlRows; updateAllUI();
+                if (!data || !data.length) { ui.historialTableBody.innerHTML = '<tr><td colspan="5">Sin datos</td></tr>'; ui.histTotalPeriodo.textContent = '$0'; ui.histPromedio.textContent = '$0'; ui.histTotalValorPunto.textContent = '$0'; if(ui.historialValorPuntoDistribucion) ui.historialValorPuntoDistribucion.textContent = ''; globalValorPunto = 0; updateAllUI(); return; }
+                const agrupado = {}; data.forEach(item => { const fecha = normalizeRemoteDate(item.fecha); const divisor = item.divisor || 'N/A'; const clave = `${fecha}_${divisor}`; if (!agrupado[clave]) { agrupado[clave] = { fecha: fecha, divisor: divisor, montoTotal: 0, tipos: {}, }; } const montoItem = parseMoney(item.monto); agrupado[clave].montoTotal += montoItem; const tipoDetectado = item.Tipo || item.tipo || 'General'; if (!agrupado[clave].tipos[tipoDetectado]) { agrupado[clave].tipos[tipoDetectado] = 0; } agrupado[clave].tipos[tipoDetectado] += montoItem; });
+                let listaAgrupada = Object.values(agrupado); const dates = flatpickrHistorial.selectedDates; if (dates.length === 2) { const start = dates[0].toISOString().split('T')[0]; const end = dates[1].toISOString().split('T')[0]; listaAgrupada = listaAgrupada.filter(d => d.fecha >= start && d.fecha <= end); } else { const thirtyDaysAgo = new Date(); thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30); const isoAgo = thirtyDaysAgo.toISOString().split('T')[0]; listaAgrupada = listaAgrupada.filter(d => d.fecha >= isoAgo); }
+                listaAgrupada.sort((a, b) => new Date(b.fecha) - new Date(a.fecha)); let total = 0; let totalValorPuntoAcumulado = 0;
+                const htmlRows = listaAgrupada.map(row => { total += row.montoTotal; const desgloseHtml = Object.entries(row.tipos).map(([t, m]) => `<div><strong>${t}:</strong> $${formatNumber(m)}</div>`).join(''); let valorPuntoStr = '-'; const divNum = parseFloat(row.divisor); if (divNum > 0) { const valorPunto = row.montoTotal / divNum; totalValorPuntoAcumulado += valorPunto; valorPuntoStr = `$${formatNumber(valorPunto)}`; } return `<tr><td>${formatDisplayDate(row.fecha)}</td><td style="font-weight:bold; color:var(--text-dark);">$${formatNumber(row.montoTotal)}</td><td>${row.divisor !== 'N/A' ? formatNumber(row.divisor) : '-'}</td><td style="font-weight:bold; color:var(--primary-color);">${valorPuntoStr}</td><td class="type-breakdown">${desgloseHtml}</td></tr>`; }).join('');
+                ui.histTotalPeriodo.textContent = `$${formatNumber(total)}`; ui.histPromedio.textContent = listaAgrupada.length ? `$${formatNumber(total / listaAgrupada.length)}` : '$0'; ui.histTotalValorPunto.textContent = `$${formatNumber(totalValorPuntoAcumulado)}`; globalValorPunto = totalValorPuntoAcumulado; if(ui.historialValorPuntoDistribucion) { ui.historialValorPuntoDistribucion.innerHTML = `Total Valor Punto (Historial): <strong>$${formatNumber(globalValorPunto)}</strong>`; } ui.historialTableBody.innerHTML = htmlRows; updateAllUI();
             }
 
-            // --- GESTIÓN DE MODALES ---
-            function openModal(templateId, callback) {
-                const template = document.getElementById(templateId); if (!template) return;
-                const clone = template.content.cloneNode(true); const modal = clone.querySelector('.modal');
-                ui.modalContainer.innerHTML = ''; ui.modalContainer.appendChild(modal); modal.style.display = 'flex';
-                const closeBtn = modal.querySelector('.close-button'); const cancelBtn = modal.querySelector('.cancel-btn');
-                const close = () => { modal.style.display = 'none'; ui.modalContainer.innerHTML = ''; };
-                if (closeBtn) closeBtn.onclick = close; if (cancelBtn) cancelBtn.onclick = close;
-                window.onclick = (e) => { if (e.target == modal) close(); };
-                if (callback) { const form = modal.querySelector('form'); callback(form || modal, modal); }
-            }
+            function openModal(templateId, callback) { const template = document.getElementById(templateId); if (!template) return; const clone = template.content.cloneNode(true); const modal = clone.querySelector('.modal'); ui.modalContainer.innerHTML = ''; ui.modalContainer.appendChild(modal); modal.style.display = 'flex'; const closeBtn = modal.querySelector('.close-button'); const cancelBtn = modal.querySelector('.cancel-btn'); const close = () => { modal.style.display = 'none'; ui.modalContainer.innerHTML = ''; }; if (closeBtn) closeBtn.onclick = close; if (cancelBtn) cancelBtn.onclick = close; window.onclick = (e) => { if (e.target == modal) close(); }; if (callback) { const form = modal.querySelector('form'); callback(form || modal, modal); } }
+            function confirmAction(message, onConfirm) { openModal('templateConfirmDeleteModal', (content, modal) => { modal.querySelector('#confirmDeleteText').textContent = message; const confirmBtn = modal.querySelector('.confirm-delete-btn'); confirmBtn.onclick = async () => { try { setBtnLoading(confirmBtn, true, 'Procesando...'); await onConfirm(); modal.style.display = 'none'; } catch(e) { showToast('Error en la acción', 'danger'); } finally { setBtnLoading(confirmBtn, false); } }; }); }
 
-            function confirmAction(message, onConfirm) {
-                openModal('templateConfirmDeleteModal', (content, modal) => {
-                    modal.querySelector('#confirmDeleteText').textContent = message;
-                    const confirmBtn = modal.querySelector('.confirm-delete-btn');
-                    confirmBtn.onclick = async () => { 
-                        // Soportar acciones asíncronas para mostrar loading en el modal de confirmación
-                        try {
-                            setBtnLoading(confirmBtn, true, 'Procesando...');
-                            await onConfirm(); 
-                            modal.style.display = 'none'; 
-                        } catch(e) {
-                            showToast('Error en la acción', 'danger');
-                        } finally {
-                            setBtnLoading(confirmBtn, false);
-                        }
-                    };
-                });
-            }
-
-            // --- LÓGICA DE NEGOCIO ---
             function calcularPuntosLogica(fechaIngreso, area) {
                 const a = (area || '').trim(); if (a === 'GastosComision') { return { puntos: 1, anos: 0, tope: 1, teoricos: 1 }; }
-                let anioIng = 0, mesIng = 0, diaIng = 0;
-                if (!fechaIngreso) { const now = new Date(); anioIng = now.getFullYear(); mesIng = now.getMonth(); diaIng = now.getDate(); } 
-                else { const parts = String(fechaIngreso).split('-'); if (parts.length === 3) { anioIng = parseInt(parts[0], 10); mesIng = parseInt(parts[1], 10) - 1; diaIng = parseInt(parts[2], 10); } else { const d = new Date(fechaIngreso); if(isNaN(d.getTime())) { const now = new Date(); anioIng = now.getFullYear(); mesIng = now.getMonth(); diaIng = now.getDate(); } else { anioIng = d.getFullYear(); mesIng = d.getMonth(); diaIng = d.getDate(); } } }
-                if (anioIng < 2000) { const now = new Date(); anioIng = now.getFullYear(); mesIng = now.getMonth(); diaIng = now.getDate(); }
-                const hoy = new Date(); let anos = hoy.getFullYear() - anioIng; const mesActual = hoy.getMonth(); const diaActual = hoy.getDate();
-                if (mesActual < mesIng || (mesActual === mesIng && diaActual < diaIng)) { anos--; } if (anos < 0) anos = 0;
-                const puntosTeoricos = 4 + (anos * 2); let tope = 12; const aLower = a.toLowerCase();
-                if (aLower.includes('cambista')) tope = 8; else if (aLower.includes('mesa')) tope = 20; else if (aLower.includes('boveda') || aLower.includes('bóveda')) tope = 10; else if (aLower.includes('maquina') || aLower.includes('máquina')) tope = 12;
+                let anioIng = 0, mesIng = 0, diaIng = 0; if (!fechaIngreso) { const now = new Date(); anioIng = now.getFullYear(); mesIng = now.getMonth(); diaIng = now.getDate(); } else { const parts = String(fechaIngreso).split('-'); if (parts.length === 3) { anioIng = parseInt(parts[0], 10); mesIng = parseInt(parts[1], 10) - 1; diaIng = parseInt(parts[2], 10); } else { const d = new Date(fechaIngreso); if(isNaN(d.getTime())) { const now = new Date(); anioIng = now.getFullYear(); mesIng = now.getMonth(); diaIng = now.getDate(); } else { anioIng = d.getFullYear(); mesIng = d.getMonth(); diaIng = d.getDate(); } } }
+                const hoy = new Date(); let anos = hoy.getFullYear() - anioIng; const mesActual = hoy.getMonth(); const diaActual = hoy.getDate(); if (mesActual < mesIng || (mesActual === mesIng && diaActual < diaIng)) { anos--; } if (anos < 0) anos = 0;
+                const puntosTeoricos = 4 + (anos * 2); let tope = 12; const aLower = a.toLowerCase(); if (aLower.includes('cambista')) tope = 8; else if (aLower.includes('mesa')) tope = 20; else if (aLower.includes('boveda') || aLower.includes('bóveda')) tope = 10; else if (aLower.includes('maquina') || aLower.includes('máquina')) tope = 12;
                 const puntosFinales = Math.min(puntosTeoricos, tope); return { puntos: puntosFinales, anos: anos, tope: tope, teoricos: puntosTeoricos };
             }
 
             const isPartTime = (s) => (s.TipoContrato||'').toLowerCase().trim()==='part-time';
-            const recalculatePartTimeAssignable = (socioId) => {
-                const pt = getStorage('part_time_data_v3'); if(!pt[socioId]) return;
-                let monto = 0; (pt[socioId].diasTrabajados || []).forEach(dia => { monto += (recaudacionPorDia[dia] || 0); });
-                pt[socioId].montoAsignable = monto; setStorage('part_time_data_v3', pt);
+            
+            const recalculatePartTimeAssignable = (socioId) => { 
+                const pt = getStorage('part_time_data_v3'); 
+                if(!pt[socioId]) return; 
+                let monto = 0; 
+                (pt[socioId].diasTrabajados || []).forEach(dia => { monto += (recaudacionPorDia[dia] || 0); }); 
+                pt[socioId].montoAsignable = monto; 
+                setStorage('part_time_data_v3', pt); 
             };
 
             const updateAllUI = () => {
                 const bruto = Object.values(recaudacionPorDia).reduce((a,b)=>a+b,0);
                 const desc = getStorage('descuentos_operacionales_v1'), totalDesc = desc.reduce((s,d)=>s+d.cantidad,0), neta = bruto-totalDesc;
                 const ants = getStorage('anticipos_data_v3'); let totalAnts = 0; Object.values(ants).forEach(l=>totalAnts+=l.reduce((s,a)=>s+a.cantidad,0));
-                
-                ui.balancePropinaBruta.textContent=`$${formatNumber(bruto)}`; ui.balanceDescuentos.textContent=`$${formatNumber(totalDesc)}`;
-                ui.balancePropinaNeta.textContent=`$${formatNumber(neta)}`; ui.balanceAnticipos.textContent=`$${formatNumber(totalAnts)}`;
-                ui.balanceSaldo.textContent=`$${formatNumber(neta-totalAnts)}`; ui.balanceSaldo.classList.toggle('negative', (neta-totalAnts)<0);
-                ui.totalGeneralPropinaNetaDistribucion.textContent=`Propina a Distribuir: $${formatNumber(neta)}`;
-
+                ui.balancePropinaBruta.textContent=`$${formatNumber(bruto)}`; ui.balanceDescuentos.textContent=`$${formatNumber(totalDesc)}`; ui.balancePropinaNeta.textContent=`$${formatNumber(neta)}`; ui.balanceAnticipos.textContent=`$${formatNumber(totalAnts)}`; ui.balanceSaldo.textContent=`$${formatNumber(neta-totalAnts)}`; ui.balanceSaldo.classList.toggle('negative', (neta-totalAnts)<0); ui.totalGeneralPropinaNetaDistribucion.textContent=`Propina a Distribuir: $${formatNumber(neta)}`;
                 let pPlanta=0, pPT=0; const ptData = getStorage('part_time_data_v3'), plantaAbs = getStorage('planta_absences_v1'); const valPunto = globalValorPunto; 
-                sociosData.forEach(s => {
-                    const calc = calcularPuntosLogica(s.FechaIngreso, s.Area); s.infoCalculo = calc; 
-                    if(isPartTime(s)) { const d = ptData[s.ID]||{}; pPT += calc.puntos; s.propinaAsignada = calc.puntos * (d.puntosCalculados||0); s.puntosAsignadosFinales = calc.puntos; } 
-                    else { let dineroPerdido = 0; (plantaAbs[s.ID]||[]).forEach(dia => dineroPerdido += (recaudacionPorDia[dia] || 0)); let factor = bruto > 0 ? (1 - (dineroPerdido / bruto)) : 1; if(factor<0)factor=0; pPlanta += (calc.puntos * factor); s.propinaAsignada = (calc.puntos * factor) * valPunto; s.puntosAsignadosFinales = calc.puntos * factor; s.dineroDescontado = dineroPerdido; }
-                });
-                ui.totalPuntosDisplay.innerHTML=`Total Puntos: <strong>${Math.round(pPlanta+pPT)}</strong> (Planta: ${Math.round(pPlanta)} + PT: ${Math.round(pPT)})`;
-                renderSociosFiltrados(); renderDescuentos(desc);
-                if(ultimaDistribucionData?.resumen) { ui.ultimaDistFecha.textContent=ultimaDistribucionData.resumen.fecha; ui.ultimaDistNeta.textContent=`$${formatNumber(ultimaDistribucionData.resumen.propinaNeta)}`; ui.ultimaDistPunto.textContent=`$${formatNumber(ultimaDistribucionData.resumen.puntoPlanta)}`; ui.ultimaDistribucionReport.style.display='block'; } else ui.ultimaDistribucionReport.style.display='none';
+                sociosData.forEach(s => { const calc = calcularPuntosLogica(s.FechaIngreso, s.Area); s.infoCalculo = calc; if(isPartTime(s)) { const d = ptData[s.ID]||{}; pPT += calc.puntos; s.propinaAsignada = calc.puntos * (d.puntosCalculados||0); s.puntosAsignadosFinales = calc.puntos; } else { let dineroPerdido = 0; (plantaAbs[s.ID]||[]).forEach(dia => dineroPerdido += (recaudacionPorDia[dia] || 0)); let factor = bruto > 0 ? (1 - (dineroPerdido / bruto)) : 1; if(factor<0)factor=0; pPlanta += (calc.puntos * factor); s.propinaAsignada = (calc.puntos * factor) * valPunto; s.puntosAsignadosFinales = calc.puntos * factor; s.dineroDescontado = dineroPerdido; } });
+                ui.totalPuntosDisplay.innerHTML=`Total Puntos: <strong>${Math.round(pPlanta+pPT)}</strong> (Planta: ${Math.round(pPlanta)} + PT: ${Math.round(pPT)})`; renderSociosFiltrados(); renderDescuentos(desc); if(ultimaDistribucionData?.resumen) { ui.ultimaDistFecha.textContent=ultimaDistribucionData.resumen.fecha; ui.ultimaDistNeta.textContent=`$${formatNumber(ultimaDistribucionData.resumen.propinaNeta)}`; ui.ultimaDistPunto.textContent=`$${formatNumber(ultimaDistribucionData.resumen.puntoPlanta)}`; ui.ultimaDistribucionReport.style.display='block'; } else ui.ultimaDistribucionReport.style.display='none';
             };
 
             const renderDescuentos = (list) => { ui.descuentosListContainer.innerHTML = list.length ? list.map(d => `<div class="descuento-item"><div class="descuento-item-info"><span class="monto">$${formatNumber(d.cantidad)} - ${d.descripcion}</span><span class="categoria">${d.categoria}</span></div><div class="descuento-item-actions"><button class="edit-descuento-btn" data-id="${d.id}">✏️</button><button class="delete-descuento-btn" data-id="${d.id}">🗑️</button></div></div>`).join('') : '<p>Sin descuentos.</p>'; };
-
+            
             const renderSociosFiltrados = () => {
-                const fN=ui.filtroNombre.value.toLowerCase(), fA=ui.filtroArea.value, fC=ui.filtroContrato.value;
-                const fNG=ui.filtroNombreGestion.value.toLowerCase(), fAG=ui.filtroAreaGestion.value, fCG=ui.filtroContratoGestion.value;
-                const fAnt = ui.filtroAnticipoStatus.value;
-                const antsData = getStorage('anticipos_data_v3'); const hasAnticipos = (id) => (antsData[id] && antsData[id].length > 0);
-                const filterFn = (s, n, a, c, checkAnticipos = false) => { let matches = `${s.Nombre} ${s.Apellido}`.toLowerCase().includes(n) && (a==='todos'||s.Area.startsWith(a)) && (c==='todos'||s.TipoContrato===c); if (checkAnticipos) { const antCheck = fAnt === 'todos' || (fAnt === 'con' && hasAnticipos(s.ID)) || (fAnt === 'sin' && !hasAnticipos(s.ID)); matches = matches && antCheck; } return matches; };
-                
-                let filteredGestion = sociosData.filter(s=>filterFn(s,fNG,fAG,fCG));
-                let filteredDist = sociosData.filter(s=>filterFn(s,fN,fA,fC, true));
-                let totalAntFiltered = 0; filteredDist.forEach(s => { const userAnts = antsData[s.ID] || []; totalAntFiltered += userAnts.reduce((a,b) => a + b.cantidad, 0); });
-                if(totalAntFiltered > 0 || fAnt === 'con') { ui.totalAnticiposFiltradosDisplay.style.display = 'block'; ui.totalAnticiposFiltradosDisplay.innerHTML = `Total Anticipos (Filtrados): $${formatNumber(totalAntFiltered)}`; } else { ui.totalAnticiposFiltradosDisplay.style.display = 'none'; }
-                if (isAlphaSort) { const sortFn = (a, b) => (a.Nombre + a.Apellido).localeCompare(b.Nombre + b.Apellido); filteredGestion.sort(sortFn); filteredDist.sort(sortFn); }
-                renderSocios(filteredGestion, filteredDist);
+                const fN=ui.filtroNombre.value.toLowerCase(), fA=ui.filtroArea.value, fC=ui.filtroContrato.value; const fNG=ui.filtroNombreGestion.value.toLowerCase(), fAG=ui.filtroAreaGestion.value, fCG=ui.filtroContratoGestion.value; const fAnt = ui.filtroAnticipoStatus.value;
+                const antsData = getStorage('anticipos_data_v3'); const hasAnticipos = (id) => (antsData[id] && antsData[id].length > 0); const filterFn = (s, n, a, c, checkAnticipos = false) => { let matches = `${s.Nombre} ${s.Apellido}`.toLowerCase().includes(n) && (a==='todos'||s.Area.startsWith(a)) && (c==='todos'||s.TipoContrato===c); if (checkAnticipos) { const antCheck = fAnt === 'todos' || (fAnt === 'con' && hasAnticipos(s.ID)) || (fAnt === 'sin' && !hasAnticipos(s.ID)); matches = matches && antCheck; } return matches; };
+                let filteredGestion = sociosData.filter(s=>filterFn(s,fNG,fAG,fCG)); let filteredDist = sociosData.filter(s=>filterFn(s,fN,fA,fC, true));
+                let totalAntFiltered = 0; filteredDist.forEach(s => { const userAnts = antsData[s.ID] || []; totalAntFiltered += userAnts.reduce((a,b) => a + b.cantidad, 0); }); if(totalAntFiltered > 0 || fAnt === 'con') { ui.totalAnticiposFiltradosDisplay.style.display = 'block'; ui.totalAnticiposFiltradosDisplay.innerHTML = `Total Anticipos (Filtrados): $${formatNumber(totalAntFiltered)}`; } else { ui.totalAnticiposFiltradosDisplay.style.display = 'none'; }
+                if (isAlphaSort) { const sortFn = (a, b) => (a.Nombre + a.Apellido).localeCompare(b.Nombre + b.Apellido); filteredGestion.sort(sortFn); filteredDist.sort(sortFn); } renderSocios(filteredGestion, filteredDist);
             };
 
             const renderSocios = (gest, dist) => {
                 ui.sociosListContainer.innerHTML = gest.length ? '' : '<p>Sin socios.</p>';
-                if(gest.length) {
-                    const grp = gest.reduce((a,s)=>{ (a[s.Area]=a[s.Area]||[]).push(s); return a;},{});
-                    const areasOrdenadas = Object.keys(grp).sort();
-                    areasOrdenadas.forEach(area => {
-                        const wrapper = document.createElement('div');
-                        const gridId = `manage-grid-${area.replace(/\s+/g,'-')}`;
-                        const isCollapsed = !openSections.has(gridId); const collapseClass = isCollapsed ? 'collapsed' : '';
-                        wrapper.innerHTML = `<div class="area-header ${collapseClass}" data-target="${gridId}">${area}</div>`;
-                        const grid = document.createElement('div'); grid.className = `area-section-grid ${collapseClass}`; grid.id = gridId;
-                        const list = grp[area]; const planta = list.filter(s => s.TipoContrato === 'Planta'); const partTime = list.filter(s => s.TipoContrato === 'Part-Time'); const others = list.filter(s => s.TipoContrato !== 'Planta' && s.TipoContrato !== 'Part-Time');
-                        if (planta.length > 0) { const sub = document.createElement('div'); sub.className='contract-subtitle'; sub.textContent='🌿 Planta'; grid.appendChild(sub); planta.forEach(s=>grid.appendChild(createCard(s, 'manage'))); }
-                        if (partTime.length > 0) { const sub = document.createElement('div'); sub.className='contract-subtitle'; sub.textContent='⏳ Part-Time'; grid.appendChild(sub); partTime.forEach(s=>grid.appendChild(createCard(s, 'manage'))); }
-                        if (others.length > 0) { const sub = document.createElement('div'); sub.className='contract-subtitle'; sub.textContent='Otros'; grid.appendChild(sub); others.forEach(s=>grid.appendChild(createCard(s, 'manage'))); }
-                        wrapper.appendChild(grid); ui.sociosListContainer.appendChild(wrapper);
-                    });
-                }
-                
+                if(gest.length) { const grp = gest.reduce((a,s)=>{ (a[s.Area]=a[s.Area]||[]).push(s); return a;},{}); const areasOrdenadas = Object.keys(grp).sort(); areasOrdenadas.forEach(area => { const wrapper = document.createElement('div'); const gridId = `manage-grid-${area.replace(/\s+/g,'-')}`; const isCollapsed = !openSections.has(gridId); const collapseClass = isCollapsed ? 'collapsed' : ''; wrapper.innerHTML = `<div class="area-header ${collapseClass}" data-target="${gridId}">${area}</div>`; const grid = document.createElement('div'); grid.className = `area-section-grid ${collapseClass}`; grid.id = gridId; const list = grp[area]; const planta = list.filter(s => s.TipoContrato === 'Planta'); const partTime = list.filter(s => s.TipoContrato === 'Part-Time'); if (planta.length > 0) { const sub = document.createElement('div'); sub.className='contract-subtitle'; sub.textContent='🌿 Planta'; grid.appendChild(sub); planta.forEach(s=>grid.appendChild(createCard(s, 'manage'))); } if (partTime.length > 0) { const sub = document.createElement('div'); sub.className='contract-subtitle'; sub.textContent='⏳ Part-Time'; grid.appendChild(sub); partTime.forEach(s=>grid.appendChild(createCard(s, 'manage'))); } wrapper.appendChild(grid); ui.sociosListContainer.appendChild(wrapper); }); }
                 ui.distribucionPlantaContainer.innerHTML='<h3>Planta</h3>'; ui.distribucionPartTimeContainer.innerHTML='<h3>Part-Time</h3>';
-                const renderArea = (list, cont, suffix) => {
-                    if(!list.length) { cont.innerHTML+='<p style="color:#777;">Sin socios.</p>'; return; }
-                    const groupedByParent = {}; list.forEach(s => { const parent = s.Area.split(' - ')[0]; if (!groupedByParent[parent]) groupedByParent[parent] = []; groupedByParent[parent].push(s); });
-                    Object.keys(groupedByParent).sort().forEach(parentArea => {
-                        const sociosInGroup = groupedByParent[parentArea]; const totalAreaPts = sociosInGroup.reduce((acc, s) => acc + (s.puntosAsignadosFinales || 0), 0);
-                        const gridId = `area-grid-${parentArea.replace(/\s+/g,'-')}-${suffix}`;
-                        const isCollapsed = !openSections.has(gridId); const collapseClass = isCollapsed ? 'collapsed' : '';
-                        cont.innerHTML += `<div class="area-header ${collapseClass}" data-target="${gridId}">${parentArea} <span style="float:right">Puntos: ${Math.round(totalAreaPts)}</span></div>`;
-                        const grid = document.createElement('div'); grid.className = `area-section-grid ${collapseClass}`; grid.id = gridId;
-                        const mainGroup = sociosInGroup.filter(s => s.Area === parentArea); const subGroups = sociosInGroup.filter(s => s.Area !== parentArea);
-                        mainGroup.forEach(s => grid.appendChild(createCard(s, 'dist')));
-                        if (subGroups.length > 0) {
-                            const subGrouped = {}; subGroups.forEach(s => { if(!subGrouped[s.Area]) subGrouped[s.Area] = []; subGrouped[s.Area].push(s); });
-                            Object.keys(subGrouped).sort().forEach(subAreaName => { const cleanSubName = subAreaName.split(' - ')[1] || subAreaName; const sep = document.createElement('div'); sep.className = 'sub-area-title'; sep.textContent = `▼ ${cleanSubName}`; grid.appendChild(sep); subGrouped[subAreaName].forEach(s => grid.appendChild(createCard(s, 'dist'))); });
-                        }
-                        cont.appendChild(grid);
-                    });
-                };
+                const renderArea = (list, cont, suffix) => { if(!list.length) { cont.innerHTML+='<p style="color:#777;">Sin socios.</p>'; return; } const groupedByParent = {}; list.forEach(s => { const parent = s.Area.split(' - ')[0]; if (!groupedByParent[parent]) groupedByParent[parent] = []; groupedByParent[parent].push(s); }); Object.keys(groupedByParent).sort().forEach(parentArea => { const sociosInGroup = groupedByParent[parentArea]; const totalAreaPts = sociosInGroup.reduce((acc, s) => acc + (s.puntosAsignadosFinales || 0), 0); const gridId = `area-grid-${parentArea.replace(/\s+/g,'-')}-${suffix}`; const isCollapsed = !openSections.has(gridId); const collapseClass = isCollapsed ? 'collapsed' : ''; cont.innerHTML += `<div class="area-header ${collapseClass}" data-target="${gridId}">${parentArea} <span style="float:right">Puntos: ${Math.round(totalAreaPts)}</span></div>`; const grid = document.createElement('div'); grid.className = `area-section-grid ${collapseClass}`; grid.id = gridId; const mainGroup = sociosInGroup.filter(s => s.Area === parentArea); const subGroups = sociosInGroup.filter(s => s.Area !== parentArea); mainGroup.forEach(s => grid.appendChild(createCard(s, 'dist'))); if (subGroups.length > 0) { const subGrouped = {}; subGroups.forEach(s => { if(!subGrouped[s.Area]) subGrouped[s.Area] = []; subGrouped[s.Area].push(s); }); Object.keys(subGrouped).sort().forEach(subAreaName => { const cleanSubName = subAreaName.split(' - ')[1] || subAreaName; const sep = document.createElement('div'); sep.className = 'sub-area-title'; sep.textContent = `▼ ${cleanSubName}`; grid.appendChild(sep); subGrouped[subAreaName].forEach(s => grid.appendChild(createCard(s, 'dist'))); }); } cont.appendChild(grid); }); };
                 renderArea(dist.filter(s=>!isPartTime(s)), ui.distribucionPlantaContainer, 'PLANTA'); renderArea(dist.filter(isPartTime), ui.distribucionPartTimeContainer, 'PT'); updatePropinaUI();
             };
 
@@ -639,307 +499,249 @@
                     card.className='socio-distribucion-card'; card.dataset.socioId=s.ID;
                     let ptsDisplay = `Puntos: ${info.puntos}`; let actionBtn = '';
                     if(!isPartTime(s)) { const aus = (getStorage('planta_absences_v1')[s.ID]||[]).length; if(aus > 0) ptsDisplay += ` <span class="ausencias-info">(-${aus} días / -$${formatNumber(s.dineroDescontado)})</span>`; actionBtn = `<button class="calendar-discount-btn" data-socio-id="${s.ID}">📅 Ausencias</button>`; }
-                    card.innerHTML = `<h3>${s.Nombre} ${s.Apellido}</h3><p>${ptsDisplay}</p><p>Asignado: <span class="propina-asignada">$0</span></p><div class="saldo-anterior-row"><span>Saldo Ant: <strong>$${formatNumber(getStorage('saldo_anterior_v1')[s.ID]||0)}</strong></span><button class="edit-saldo-anterior-btn" data-socio-id="${s.ID}">💰</button></div><p>Anticipos: <span class="total-anticipos">$0</span></p><p>Saldo Final: <span class="saldo-disponible">$0</span></p>${actionBtn}<div class="anticipos-container"></div><div class="individual-actions"><button class="download-anticipos-btn" data-socio-id="${s.ID}">📥</button><button class="upload-anticipos-btn" data-socio-id="${s.ID}">⬆️</button></div>`;
+                    
+                    card.innerHTML = `<h3>${s.Nombre} ${s.Apellido}</h3><p>${ptsDisplay}</p><p>Asignado: <span class="propina-asignada">$0</span></p><div class="saldo-anterior-row"><span>Saldo Ant: <strong>$${formatNumber(getStorage('saldo_anterior_v1')[s.ID]||0)}</strong></span><button class="edit-saldo-anterior-btn" data-socio-id="${s.ID}">💰</button></div><p>Anticipos: <span class="total-anticipos">$0</span></p><p>(-) Desc. Personales: <span class="total-desc-personales">$0</span></p><hr style="border:0; border-top:1px dashed #ccc; margin:5px 0;"><p>Saldo Final: <span class="saldo-disponible">$0</span></p>${actionBtn}<button class="add-pd-btn" data-socio-id="${s.ID}">📉 Agregar Descuento / Nota</button><div class="personal-discounts-list-container"></div><div class="anticipos-container"></div><div class="individual-actions"><button class="download-anticipos-btn" data-socio-id="${s.ID}">📥</button><button class="upload-anticipos-btn" data-socio-id="${s.ID}">⬆️</button></div>`;
                 }
                 return card;
             };
 
             const updatePropinaUI = () => {
-                const ants = getStorage('anticipos_data_v3'), saldoAntData = getStorage('saldo_anterior_v1');
+                const ants = getStorage('anticipos_data_v3'), saldoAntData = getStorage('saldo_anterior_v1'), descPersonalesData = getStorage('descuentos_personales_v1');
                 sociosData.forEach(s => {
                     const c = document.querySelector(`.socio-distribucion-card[data-socio-id="${s.ID}"]`); if(!c) return;
-                    const antS = ants[s.ID]||[], totA = antS.reduce((a,b)=>a+b.cantidad,0), sal = s.propinaAsignada - totA + (saldoAntData[s.ID]||0);
-                    c.querySelector('.propina-asignada').textContent=`$${formatNumber(s.propinaAsignada)}`;
-                    c.querySelector('.total-anticipos').textContent=`$${formatNumber(totA)}`;
-                    const elSal = c.querySelector('.saldo-disponible'); elSal.textContent=`$${formatNumber(sal)}`; elSal.classList.toggle('negative', sal<0);
+                    const antS = ants[s.ID]||[], totA = antS.reduce((a,b)=>a+b.cantidad,0); const descS = descPersonalesData[s.ID] || [], totDescP = descS.reduce((a,b) => a + (parseFloat(b.monto)||0), 0);
+                    const sal = s.propinaAsignada - totA - totDescP + (saldoAntData[s.ID]||0);
+                    c.querySelector('.propina-asignada').textContent = `$${formatNumber(s.propinaAsignada)}`; c.querySelector('.total-anticipos').textContent = `$${formatNumber(totA)}`; c.querySelector('.total-desc-personales').textContent = `$${formatNumber(totDescP)}`;
+                    const elSal = c.querySelector('.saldo-disponible'); elSal.textContent = `$${formatNumber(sal)}`; elSal.classList.toggle('negative', sal<0);
                     c.querySelector('.anticipos-container').innerHTML = antS.length ? `<div class="anticipos-list-container"><h4>Anticipos</h4>${antS.map((a,i)=>`<div class="anticipo-item"><span class="monto">$${formatNumber(a.cantidad)} (${formatDisplayDate(a.fecha)})</span><div class="anticipo-item-actions"><button class="edit-anticipo-btn" data-socio-id="${s.ID}" data-anticipo-index="${i}">✏️</button><button class="delete-anticipo-btn" data-socio-id="${s.ID}" data-anticipo-index="${i}">🗑️</button></div></div>`).join('')}</div>` : '';
+                    const descContainer = c.querySelector('.personal-discounts-list-container'); if (descS.length > 0) { descContainer.classList.add('has-items'); descContainer.innerHTML = `<h4>Notas / Descuentos</h4>` + descS.map((d, i) => `<div class="personal-discount-item"><div class="personal-discount-info"><span class="pd-monto">-$${formatNumber(d.monto)}</span><span class="pd-motivo">${d.motivo}</span></div><div class="anticipo-item-actions"><button class="delete-pd-btn" style="background-color:var(--danger-color);" data-socio-id="${s.ID}" data-index="${i}">🗑️</button></div></div>`).join(''); } else { descContainer.classList.remove('has-items'); descContainer.innerHTML = ''; }
                 });
             };
 
-            async function apiCall(url, action, method='GET', body=null) {
-                const opt = { method, mode:'cors' }; if(method!=='GET') opt.body=JSON.stringify({action, ...body});
-                const r = await fetch(method==='GET'?`${url}?action=${action}`:url, opt); const res = await r.json(); 
-                if(res.status!=='success') throw new Error(res.message); return res.data||res;
-            }
+            async function apiCall(url, action, method='GET', body=null) { const opt = { method, mode:'cors' }; if(method!=='GET') opt.body=JSON.stringify({action, ...body}); const r = await fetch(method==='GET'?`${url}?action=${action}`:url, opt); const res = await r.json(); if(res.status!=='success') throw new Error(res.message); return res.data||res; }
 
             async function syncData() { 
-                if(isSyncing)return; isSyncing=true; ui.syncIndicator.classList.add('visible'); 
-                setBtnLoading(ui.syncDataBtn, true, 'Sincronizando'); // Animación
-                ui.balancePropinaBruta.innerHTML='<span style="color:#f39c12; font-size: 0.6em;">↻ Actualizando datos...</span>';
+                if(isSyncing)return; isSyncing=true; ui.syncIndicator.classList.add('visible'); setBtnLoading(ui.syncDataBtn, true, 'Sincronizando'); ui.balancePropinaBruta.innerHTML='<span style="color:#f39c12; font-size: 0.6em;">↻ Actualizando datos...</span>';
                 try{ 
-                    const urlRec = SCRIPT_URL_RECAUDACIONES + (SCRIPT_URL_RECAUDACIONES.includes('?') ? '&' : '?') + 'action=get&t=' + new Date().getTime();
-                    const recRes = await fetch(urlRec); const recJson = await recRes.json();
-                    let listaRec = []; if (Array.isArray(recJson)) listaRec = recJson; else if (recJson.data && Array.isArray(recJson.data)) listaRec = recJson.data; else if (recJson.result && Array.isArray(recJson.result)) listaRec = recJson.result;
-                    montosData = listaRec; historialRawData = listaRec; recaudacionPorDia={}; 
-                    if(Array.isArray(montosData)) { montosData.forEach(r=>{ if(r.fecha && r.monto) { let m = parseMoney(r.monto); let fRec = normalizeRemoteDate(r.fecha); recaudacionPorDia[fRec]=(recaudacionPorDia[fRec]||0)+m; } }); }
-                    const rS = await apiCall(SCRIPT_URL_SOCIOS,'getSocios'); sociosData=rS.map(s=>({...s, propinaAsignada:0})); 
-                    const pt=getStorage('part_time_data_v3'); 
-                    sociosData.filter(isPartTime).forEach(s=>{ if(!pt[s.ID]) pt[s.ID]={diasTrabajados:[],montoAsignable:0}; let m=0; (pt[s.ID].diasTrabajados||[]).forEach(d=>{ m+=(recaudacionPorDia[d]||0); }); pt[s.ID].montoAsignable=m; }); setStorage('part_time_data_v3',pt);
-                    try{ultimaDistribucionData=await apiCall(SCRIPT_URL_SOCIOS,'getUltimaDistribucion');}catch(e){} 
-                    renderHistorial(historialRawData); 
-                    showToast('Sincronizado'); 
-                }catch(e){ ui.balancePropinaBruta.textContent="Error"; console.error(e); showToast("Error Sincronizando", 'danger'); } 
-                finally{ isSyncing=false; ui.syncIndicator.classList.remove('visible'); setBtnLoading(ui.syncDataBtn, false); } 
+                    const urlRec = SCRIPT_URL_RECAUDACIONES + (SCRIPT_URL_RECAUDACIONES.includes('?') ? '&' : '?') + 'action=get&t=' + new Date().getTime(); const recRes = await fetch(urlRec); const recJson = await recRes.json(); let listaRec = []; if (Array.isArray(recJson)) listaRec = recJson; else if (recJson.data && Array.isArray(recJson.data)) listaRec = recJson.data; else if (recJson.result && Array.isArray(recJson.result)) listaRec = recJson.result; montosData = listaRec; historialRawData = listaRec; recaudacionPorDia={}; if(Array.isArray(montosData)) { montosData.forEach(r=>{ if(r.fecha && r.monto) { let m = parseMoney(r.monto); let fRec = normalizeRemoteDate(r.fecha); recaudacionPorDia[fRec]=(recaudacionPorDia[fRec]||0)+m; } }); }
+                    const rS = await apiCall(SCRIPT_URL_SOCIOS,'getSocios'); sociosData=rS.map(s=>({...s, propinaAsignada:0})); const pt=getStorage('part_time_data_v3'); sociosData.filter(isPartTime).forEach(s=>{ if(!pt[s.ID]) pt[s.ID]={diasTrabajados:[],montoAsignable:0}; let m=0; (pt[s.ID].diasTrabajados||[]).forEach(d=>{ m+=(recaudacionPorDia[d]||0); }); pt[s.ID].montoAsignable=m; }); setStorage('part_time_data_v3',pt);
+                    try{ultimaDistribucionData=await apiCall(SCRIPT_URL_SOCIOS,'getUltimaDistribucion');}catch(e){} renderHistorial(historialRawData); showToast('Sincronizado'); 
+                }catch(e){ ui.balancePropinaBruta.textContent="Error"; console.error(e); showToast("Error Sincronizando", 'danger'); } finally{ isSyncing=false; ui.syncIndicator.classList.remove('visible'); setBtnLoading(ui.syncDataBtn, false); } 
             }
 
-            // --- MANEJADORES DE ACCIÓN ---
-            function setupAreaSelects(form, mainId, subId, subContainerId) {
-                const mainSelect = form.querySelector(`#${mainId}`); const subSelect = form.querySelector(`#${subId}`); const subContainer = form.querySelector(`#${subContainerId}`);
-                const toggle = () => { if (mainSelect.value === 'Mesas') { subContainer.style.display = 'block'; } else { subContainer.style.display = 'none'; subSelect.value = ''; } };
-                mainSelect.addEventListener('change', toggle); toggle();
+            async function syncWithSheets(socioId = null, actionType = 'upload') {
+                const isMassive = (socioId === null); let btn;
+                if (isMassive) { btn = (actionType === 'upload') ? ui.uploadAllAnticiposBtn : ui.loadAllAnticiposBtn; } else { const selector = (actionType === 'upload') ? '.upload-anticipos-btn' : '.download-anticipos-btn'; btn = document.querySelector(`.socio-distribucion-card[data-socio-id="${socioId}"] ${selector}`); }
+                setBtnLoading(btn, true, isMassive ? (actionType === 'upload' ? 'Subiendo' : 'Cargando') : '');
+                try {
+                    if (actionType === 'download') {
+                        const response = await apiCall(SCRIPT_URL_SOCIOS, 'getAllDataDesdeSheets', 'POST'); const dAnticipos = response.anticipos || {}; const dExtras = response.extras || {}; let hayCambios = false;
+                        const idsAProcesar = isMassive ? Object.keys({...dAnticipos, ...dExtras}) : [socioId];
+                        idsAProcesar.forEach(id => {
+                            if (dAnticipos[id]) { const l = getStorage('anticipos_data_v3'); if (!l[id]) l[id] = []; const ex = new Set(l[id].map(a => `${a.fecha}_${Math.round(a.cantidad)}`)); dAnticipos[id].forEach(r => { const f = normalizeRemoteDate(r.fecha); if (!ex.has(`${f}_${Math.round(r.cantidad)}`)) { l[id].push({ fecha: f, cantidad: Math.round(r.cantidad) }); hayCambios = true; } }); setStorage('anticipos_data_v3', l); }
+                            if (dExtras[id]) {
+                                const lDesc = getStorage('descuentos_personales_v1'); const lAbs = getStorage('planta_absences_v1');
+                                dExtras[id].forEach(item => { if (item.tipo === 'DESCUENTO_PERSONAL') { if (!lDesc[id]) lDesc[id] = []; if (!lDesc[id].some(d => Math.round(d.monto) === Math.round(item.monto) && d.motivo === item.detalle)) { lDesc[id].push({ monto: item.monto, motivo: item.detalle }); hayCambios = true; } } else if (item.tipo === 'AUSENCIA') { if (!lAbs[id]) lAbs[id] = []; const f = normalizeRemoteDate(item.fecha); if (!lAbs[id].includes(f)) { lAbs[id].push(f); hayCambios = true; } } });
+                                setStorage('descuentos_personales_v1', lDesc); setStorage('planta_absences_v1', lAbs);
+                            }
+                        });
+                        if (hayCambios) { updateAllUI(); showToast(isMassive ? 'Datos actualizados de la nube' : 'Datos del socio importados'); } else { showToast('No hay datos nuevos en la nube'); }
+                    } else {
+                        const idsSubir = isMassive ? sociosData.map(s => s.ID) : [socioId]; const allAnts = getStorage('anticipos_data_v3'); const allDescP = getStorage('descuentos_personales_v1'); const allAbs = getStorage('planta_absences_v1');
+                        const listAnts = []; const listExtras = [];
+                        idsSubir.forEach(id => {
+                            const socio = sociosData.find(x => x.ID === id); if (!socio) return;
+                            if(allAnts[id]) allAnts[id].forEach(a => listAnts.push({id, nombre:`${socio.Nombre} ${socio.Apellido}`, fecha:a.fecha, monto:Math.round(a.cantidad)}));
+                            if(allDescP[id]) allDescP[id].forEach(d => { listExtras.push({ id, nombre: `${socio.Nombre} ${socio.Apellido}`, fecha: new Date().toISOString().split('T')[0], tipo: 'DESCUENTO_PERSONAL', monto: Math.round(d.monto), detalle: d.motivo }); });
+                            if(allAbs[id]) allAbs[id].forEach(dateStr => { listExtras.push({ id, nombre: `${socio.Nombre} ${socio.Apellido}`, fecha: dateStr, tipo: 'AUSENCIA', monto: 0, detalle: 'Ausencia registrada' }); });
+                        });
+                        if (!listAnts.length && !listExtras.length) { showToast('Nada que subir', 'warning'); return; }
+                        await apiCall(SCRIPT_URL_SOCIOS, 'registrarTodoMasivo', 'POST', { detalleAnticipos: listAnts, detalleExtras: listExtras });
+                        showToast(isMassive ? 'Todo guardado en la nube' : 'Datos del socio guardados en la nube');
+                    }
+                } catch (e) { showToast(e.message, 'danger'); } finally { setBtnLoading(btn, false); }
             }
 
-            function handleShowEditSocioModal(socioId) {
-                const socio = sociosData.find(s => s.ID == socioId); if (!socio) return;
-                openModal('templateEditSocioModal', (form, modal) => {
-                    setupAreaSelects(form, 'editArea', 'editSubArea', 'editSubAreaContainer');
-                    form.editSocioId.value = socio.ID; form.editNombre.value = socio.Nombre; form.editApellido.value = socio.Apellido; form.editFechaIngreso.value = normalizeRemoteDate(socio.FechaIngreso);
-                    if (socio.Area.includes(' - Cambistas')) { form.editArea.value = 'Mesas'; form.editArea.dispatchEvent(new Event('change')); form.editSubArea.value = 'Cambistas'; } else { form.editArea.value = socio.Area; form.editArea.dispatchEvent(new Event('change')); }
-                    form.editTipoContrato.value = socio.TipoContrato;
-                    form.onsubmit = async (e) => {
-                        e.preventDefault(); 
-                        const submitBtn = form.querySelector('button[type="submit"]');
-                        setBtnLoading(submitBtn, true, 'Guardando');
-                        let finalArea = form.editArea.value; if (finalArea === 'Mesas' && form.editSubArea.value) { finalArea += ' - ' + form.editSubArea.value; }
-                        try { await apiCall(SCRIPT_URL_SOCIOS, 'updateSocio', 'POST', { socioId: socio.ID, updates: { Nombre: form.editNombre.value, Apellido: form.editApellido.value, FechaIngreso: form.editFechaIngreso.value, Area: finalArea, TipoContrato: form.editTipoContrato.value } }); showToast('Socio actualizado'); modal.style.display = 'none'; syncData(); } 
-                        catch (error) { showToast(error.message, 'danger'); setBtnLoading(submitBtn, false); }
-                    };
-                });
-            }
+            function resetDatosLocales() { confirmAction('¿Desea borrar TODOS los anticipos, notas y ausencias guardados en este dispositivo?', () => { localStorage.removeItem('anticipos_data_v3'); localStorage.removeItem('descuentos_personales_v1'); localStorage.removeItem('planta_absences_v1'); localStorage.removeItem('saldo_anterior_v1'); updateAllUI(); showToast('Memoria local limpiada correctamente', 'success'); }); }
 
-            function handleEditAnt(socioId, index) {
-                const ants = getStorage('anticipos_data_v3'); const anticipo = ants[socioId][index]; if (!anticipo) return;
-                openModal('templateEditAnticipoModal', (form, modal) => {
-                    setupNumericInputFormatting(form.editAnticipoCantidad); form.editSocioId.value = socioId; form.editAnticipoIndex.value = index; form.editAnticipoFecha.value = normalizeRemoteDate(anticipo.fecha); form.editAnticipoCantidad.value = formatNumber(anticipo.cantidad);
-                    form.onsubmit = (e) => { 
+            function setupAreaSelects(form, mainId, subId, subContainerId) { const mainSelect = form.querySelector(`#${mainId}`); const subSelect = form.querySelector(`#${subId}`); const subContainer = form.querySelector(`#${subContainerId}`); const toggle = () => { if (mainSelect.value === 'Mesas') { subContainer.style.display = 'block'; } else { subContainer.style.display = 'none'; subSelect.value = ''; } }; mainSelect.addEventListener('change', toggle); toggle(); }
+            
+            function handleShowEditSocioModal(socioId) { const socio = sociosData.find(s => s.ID == socioId); if (!socio) return; openModal('templateEditSocioModal', (form, modal) => { setupAreaSelects(form, 'editArea', 'editSubArea', 'editSubAreaContainer'); form.editSocioId.value = socio.ID; form.editNombre.value = socio.Nombre; form.editApellido.value = socio.Apellido; form.editFechaIngreso.value = normalizeRemoteDate(socio.FechaIngreso); if (socio.Area.includes(' - Cambistas')) { form.editArea.value = 'Mesas'; form.editArea.dispatchEvent(new Event('change')); form.editSubArea.value = 'Cambistas'; } else { form.editArea.value = socio.Area; form.editArea.dispatchEvent(new Event('change')); } form.editTipoContrato.value = socio.TipoContrato; form.onsubmit = async (e) => { e.preventDefault(); const submitBtn = form.querySelector('button[type="submit"]'); setBtnLoading(submitBtn, true, 'Guardando'); let finalArea = form.editArea.value; if (finalArea === 'Mesas' && form.editSubArea.value) { finalArea += ' - ' + form.editSubArea.value; } try { await apiCall(SCRIPT_URL_SOCIOS, 'updateSocio', 'POST', { socioId: socio.ID, updates: { Nombre: form.editNombre.value, Apellido: form.editApellido.value, FechaIngreso: form.editFechaIngreso.value, Area: finalArea, TipoContrato: form.editTipoContrato.value } }); showToast('Socio actualizado'); modal.style.display = 'none'; syncData(); } catch (error) { showToast(error.message, 'danger'); setBtnLoading(submitBtn, false); } }; }); }
+            
+            function handleEditAnt(socioId, index) { const ants = getStorage('anticipos_data_v3'); const anticipo = ants[socioId][index]; if (!anticipo) return; openModal('templateEditAnticipoModal', (form, modal) => { setupNumericInputFormatting(form.editAnticipoCantidad); form.editSocioId.value = socioId; form.editAnticipoIndex.value = index; form.editAnticipoFecha.value = normalizeRemoteDate(anticipo.fecha); form.editAnticipoCantidad.value = formatNumber(anticipo.cantidad); form.onsubmit = (e) => { e.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { ants[socioId][index] = { fecha: form.editAnticipoFecha.value, cantidad: parseNumber(form.editAnticipoCantidad.value) }; setStorage('anticipos_data_v3', ants); updateAllUI(); modal.style.display = 'none'; showToast('Anticipo editado'); setBtnLoading(btn, false); }, 400); }; }); }
+            
+            function handleShowDescuentoModal(id = null) { const descuentos = getStorage('descuentos_operacionales_v1'); const descuento = id ? descuentos.find(d => d.id == id) : null; openModal('templateAddDescuentoModal', (form, modal) => { setupNumericInputFormatting(form.descuentoCantidad); if (descuento) { form.descuentoId.value = descuento.id; form.descuentoCategoria.value = descuento.categoria; form.descuentoDescripcion.value = descuento.descripcion; form.descuentoCantidad.value = formatNumber(descuento.cantidad); } form.onsubmit = (e) => { e.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const nuevoDescuento = { id: descuento ? descuento.id : Date.now().toString(), categoria: form.descuentoCategoria.value, descripcion: form.descuentoDescripcion.value, cantidad: parseNumber(form.descuentoCantidad.value) }; let newList; if (descuento) { newList = descuentos.map(d => d.id == descuento.id ? nuevoDescuento : d); } else { newList = [...descuentos, nuevoDescuento]; } setStorage('descuentos_operacionales_v1', newList); updateAllUI(); modal.style.display = 'none'; showToast('Descuento guardado'); setBtnLoading(btn, false); }, 400); }; }); }
+
+            function handleEditSaldoAnterior(socioId) {
+                openModal('templateEditSaldoAnteriorModal', (form, modal) => {
+                    const storage = getStorage('saldo_anterior_v1');
+                    setupNumericInputFormatting(form.editSaldoMonto);
+                    form.editSaldoSocioId.value = socioId;
+                    form.editSaldoMonto.value = formatNumber(storage[socioId] || 0);
+                    form.onsubmit = (e) => {
                         e.preventDefault();
-                        const btn = form.querySelector('button[type="submit"]');
-                        setBtnLoading(btn, true, 'Guardando');
-                        setTimeout(() => {
-                            ants[socioId][index] = { fecha: form.editAnticipoFecha.value, cantidad: parseNumber(form.editAnticipoCantidad.value) }; setStorage('anticipos_data_v3', ants); updateAllUI(); modal.style.display = 'none'; showToast('Anticipo editado'); setBtnLoading(btn, false);
-                        }, 400);
+                        storage[socioId] = parseNumber(form.editSaldoMonto.value);
+                        setStorage('saldo_anterior_v1', storage);
+                        updateAllUI();
+                        modal.style.display = 'none';
+                        showToast('Saldo anterior actualizado');
                     };
                 });
             }
 
-            function handleShowDescuentoModal(id = null) {
-                const descuentos = getStorage('descuentos_operacionales_v1'); const descuento = id ? descuentos.find(d => d.id == id) : null;
-                openModal('templateAddDescuentoModal', (form, modal) => {
-                    setupNumericInputFormatting(form.descuentoCantidad);
-                    if (descuento) { form.descuentoId.value = descuento.id; form.descuentoCategoria.value = descuento.categoria; form.descuentoDescripcion.value = descuento.descripcion; form.descuentoCantidad.value = formatNumber(descuento.cantidad); }
-                    form.onsubmit = (e) => { 
-                        e.preventDefault();
-                        const btn = form.querySelector('button[type="submit"]');
-                        setBtnLoading(btn, true, 'Guardando');
-                        setTimeout(() => {
-                             const nuevoDescuento = { id: descuento ? descuento.id : Date.now().toString(), categoria: form.descuentoCategoria.value, descripcion: form.descuentoDescripcion.value, cantidad: parseNumber(form.descuentoCantidad.value) }; let newList; if (descuento) { newList = descuentos.map(d => d.id == descuento.id ? nuevoDescuento : d); } else { newList = [...descuentos, nuevoDescuento]; } setStorage('descuentos_operacionales_v1', newList); updateAllUI(); modal.style.display = 'none'; showToast('Descuento guardado'); setBtnLoading(btn, false);
-                        }, 400);
+            function abrirCalendarModal(socioId, tipo) {
+                const socio = sociosData.find(s => s.ID == socioId);
+                openModal('templateCalendarModal', (modal, parentModal) => {
+                    const title = modal.querySelector('#calendarModalTitle');
+                    const subtitle = modal.querySelector('#calendarSubtitle');
+                    const countDisplay = modal.querySelector('#selectedDaysCount');
+                    const montoInfo = modal.querySelector('#montoDescuentoInfo');
+                    const input = modal.querySelector('#flatpickrInput');
+                    const saveBtn = modal.querySelector('#saveCalendarBtn');
+                    
+                    title.textContent = tipo === 'PT' ? 'Días Trabajados' : 'Días de Ausencia';
+                    subtitle.textContent = `${socio.Nombre} ${socio.Apellido}`;
+                    
+                    const preSelected = tipo === 'PT' ? (getStorage('part_time_data_v3')[socioId]?.diasTrabajados || []) : (getStorage('planta_absences_v1')[socioId] || []);
+                    
+                    // MODIFICACIÓN: Se quita "enable: fechasDisponibles" para permitir cualquier día (futuro o pasado)
+                    const fp = flatpickr(input, {
+                        mode: "multiple",
+                        dateFormat: "Y-m-d",
+                        locale: "es",
+                        defaultDate: preSelected,
+                        onChange: (selectedDates) => {
+                            const count = selectedDates.length;
+                            countDisplay.textContent = count;
+                            if (tipo === 'PLANTA') {
+                                let totalDesc = 0;
+                                selectedDates.forEach(d => {
+                                    const iso = d.toISOString().split('T')[0];
+                                    totalDesc += (recaudacionPorDia[iso] || 0);
+                                });
+                                montoInfo.style.display = 'block';
+                                montoInfo.textContent = `Descuento aprox: $${formatNumber(totalDesc)}`;
+                            }
+                        }
+                    });
+
+                    countDisplay.textContent = preSelected.length;
+
+                    saveBtn.onclick = () => {
+                        const selectedFechas = fp.selectedDates.map(d => d.toISOString().split('T')[0]);
+                        if (tipo === 'PT') {
+                            const pt = getStorage('part_time_data_v3');
+                            if (!pt[socioId]) pt[socioId] = { diasTrabajados: [], puntosCalculados: 0, montoAsignable: 0 };
+                            pt[socioId].diasTrabajados = selectedFechas;
+                            setStorage('part_time_data_v3', pt);
+                            recalculatePartTimeAssignable(socioId);
+                        } else {
+                            const abs = getStorage('planta_absences_v1');
+                            abs[socioId] = selectedFechas;
+                            setStorage('planta_absences_v1', abs);
+                        }
+                        updateAllUI();
+                        parentModal.style.display = 'none';
+                        showToast('Días actualizados');
                     };
                 });
             }
 
-            function handleDownloadAnticipos(socioId) {
-                const socio = sociosData.find(s => s.ID == socioId); const ants = getStorage('anticipos_data_v3')[socioId] || [];
-                if (!ants.length) { showToast('Sin anticipos', 'warning'); return; }
-                let text = `Anticipos: ${socio.Nombre} ${socio.Apellido}\n\n`; ants.forEach(a => { text += `${formatDisplayDate(a.fecha)}: $${formatNumber(a.cantidad)}\n`; }); text += `\nTotal: $${formatNumber(ants.reduce((s, a) => s + a.cantidad, 0))}`;
-                const blob = new Blob([text], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `Anticipos_${socio.Nombre.replace(/\s+/g,'_')}.txt`; a.click(); URL.revokeObjectURL(url);
+            function abrirPuntosPT(socioId) {
+                const socio = sociosData.find(s => s.ID == socioId);
+                const ptData = getStorage('part_time_data_v3')[socioId] || { montoAsignable: 0 };
+                const basePoints = calcularPuntosLogica(socio.FechaIngreso, socio.Area).puntos;
+                
+                openModal('templatePartTimePointsModal', (modal, parentModal) => {
+                    modal.querySelector('#partTimeModalBasePoints').textContent = basePoints;
+                    modal.querySelector('#partTimeModalAssignableAmount').textContent = `$${formatNumber(ptData.montoAsignable)}`;
+                    const inputMult = modal.querySelector('#partTimeMultiplicador');
+                    setupNumericInputFormatting(inputMult);
+                    
+                    modal.querySelector('#calculatePartTimePointsInternoBtn').onclick = () => {
+                        const divisor = parseNumber(inputMult.value);
+                        if (divisor <= 0) { showToast('Ingrese un divisor válido', 'warning'); return; }
+                        const resultado = ptData.montoAsignable / divisor;
+                        const pt = getStorage('part_time_data_v3');
+                        pt[socioId].puntosCalculados = resultado;
+                        setStorage('part_time_data_v3', pt);
+                        updateAllUI();
+                        parentModal.style.display = 'none';
+                        showToast('Cálculo PT realizado');
+                    };
+                });
             }
 
             async function handleSaveDistribucionFinal(){
                 const neta=parseNumber(ui.balancePropinaNeta.textContent); const punto=globalValorPunto;
                 if(punto<=0){showToast('Valor punto es 0 (Revisa historial)','warning');return;}
                 setBtnLoading(ui.saveAllAnticiposAndDistribucionBtn, true, 'Guardando');
-                const ants=getStorage('anticipos_data_v3'); const saldoAnt=getStorage('saldo_anterior_v1'); const detalleAnts=[];
-                const distribucion=sociosData.map(s=>{ const l=ants[s.ID]||[]; const sumA=l.reduce((x,y)=>x+y.cantidad,0); l.forEach(a=>detalleAnts.push({id:s.ID,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad)})); return{ ID:s.ID, NombreCompleto:`${s.Nombre} ${s.Apellido}`, Area:s.Area, TipoContrato:s.TipoContrato, PuntosAntiguedad:s.infoCalculo.puntos, PuntosFinales:s.puntosAsignadosFinales, PropinaAsignada:Math.round(s.propinaAsignada), Anticipos:Math.round(sumA), SaldoFinal:Math.round(s.propinaAsignada-sumA+(saldoAnt[s.ID]||0)) }; });
-                try{ showToast('Guardando en la nube...', 'warning'); const res=await apiCall(SCRIPT_URL_SOCIOS,'guardarDistribucion','POST',{ resumen:{ fecha:new Date().toISOString().split('T')[0], propinaNeta:neta, puntoPlanta:punto, totalPuntos:parseFloat((ui.totalPuntosDisplay.innerText.match(/[\d\.]+/)||['0'])[0]), totalAnticipos:detalleAnts.reduce((a,b)=>a+b.monto,0) }, distribucion, descuentos:getStorage('descuentos_operacionales_v1'), detalleAnticipos:detalleAnts }); showToast(`Guardado. Hoja: ${res.sheetName}`); localStorage.removeItem('anticipos_data_v3'); syncData(); }
-                catch(e){ showToast(e.message,'danger'); }
-                finally{ setBtnLoading(ui.saveAllAnticiposAndDistribucionBtn, false); }
-            }
-
-            async function handleUploadAllAnticipos(){
-                setBtnLoading(ui.uploadAllAnticiposBtn, true, 'Subiendo');
-                const all=getStorage('anticipos_data_v3'),list=[];
-                Object.keys(all).forEach(id=>{ const s=sociosData.find(x=>x.ID===id); if(s)all[id].forEach(a=>list.push({id,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad)})); });
-                if(!list.length){showToast('Nada que subir','warning'); setBtnLoading(ui.uploadAllAnticiposBtn, false); return;}
-                try{showToast('Subiendo...');await apiCall(SCRIPT_URL_SOCIOS,'registrarTodosLosAnticipos','POST',{detalleAnticipos:list});showToast('Éxito');}
-                catch(e){showToast(e.message,'danger');}
-                finally{setBtnLoading(ui.uploadAllAnticiposBtn, false);}
-            }
-            
-            function handleEditSaldoAnterior(id){
-                openModal('templateEditSaldoAnteriorModal',(f, modal)=>{
-                    setupNumericInputFormatting(f.editSaldoMonto); f.editSaldoMonto.value=formatNumber(getStorage('saldo_anterior_v1')[id]||0); f.editSaldoSocioId.value=id;
-                    f.onsubmit=e=>{ 
-                        e.preventDefault(); 
-                        const btn = f.querySelector('button[type="submit"]');
-                        setBtnLoading(btn, true, 'Guardando');
-                        setTimeout(() => {
-                            const l=getStorage('saldo_anterior_v1'); l[id]=parseNumber(f.editSaldoMonto.value); setStorage('saldo_anterior_v1',l); updateAllUI(); modal.style.display='none'; setBtnLoading(btn, false);
-                        }, 400);
-                    }
+                const ants=getStorage('anticipos_data_v3'); const saldoAnt=getStorage('saldo_anterior_v1'); const descPersonalesData = getStorage('descuentos_personales_v1');
+                const detalleAnts=[]; const detalleExtrasCierre = [];
+                const distribucion=sociosData.map(s=>{ 
+                    const l=ants[s.ID]||[]; const sumA=l.reduce((x,y)=>x+y.cantidad,0); 
+                    const listDP = descPersonalesData[s.ID] || []; const sumDP = listDP.reduce((x,y) => x + (parseFloat(y.monto)||0), 0); const notasTexto = listDP.map(d => d.motivo).join(', ');
+                    l.forEach(a=>detalleAnts.push({id:s.ID,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad)})); 
+                    listDP.forEach(d => detalleExtrasCierre.push({id:s.ID, fecha: new Date().toISOString().split('T')[0], tipo:'DESCUENTO_PERSONAL', monto: Math.round(d.monto), detalle:d.motivo}));
+                    const absList = getStorage('planta_absences_v1')[s.ID] || [];
+                    absList.forEach(dateStr => detalleExtrasCierre.push({id:s.ID, fecha: dateStr, tipo:'AUSENCIA', monto: 0, detalle:'Ausencia registrada'}));
+                    return{ 
+                        ID:s.ID, NombreCompleto:`${s.Nombre} ${s.Apellido}`, Area:s.Area, TipoContrato:s.TipoContrato, PuntosAntiguedad:s.infoCalculo.puntos, PuntosFinales:s.puntosAsignadosFinales, PropinaAsignada:Math.round(s.propinaAsignada), 
+                        DescuentoAusencia: Math.round(s.dineroDescontado || 0), TotalDescuentosPersonales: Math.round(sumDP), DetalleNotas: notasTexto, Anticipos: Math.round(sumA), SaldoFinal:Math.round(s.propinaAsignada - sumA - sumDP + (saldoAnt[s.ID]||0)) 
+                    }; 
                 });
-            }
-
-            function abrirCalendarModal(id,mode){
-                const s=sociosData.find(x=>x.ID===id);
-                openModal('templateCalendarModal',(d,m)=>{
-                    m.querySelector('#calendarModalTitle').textContent=mode==='PT'?'Días PT':'Ausencias';
-                    const info=m.querySelector('#montoDescuentoInfo');
-                    let dias=mode==='PT'?(getStorage('part_time_data_v3')[id]||{}).diasTrabajados||[]:getStorage('planta_absences_v1')[id]||[];
-                    m.querySelector('#selectedDaysCount').textContent=dias.length;
-                    const upd=(sel)=>{ let t=0; sel.forEach(d=>t+=(recaudacionPorDia[flatpickrInstance.formatDate(d,"Y-m-d")]||0)); info.style.display='block'; info.style.color=mode==='PT'?'#27ae60':'#c0392b'; info.textContent=`Total: $${formatNumber(t)}`; m.querySelector('#selectedDaysCount').textContent=sel.length; };
-                    flatpickrInstance=flatpickr(m.querySelector('#flatpickrInput'),{ mode:"multiple",dateFormat:"Y-m-d",defaultDate:dias,locale:"es", onChange:upd,onOpen:()=>upd(flatpickrInstance.selectedDates) });
-                    
-                    const btn = m.querySelector('#saveCalendarBtn');
-                    btn.onclick=()=>{
-                        setBtnLoading(btn, true, 'Guardando');
-                        setTimeout(() => {
-                            const sel=flatpickrInstance.selectedDates.map(d=>flatpickrInstance.formatDate(d,"Y-m-d"));
-                            if(mode==='PT'){ const pt=getStorage('part_time_data_v3'); pt[id]={...(pt[id]||{}),diasTrabajados:sel}; setStorage('part_time_data_v3',pt); recalculatePartTimeAssignable(s.ID); }else{ const abs=getStorage('planta_absences_v1'); abs[id]=sel; setStorage('planta_absences_v1',abs); }
-                            updateAllUI();showToast('Guardado');m.style.display='none'; setBtnLoading(btn, false);
-                        }, 400);
-                    };
-                });
-            }
-
-            function abrirPuntosPT(id){
-                openModal('templatePartTimePointsModal',(f,m)=>{
-                    const pt=getStorage('part_time_data_v3')[id]||{};
-                    m.querySelector('#partTimeModalBasePoints').textContent=sociosData.find(x=>x.ID===id).infoCalculo.puntos;
-                    m.querySelector('#partTimeModalAssignableAmount').textContent=`$${formatNumber(pt.montoAsignable||0)}`;
-                    
-                    const btn = m.querySelector('#calculatePartTimePointsInternoBtn');
-                    btn.onclick=()=>{ 
-                        const d=parseNumber(m.querySelector('#partTimeMultiplicador').value); 
-                        if(d>0){ 
-                            setBtnLoading(btn, true, 'Calculando');
-                            setTimeout(() => {
-                                pt.puntosCalculados=(pt.montoAsignable||0)/d; const st=getStorage('part_time_data_v3'); st[id]=pt; setStorage('part_time_data_v3',st); updateAllUI();m.style.display='none'; setBtnLoading(btn, false);
-                            }, 400);
-                        } 
-                    };
-                });
+                try{ 
+                    showToast('Guardando en la nube...', 'warning'); 
+                    const res=await apiCall(SCRIPT_URL_SOCIOS,'guardarDistribucion','POST',{ 
+                        resumen:{ fecha:new Date().toISOString().split('T')[0], propinaNeta:neta, puntoPlanta:punto, totalPuntos:parseFloat((ui.totalPuntosDisplay.innerText.match(/[\d\.]+/)||['0'])[0]), totalAnticipos:detalleAnts.reduce((a,b)=>a+b.monto,0) }, 
+                        distribucion, descuentos:getStorage('descuentos_operacionales_v1'), detalleAnticipos:detalleAnts, detalleExtrasCierre: detalleExtrasCierre 
+                    }); 
+                    showToast(`Guardado. Hoja: ${res.sheetName}`); localStorage.removeItem('anticipos_data_v3'); syncData(); 
+                } catch(e){ showToast(e.message,'danger'); } finally{ setBtnLoading(ui.saveAllAnticiposAndDistribucionBtn, false); }
             }
 
             // --- LISTENERS GENERALES ---
             ui.menuToggle.onclick=e=>{e.stopPropagation();ui.sideMenu.classList.toggle('open'); ui.menuToggle.classList.toggle('active');};
             document.addEventListener('click', e=>{ 
                 if(ui.sideMenu.classList.contains('open') && !ui.sideMenu.contains(e.target) && !ui.menuToggle.contains(e.target)) { ui.sideMenu.classList.remove('open'); ui.menuToggle.classList.remove('active'); }
-                
-                const areaHeader = e.target.closest('.area-header');
-                if (areaHeader) {
-                    const targetId = areaHeader.dataset.target; const grid = document.getElementById(targetId);
-                    if (grid) {
-                        grid.classList.toggle('collapsed'); areaHeader.classList.toggle('collapsed');
-                        if (grid.classList.contains('collapsed')) { openSections.delete(targetId); } else { openSections.add(targetId); }
-                    }
-                    return; 
-                }
-                
+                const areaHeader = e.target.closest('.area-header'); if (areaHeader) { const targetId = areaHeader.dataset.target; const grid = document.getElementById(targetId); if (grid) { grid.classList.toggle('collapsed'); areaHeader.classList.toggle('collapsed'); if (grid.classList.contains('collapsed')) { openSections.delete(targetId); } else { openSections.add(targetId); } } return; }
                 const filterHeader = e.target.closest('.filtros-header'); if (filterHeader) { const container = filterHeader.closest('.filtros-container'); container.classList.toggle('collapsed'); }
-
                 const edit=e.target.closest('.edit-btn'); if(edit) handleShowEditSocioModal(edit.dataset.socioId);
-                const del=e.target.closest('.delete-btn'); 
-                if(del) confirmAction('¿Eliminar Socio permanentemente?', async ()=>{ 
-                    await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); 
-                });
-                
+                const del=e.target.closest('.delete-btn'); if(del) confirmAction('¿Eliminar Socio permanentemente?', async ()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
                 const cal=e.target.closest('.calendar-btn'); if(cal) abrirCalendarModal(cal.dataset.socioId, 'PT');
                 const calP=e.target.closest('.calendar-discount-btn'); if(calP) abrirCalendarModal(calP.dataset.socioId, 'PLANTA');
                 const cpt=e.target.closest('.calculate-btn'); if(cpt) abrirPuntosPT(cpt.dataset.socioId);
                 const edA=e.target.closest('.edit-anticipo-btn'); if(edA) handleEditAnt(edA.dataset.socioId, edA.dataset.anticipoIndex);
-                
-                const dlA = e.target.closest('.delete-anticipo-btn'); 
-                if (dlA) {
-                    const sId = dlA.dataset.socioId; const idx = dlA.dataset.anticipoIndex; const socio = sociosData.find(s => s.ID == sId); const ants = getStorage('anticipos_data_v3')[sId]; const ant = ants ? ants[idx] : null;
-                    if (socio && ant) { 
-                        confirmAction(`¿Estás seguro de eliminar el anticipo de:\n\n👤 ${socio.Nombre} ${socio.Apellido}\n💰 $${formatNumber(ant.cantidad)}?`, () => { 
-                            ants.splice(idx, 1); const allAnts = getStorage('anticipos_data_v3'); allAnts[sId] = ants; setStorage('anticipos_data_v3', allAnts); updateAllUI(); showToast('Anticipo eliminado', 'warning'); 
-                        }); 
-                    }
-                }
-
+                const dlA = e.target.closest('.delete-anticipo-btn'); if (dlA) { const sId = dlA.dataset.socioId; const idx = dlA.dataset.anticipoIndex; const socio = sociosData.find(s => s.ID == sId); const ants = getStorage('anticipos_data_v3')[sId]; const ant = ants ? ants[idx] : null; if (socio && ant) { confirmAction(`¿Estás seguro de eliminar el anticipo de:\n\n👤 ${socio.Nombre} ${socio.Apellido}\n💰 $${formatNumber(ant.cantidad)}?`, () => { ants.splice(idx, 1); const allAnts = getStorage('anticipos_data_v3'); allAnts[sId] = ants; setStorage('anticipos_data_v3', allAnts); updateAllUI(); showToast('Anticipo eliminado', 'warning'); }); } }
+                const btnAddPd = e.target.closest('.add-pd-btn'); if (btnAddPd) { const sId = btnAddPd.dataset.socioId; openModal('templatePersonalDiscountModal', (form, modal) => { setupNumericInputFormatting(form.pdMonto); form.pdSocioId.value = sId; form.onsubmit = (ev) => { ev.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const monto = parseNumber(form.pdMonto.value); const motivo = form.pdMotivo.value; const storage = getStorage('descuentos_personales_v1'); if (!storage[sId]) storage[sId] = []; storage[sId].push({ monto: monto, motivo: motivo }); setStorage('descuentos_personales_v1', storage); updateAllUI(); modal.style.display = 'none'; showToast('Descuento agregado'); setBtnLoading(btn, false); }, 300); }; }); }
+                const btnDelPd = e.target.closest('.delete-pd-btn'); if (btnDelPd) { const sId = btnDelPd.dataset.socioId; const idx = btnDelPd.dataset.index; confirmAction('¿Borrar este descuento/nota?', () => { const storage = getStorage('descuentos_personales_v1'); if (storage[sId]) { storage[sId].splice(idx, 1); setStorage('descuentos_personales_v1', storage); updateAllUI(); showToast('Descuento eliminado'); } }); }
                 const edD=e.target.closest('.edit-descuento-btn'); if(edD) handleShowDescuentoModal(edD.dataset.id);
-                const dlD=e.target.closest('.delete-descuento-btn'); 
-                if(dlD) confirmAction('¿Borrar descuento?',()=>{ const l=getStorage('descuentos_operacionales_v1').filter(x=>x.id!=dlD.dataset.id); setStorage('descuentos_operacionales_v1',l); updateAllUI(); });
-                
-                const up=e.target.closest('.upload-anticipos-btn'); if(up) handleUploadAllAnticipos();
-                const down=e.target.closest('.download-anticipos-btn'); if(down) handleDownloadAnticipos(down.dataset.socioId);
-                const esal=e.target.closest('.edit-saldo-anterior-btn'); if(esal) handleEditSaldoAnterior(esal.dataset.socioId);
+                const dlD=e.target.closest('.delete-descuento-btn'); if(dlD) confirmAction('¿Borrar descuento?',()=>{ const l=getStorage('descuentos_operacionales_v1').filter(x=>x.id!=dlD.dataset.id); setStorage('descuentos_operacionales_v1',l); updateAllUI(); }); 
+                const btnUp = e.target.closest('.upload-anticipos-btn'); if(btnUp) syncWithSheets(btnUp.closest('.socio-distribucion-card').dataset.socioId, 'upload');
+                const btnDown = e.target.closest('.download-anticipos-btn'); if(btnDown) syncWithSheets(btnDown.closest('.socio-distribucion-card').dataset.socioId, 'download');
+                const esal=e.target.closest('.edit-saldo-anterior-btn'); if(esal) handleEditSaldoAnterior(esal.dataset.socioId); 
             });
 
             document.querySelectorAll('.menu-link').forEach(l=>l.onclick=e=>{if(l.target!=='_blank'){
                 e.preventDefault();
                 document.querySelectorAll('.content-panel').forEach(p=>p.classList.remove('active'));
                 document.getElementById(l.dataset.target).classList.add('active');
-                
-                // Actualizar Highlight del Menú
                 document.querySelectorAll('.menu-link').forEach(link => link.classList.remove('active-link'));
                 l.classList.add('active-link');
-                
                 if(window.innerWidth<=991){ui.sideMenu.classList.remove('open');ui.menuToggle.classList.remove('active');}
             }});
+
             [ui.filtroNombre,ui.filtroArea,ui.filtroContrato,ui.filtroAnticipoStatus,ui.filtroNombreGestion,ui.filtroAreaGestion,ui.filtroContratoGestion].forEach(el=>el.addEventListener('input',renderSociosFiltrados));
-            
             ui.syncDataBtn.onclick=syncData;
-            ui.resetAnticiposLocalBtn.onclick = () => confirmAction('¿Borrar SOLO los ANTICIPOS guardados en este dispositivo? \n\nNota: NO se borrarán los socios, solo los montos de dinero pendientes.', () => { localStorage.removeItem('anticipos_data_v3'); updateAllUI(); showToast('Anticipos locales borrados'); });
+            ui.loadAllAnticiposBtn.onclick = () => syncWithSheets(null, 'download');
+            ui.uploadAllAnticiposBtn.onclick = () => syncWithSheets(null, 'upload');
+            ui.resetAnticiposLocalBtn.onclick = resetDatosLocales;
             ui.resetPartTimeDataBtn.onclick = () => confirmAction('¿Borrar cálculos Part-Time y Ausencias?', () => { localStorage.removeItem('part_time_data_v3'); localStorage.removeItem('planta_absences_v1'); updateAllUI(); showToast('Datos de tiempo reiniciados'); });
             ui.saveAllAnticiposAndDistribucionBtn.onclick = () => confirmAction('¿Desea cerrar la distribución y guardar en Google Sheets?', handleSaveDistribucionFinal);
-
-            ui.showRegisterSocioModalBtn.onclick=()=>openModal('templateRegisterSocioModal',(f, modal)=>{
-                setupAreaSelects(f, 'area', 'subArea', 'subAreaContainer');
-                f.onsubmit=async e=>{ 
-                    e.preventDefault(); 
-                    const submitBtn = f.querySelector('button[type="submit"]');
-                    setBtnLoading(submitBtn, true, 'Guardando');
-                    let finalArea = f.area.value; if (finalArea === 'Mesas' && f.subArea.value) { finalArea += ' - ' + f.subArea.value; } 
-                    try{ await apiCall(SCRIPT_URL_SOCIOS,'addSocio','POST',{ socio:{ Nombre:f.nombre.value, Apellido:f.apellido.value, FechaIngreso:f.fechaIngreso.value, Area:finalArea, TipoContrato:f.tipoContrato.value } }); showToast('Guardado'); modal.style.display='none'; syncData(); }
-                    catch(e){ showToast(e.message,'danger'); setBtnLoading(submitBtn, false); } 
-                }
-            });
-            
-            ui.addAnticipoBtn.onclick=()=>openModal('templateAddAnticipoModal',(f,m)=>{
-                m.querySelector('#sociosAnticipoList').innerHTML=sociosData.map(s=>`<option value="${s.Nombre} ${s.Apellido}" data-id="${s.ID}">`).join(''); 
-                m.querySelector('#anticipoSocioInput').oninput=e=>{const o=[...m.querySelectorAll('option')].find(x=>x.value===e.target.value); if(o) m.querySelector('#anticipoSocioId').value=o.dataset.id;}; 
-                setupNumericInputFormatting(f.anticipoCantidad); 
-                f.onsubmit=e=>{
-                    e.preventDefault();const id=e.target.anticipoSocioId.value;
-                    if(id){
-                        const btn = f.querySelector('button[type="submit"]');
-                        setBtnLoading(btn, true, 'Guardando');
-                        setTimeout(() => {
-                            const l=getStorage('anticipos_data_v3');if(!l[id])l[id]=[];l[id].push({fecha:f.anticipoFecha.value,cantidad:parseNumber(f.anticipoCantidad.value)});setStorage('anticipos_data_v3',l);updateAllUI();m.style.display='none'; setBtnLoading(btn, false);
-                        }, 400);
-                    }
-                }
-            });
+            ui.showRegisterSocioModalBtn.onclick=()=>openModal('templateRegisterSocioModal',(f, modal)=>{ setupAreaSelects(f, 'area', 'subArea', 'subAreaContainer'); f.onsubmit=async e=>{ e.preventDefault(); const submitBtn = f.querySelector('button[type="submit"]'); setBtnLoading(submitBtn, true, 'Guardando'); let finalArea = f.area.value; if (finalArea === 'Mesas' && f.subArea.value) { finalArea += ' - ' + f.subArea.value; } try{ await apiCall(SCRIPT_URL_SOCIOS,'addSocio','POST',{ socio:{ Nombre:f.nombre.value, Apellido:f.apellido.value, FechaIngreso:f.fechaIngreso.value, Area:finalArea, TipoContrato:f.tipoContrato.value } }); showToast('Guardado'); modal.style.display='none'; syncData(); } catch(e){ showToast(e.message,'danger'); setBtnLoading(submitBtn, false); } } });
+            ui.addAnticipoBtn.onclick=()=>openModal('templateAddAnticipoModal',(f,m)=>{ m.querySelector('#sociosAnticipoList').innerHTML=sociosData.map(s=>`<option value="${s.Nombre} ${s.Apellido}" data-id="${s.ID}">`).join(''); m.querySelector('#anticipoSocioInput').oninput=e=>{const o=[...m.querySelectorAll('option')].find(x=>x.value===e.target.value); if(o) m.querySelector('#anticipoSocioId').value=o.dataset.id;}; setupNumericInputFormatting(f.anticipoCantidad); f.onsubmit=e=>{ e.preventDefault();const id=e.target.anticipoSocioId.value; if(id){ const btn = f.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const l=getStorage('anticipos_data_v3');if(!l[id])l[id]=[];l[id].push({fecha:f.anticipoFecha.value,cantidad:parseNumber(f.anticipoCantidad.value)});setStorage('anticipos_data_v3',l);updateAllUI();m.style.display='none'; setBtnLoading(btn, false); }, 400); } } });
             ui.addDescuentoBtn.onclick=()=>handleShowDescuentoModal();
-            
-            async function cargarAnticiposDesdeSheets(esAutomatico = false) {
-                try {
-                    if (!esAutomatico) {
-                        showToast('Cargando anticipos...');
-                        setBtnLoading(ui.loadAllAnticiposBtn, true, 'Cargando');
-                    }
-                    const d = await apiCall(SCRIPT_URL_SOCIOS, 'getAllAnticiposDesdeSheets', 'POST');
-                    if (!Object.keys(d).length) { if (!esAutomatico) showToast('Nada pendiente'); return; }
-                    const l = getStorage('anticipos_data_v3'); let nuevosDetalles = [];
-                    for (const id in d) {
-                        if (!l[id]) l[id] = []; const ex = new Set(l[id].map(a => `${a.fecha}_${Math.round(a.cantidad)}`));
-                        const socio = sociosData.find(s => s.ID === id); const nombreSocio = socio ? `${socio.Nombre} ${socio.Apellido}` : 'Socio Desconocido';
-                        d[id].forEach(r => { const f = normalizeRemoteDate(r.fecha); const k = `${f}_${Math.round(r.cantidad)}`; if (!ex.has(k)) { l[id].push({ fecha: f, cantidad: Math.round(r.cantidad) }); ex.add(k); nuevosDetalles.push(`${nombreSocio}: $${formatNumber(r.cantidad)}`); } });
-                    }
-                    if (nuevosDetalles.length > 0) { setStorage('anticipos_data_v3', l); updateAllUI(); let mensaje = ''; if (nuevosDetalles.length <= 3) { mensaje = `📥 Recibido: ${nuevosDetalles.join(', ')}`; } else { mensaje = `📥 Recibido: ${nuevosDetalles.slice(0, 3).join(', ')} y ${nuevosDetalles.length - 3} más.`; } showToast(mensaje, 'success', 60000); } else { if (!esAutomatico) showToast('Listo (Sin cambios nuevos)'); }
-                } catch (e) { if (!esAutomatico) showToast(e.message, 'danger'); console.error("Auto-fetch error:", e); }
-                finally { if (!esAutomatico) setBtnLoading(ui.loadAllAnticiposBtn, false); }
-            }
-
-            ui.loadAllAnticiposBtn.onclick = () => cargarAnticiposDesdeSheets(false);
-            ui.uploadAllAnticiposBtn.onclick = handleUploadAllAnticipos;
-
-            syncData(); 
-            setInterval(syncData, 300000); 
-            setInterval(() => cargarAnticiposDesdeSheets(true), 180000); 
+            syncData(); setInterval(syncData, 300000);
         });
     </script>
 </body>
