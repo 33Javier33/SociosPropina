@@ -518,7 +518,14 @@
                 });
             };
 
-            async function apiCall(url, action, method='GET', body=null) { const opt = { method, mode:'cors' }; if(method!=='GET') opt.body=JSON.stringify({action, ...body}); const r = await fetch(method==='GET'?`${url}?action=${action}`:url, opt); const res = await r.json(); if(res.status!=='success') throw new Error(res.message); return res.data||res; }
+            async function apiCall(url, action, method='GET', body=null) { 
+                const opt = { method, mode:'cors' }; 
+                if(method!=='GET') opt.body=JSON.stringify({action, ...body}); 
+                const r = await fetch(method==='GET'?`${url}?action=${action}`:url, opt); 
+                const res = await r.json(); 
+                if(res.status!=='success') throw new Error(res.message); 
+                return res.data||res; 
+            }
 
             async function syncData() { 
                 if(isSyncing)return; isSyncing=true; ui.syncIndicator.classList.add('visible'); setBtnLoading(ui.syncDataBtn, true, 'Sincronizando'); ui.balancePropinaBruta.innerHTML='<span style="color:#f39c12; font-size: 0.6em;">↻ Actualizando datos...</span>';
@@ -566,7 +573,54 @@
 
             function setupAreaSelects(form, mainId, subId, subContainerId) { const mainSelect = form.querySelector(`#${mainId}`); const subSelect = form.querySelector(`#${subId}`); const subContainer = form.querySelector(`#${subContainerId}`); const toggle = () => { if (mainSelect.value === 'Mesas') { subContainer.style.display = 'block'; } else { subContainer.style.display = 'none'; subSelect.value = ''; } }; mainSelect.addEventListener('change', toggle); toggle(); }
             
-            function handleShowEditSocioModal(socioId) { const socio = sociosData.find(s => s.ID == socioId); if (!socio) return; openModal('templateEditSocioModal', (form, modal) => { setupAreaSelects(form, 'editArea', 'editSubArea', 'editSubAreaContainer'); form.editSocioId.value = socio.ID; form.editNombre.value = socio.Nombre; form.editApellido.value = socio.Apellido; form.editFechaIngreso.value = normalizeRemoteDate(socio.FechaIngreso); if (socio.Area.includes(' - Cambistas')) { form.editArea.value = 'Mesas'; form.editArea.dispatchEvent(new Event('change')); form.editSubArea.value = 'Cambistas'; } else { form.editArea.value = socio.Area; form.editArea.dispatchEvent(new Event('change')); } form.editTipoContrato.value = socio.TipoContrato; form.onsubmit = async (e) => { e.preventDefault(); const submitBtn = form.querySelector('button[type="submit"]'); setBtnLoading(submitBtn, true, 'Guardando'); let finalArea = form.editArea.value; if (finalArea === 'Mesas' && form.editSubArea.value) { finalArea += ' - ' + form.editSubArea.value; } try { await apiCall(SCRIPT_URL_SOCIOS, 'updateSocio', 'POST', { socioId: socio.ID, updates: { Nombre: form.editNombre.value, Apellido: form.editApellido.value, FechaIngreso: form.editFechaIngreso.value, Area: finalArea, TipoContrato: form.editTipoContrato.value } }); showToast('Socio actualizado'); modal.style.display = 'none'; syncData(); } catch (error) { showToast(error.message, 'danger'); setBtnLoading(submitBtn, false); } }; }); }
+            function handleShowEditSocioModal(socioId) { 
+                const socio = sociosData.find(s => s.ID == socioId); 
+                if (!socio) return; 
+                openModal('templateEditSocioModal', (form, modal) => { 
+                    setupAreaSelects(form, 'editArea', 'editSubArea', 'editSubAreaContainer'); 
+                    form.editSocioId.value = socio.ID; 
+                    form.editNombre.value = socio.Nombre; 
+                    form.editApellido.value = socio.Apellido; 
+                    form.editFechaIngreso.value = normalizeRemoteDate(socio.FechaIngreso); 
+                    if (socio.Area.includes(' - Cambistas')) { 
+                        form.editArea.value = 'Mesas'; 
+                        form.editArea.dispatchEvent(new Event('change')); 
+                        form.editSubArea.value = 'Cambistas'; 
+                    } else { 
+                        form.editArea.value = socio.Area; 
+                        form.editArea.dispatchEvent(new Event('change')); 
+                    } 
+                    form.editTipoContrato.value = socio.TipoContrato; 
+                    form.onsubmit = async (e) => { 
+                        e.preventDefault(); 
+                        const submitBtn = form.querySelector('button[type="submit"]'); 
+                        setBtnLoading(submitBtn, true, 'Guardando'); 
+                        let finalArea = form.editArea.value; 
+                        if (finalArea === 'Mesas' && form.editSubArea.value) { 
+                            finalArea += ' - ' + form.editSubArea.value; 
+                        } 
+                        try { 
+                            // CORRECCIÓN: 'updateSocio' como STRING
+                            await apiCall(SCRIPT_URL_SOCIOS, 'updateSocio', 'POST', { 
+                                socioId: socio.ID, 
+                                updates: { 
+                                    Nombre: form.editNombre.value, 
+                                    Apellido: form.editApellido.value, 
+                                    FechaIngreso: form.editFechaIngreso.value, 
+                                    Area: finalArea, 
+                                    TipoContrato: form.editTipoContrato.value 
+                                } 
+                            }); 
+                            showToast('Socio actualizado'); 
+                            modal.style.display = 'none'; 
+                            syncData(); 
+                        } catch (error) { 
+                            showToast(error.message, 'danger'); 
+                            setBtnLoading(submitBtn, false); 
+                        } 
+                    }; 
+                }); 
+            }
             
             function handleEditAnt(socioId, index) { const ants = getStorage('anticipos_data_v3'); const anticipo = ants[socioId][index]; if (!anticipo) return; openModal('templateEditAnticipoModal', (form, modal) => { setupNumericInputFormatting(form.editAnticipoCantidad); form.editSocioId.value = socioId; form.editAnticipoIndex.value = index; form.editAnticipoFecha.value = normalizeRemoteDate(anticipo.fecha); form.editAnticipoCantidad.value = formatNumber(anticipo.cantidad); form.onsubmit = (e) => { e.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { ants[socioId][index] = { fecha: form.editAnticipoFecha.value, cantidad: parseNumber(form.editAnticipoCantidad.value) }; setStorage('anticipos_data_v3', ants); updateAllUI(); modal.style.display = 'none'; showToast('Anticipo editado'); setBtnLoading(btn, false); }, 400); }; }); }
             
@@ -604,7 +658,6 @@
                     
                     const preSelected = tipo === 'PT' ? (getStorage('part_time_data_v3')[socioId]?.diasTrabajados || []) : (getStorage('planta_absences_v1')[socioId] || []);
                     
-                    // MODIFICACIÓN: Se quita "enable: fechasDisponibles" para permitir cualquier día (futuro o pasado)
                     const fp = flatpickr(input, {
                         mode: "multiple",
                         dateFormat: "Y-m-d",
@@ -706,15 +759,27 @@
                 if(ui.sideMenu.classList.contains('open') && !ui.sideMenu.contains(e.target) && !ui.menuToggle.contains(e.target)) { ui.sideMenu.classList.remove('open'); ui.menuToggle.classList.remove('active'); }
                 const areaHeader = e.target.closest('.area-header'); if (areaHeader) { const targetId = areaHeader.dataset.target; const grid = document.getElementById(targetId); if (grid) { grid.classList.toggle('collapsed'); areaHeader.classList.toggle('collapsed'); if (grid.classList.contains('collapsed')) { openSections.delete(targetId); } else { openSections.add(targetId); } } return; }
                 const filterHeader = e.target.closest('.filtros-header'); if (filterHeader) { const container = filterHeader.closest('.filtros-container'); container.classList.toggle('collapsed'); }
-                const edit=e.target.closest('.edit-btn'); if(edit) handleShowEditSocioModal(edit.dataset.socioId);
-                const del=e.target.closest('.delete-btn'); if(del) confirmAction('¿Eliminar Socio permanentemente?', async ()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
+                
+                const edit=e.target.closest('.edit-btn'); 
+                if(edit) handleShowEditSocioModal(edit.dataset.socioId);
+
+                const del=e.target.closest('.delete-btn'); 
+                if(del) confirmAction('¿Eliminar Socio permanentemente?', async ()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
+                
                 const cal=e.target.closest('.calendar-btn'); if(cal) abrirCalendarModal(cal.dataset.socioId, 'PT');
                 const calP=e.target.closest('.calendar-discount-btn'); if(calP) abrirCalendarModal(calP.dataset.socioId, 'PLANTA');
                 const cpt=e.target.closest('.calculate-btn'); if(cpt) abrirPuntosPT(cpt.dataset.socioId);
                 const edA=e.target.closest('.edit-anticipo-btn'); if(edA) handleEditAnt(edA.dataset.socioId, edA.dataset.anticipoIndex);
-                const dlA = e.target.closest('.delete-anticipo-btn'); if (dlA) { const sId = dlA.dataset.socioId; const idx = dlA.dataset.anticipoIndex; const socio = sociosData.find(s => s.ID == sId); const ants = getStorage('anticipos_data_v3')[sId]; const ant = ants ? ants[idx] : null; if (socio && ant) { confirmAction(`¿Estás seguro de eliminar el anticipo de:\n\n👤 ${socio.Nombre} ${socio.Apellido}\n💰 $${formatNumber(ant.cantidad)}?`, () => { ants.splice(idx, 1); const allAnts = getStorage('anticipos_data_v3'); allAnts[sId] = ants; setStorage('anticipos_data_v3', allAnts); updateAllUI(); showToast('Anticipo eliminado', 'warning'); }); } }
-                const btnAddPd = e.target.closest('.add-pd-btn'); if (btnAddPd) { const sId = btnAddPd.dataset.socioId; openModal('templatePersonalDiscountModal', (form, modal) => { setupNumericInputFormatting(form.pdMonto); form.pdSocioId.value = sId; form.onsubmit = (ev) => { ev.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const monto = parseNumber(form.pdMonto.value); const motivo = form.pdMotivo.value; const storage = getStorage('descuentos_personales_v1'); if (!storage[sId]) storage[sId] = []; storage[sId].push({ monto: monto, motivo: motivo }); setStorage('descuentos_personales_v1', storage); updateAllUI(); modal.style.display = 'none'; showToast('Descuento agregado'); setBtnLoading(btn, false); }, 300); }; }); }
-                const btnDelPd = e.target.closest('.delete-pd-btn'); if (btnDelPd) { const sId = btnDelPd.dataset.socioId; const idx = btnDelPd.dataset.index; confirmAction('¿Borrar este descuento/nota?', () => { const storage = getStorage('descuentos_personales_v1'); if (storage[sId]) { storage[sId].splice(idx, 1); setStorage('descuentos_personales_v1', storage); updateAllUI(); showToast('Descuento eliminado'); } }); }
+                
+                const dlA = e.target.closest('.delete-anticipo-btn'); 
+                if (dlA) { const sId = dlA.dataset.socioId; const idx = dlA.dataset.anticipoIndex; const socio = sociosData.find(s => s.ID == sId); const ants = getStorage('anticipos_data_v3')[sId]; const ant = ants ? ants[idx] : null; if (socio && ant) { confirmAction(`¿Estás seguro de eliminar el anticipo de:\n\n👤 ${socio.Nombre} ${socio.Apellido}\n💰 $${formatNumber(ant.cantidad)}?`, () => { ants.splice(idx, 1); const allAnts = getStorage('anticipos_data_v3'); allAnts[sId] = ants; setStorage('anticipos_data_v3', allAnts); updateAllUI(); showToast('Anticipo eliminado', 'warning'); }); } }
+                
+                const btnAddPd = e.target.closest('.add-pd-btn'); 
+                if (btnAddPd) { const sId = btnAddPd.dataset.socioId; openModal('templatePersonalDiscountModal', (form, modal) => { setupNumericInputFormatting(form.pdMonto); form.pdSocioId.value = sId; form.onsubmit = (ev) => { ev.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const monto = parseNumber(form.pdMonto.value); const motivo = form.pdMotivo.value; const storage = getStorage('descuentos_personales_v1'); if (!storage[sId]) storage[sId] = []; storage[sId].push({ monto: monto, motivo: motivo }); setStorage('descuentos_personales_v1', storage); updateAllUI(); modal.style.display = 'none'; showToast('Descuento agregado'); setBtnLoading(btn, false); }, 300); }; }); }
+                
+                const btnDelPd = e.target.closest('.delete-pd-btn'); 
+                if (btnDelPd) { const sId = btnDelPd.dataset.socioId; const idx = btnDelPd.dataset.index; confirmAction('¿Borrar este descuento/nota?', () => { const storage = getStorage('descuentos_personales_v1'); if (storage[sId]) { storage[sId].splice(idx, 1); setStorage('descuentos_personales_v1', storage); updateAllUI(); showToast('Descuento eliminado'); } }); }
+                
                 const edD=e.target.closest('.edit-descuento-btn'); if(edD) handleShowDescuentoModal(edD.dataset.id);
                 const dlD=e.target.closest('.delete-descuento-btn'); if(dlD) confirmAction('¿Borrar descuento?',()=>{ const l=getStorage('descuentos_operacionales_v1').filter(x=>x.id!=dlD.dataset.id); setStorage('descuentos_operacionales_v1',l); updateAllUI(); }); 
                 const btnUp = e.target.closest('.upload-anticipos-btn'); if(btnUp) syncWithSheets(btnUp.closest('.socio-distribucion-card').dataset.socioId, 'upload');
@@ -738,7 +803,38 @@
             ui.resetAnticiposLocalBtn.onclick = resetDatosLocales;
             ui.resetPartTimeDataBtn.onclick = () => confirmAction('¿Borrar cálculos Part-Time y Ausencias?', () => { localStorage.removeItem('part_time_data_v3'); localStorage.removeItem('planta_absences_v1'); updateAllUI(); showToast('Datos de tiempo reiniciados'); });
             ui.saveAllAnticiposAndDistribucionBtn.onclick = () => confirmAction('¿Desea cerrar la distribución y guardar en Google Sheets?', handleSaveDistribucionFinal);
-            ui.showRegisterSocioModalBtn.onclick=()=>openModal('templateRegisterSocioModal',(f, modal)=>{ setupAreaSelects(f, 'area', 'subArea', 'subAreaContainer'); f.onsubmit=async e=>{ e.preventDefault(); const submitBtn = f.querySelector('button[type="submit"]'); setBtnLoading(submitBtn, true, 'Guardando'); let finalArea = f.area.value; if (finalArea === 'Mesas' && f.subArea.value) { finalArea += ' - ' + f.subArea.value; } try{ await apiCall(SCRIPT_URL_SOCIOS,'addSocio','POST',{ socio:{ Nombre:f.nombre.value, Apellido:f.apellido.value, FechaIngreso:f.fechaIngreso.value, Area:finalArea, TipoContrato:f.tipoContrato.value } }); showToast('Guardado'); modal.style.display='none'; syncData(); } catch(e){ showToast(e.message,'danger'); setBtnLoading(submitBtn, false); } } });
+            
+            ui.showRegisterSocioModalBtn.onclick=()=>openModal('templateRegisterSocioModal',(f, modal)=>{ 
+                setupAreaSelects(f, 'area', 'subArea', 'subAreaContainer'); 
+                f.onsubmit=async e=>{ 
+                    e.preventDefault(); 
+                    const submitBtn = f.querySelector('button[type="submit"]'); 
+                    setBtnLoading(submitBtn, true, 'Guardando'); 
+                    let finalArea = f.area.value; 
+                    if (finalArea === 'Mesas' && f.subArea.value) { 
+                        finalArea += ' - ' + f.subArea.value; 
+                    } 
+                    try{ 
+                        // CORRECCIÓN: 'addSocio' como STRING
+                        await apiCall(SCRIPT_URL_SOCIOS,'addSocio','POST',{ 
+                            socio:{ 
+                                Nombre:f.nombre.value, 
+                                Apellido:f.apellido.value, 
+                                FechaIngreso:f.fechaIngreso.value, 
+                                Area:finalArea, 
+                                TipoContrato:f.tipoContrato.value 
+                            } 
+                        }); 
+                        showToast('Socio agregado correctamente'); 
+                        modal.style.display='none'; 
+                        syncData(); 
+                    } catch(e){ 
+                        showToast(e.message,'danger'); 
+                        setBtnLoading(submitBtn, false); 
+                    } 
+                } 
+            });
+
             ui.addAnticipoBtn.onclick=()=>openModal('templateAddAnticipoModal',(f,m)=>{ m.querySelector('#sociosAnticipoList').innerHTML=sociosData.map(s=>`<option value="${s.Nombre} ${s.Apellido}" data-id="${s.ID}">`).join(''); m.querySelector('#anticipoSocioInput').oninput=e=>{const o=[...m.querySelectorAll('option')].find(x=>x.value===e.target.value); if(o) m.querySelector('#anticipoSocioId').value=o.dataset.id;}; setupNumericInputFormatting(f.anticipoCantidad); f.onsubmit=e=>{ e.preventDefault();const id=e.target.anticipoSocioId.value; if(id){ const btn = f.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const l=getStorage('anticipos_data_v3');if(!l[id])l[id]=[];l[id].push({fecha:f.anticipoFecha.value,cantidad:parseNumber(f.anticipoCantidad.value)});setStorage('anticipos_data_v3',l);updateAllUI();m.style.display='none'; setBtnLoading(btn, false); }, 400); } } });
             ui.addDescuentoBtn.onclick=()=>handleShowDescuentoModal();
             syncData(); setInterval(syncData, 300000);
