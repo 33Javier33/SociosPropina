@@ -386,6 +386,8 @@
     </template>
 
     <script>
+        const generateUUID = () => 'ax-' + Date.now() + '-' + Math.floor(Math.random() * 1000000);
+
         document.addEventListener('DOMContentLoaded', () => {
             const SCRIPT_URL_SOCIOS = 'https://script.google.com/macros/s/AKfycbyr447pMQtsKoBfp8qTcB1uyE3rORhgPPmZM6Fgia3BgmIvtlZ_h04uGZrmx_HwubHQ/exec'; 
             const SCRIPT_URL_RECAUDACIONES = 'https://script.google.com/macros/s/AKfycbz_kCb4aEe437zHGbRqnjCibw1NtAqfCbTNmsVPn9jaZOPBFaZ6-FwmiTLqVxq39X1P/exec'; 
@@ -540,25 +542,66 @@
                 const isMassive = (socioId === null); let btn;
                 if (isMassive) { btn = (actionType === 'upload') ? ui.uploadAllAnticiposBtn : ui.loadAllAnticiposBtn; } else { const selector = (actionType === 'upload') ? '.upload-anticipos-btn' : '.download-anticipos-btn'; btn = document.querySelector(`.socio-distribucion-card[data-socio-id="${socioId}"] ${selector}`); }
                 setBtnLoading(btn, true, isMassive ? (actionType === 'upload' ? 'Subiendo' : 'Cargando') : '');
+                
                 try {
                     if (actionType === 'download') {
-                        const response = await apiCall(SCRIPT_URL_SOCIOS, 'getAllDataDesdeSheets', 'POST'); const dAnticipos = response.anticipos || {}; const dExtras = response.extras || {}; let hayCambios = false;
+                        // 1. Descargar datos
+                        const response = await apiCall(SCRIPT_URL_SOCIOS, 'getAllDataDesdeSheets', 'POST'); 
+                        const dAnticipos = response.anticipos || {}; 
+                        const dExtras = response.extras || {}; 
+                        let hayCambios = false;
+
                         const idsAProcesar = isMassive ? Object.keys({...dAnticipos, ...dExtras}) : [socioId];
+                        
                         idsAProcesar.forEach(id => {
-                            if (dAnticipos[id]) { const l = getStorage('anticipos_data_v3'); if (!l[id]) l[id] = []; const ex = new Set(l[id].map(a => `${a.fecha}_${Math.round(a.cantidad)}`)); dAnticipos[id].forEach(r => { const f = normalizeRemoteDate(r.fecha); if (!ex.has(`${f}_${Math.round(r.cantidad)}`)) { l[id].push({ fecha: f, cantidad: Math.round(r.cantidad) }); hayCambios = true; } }); setStorage('anticipos_data_v3', l); }
+                            // --- LÓGICA CORREGIDA PARA ANTICIPOS ---
+                            if (dAnticipos[id]) { 
+                                const l = getStorage('anticipos_data_v3'); 
+                                if (!l[id]) l[id] = []; 
+                                
+                                // Creamos un SET de "firmas" (Fecha_Monto) de lo que ya existe localmente.
+                                const existingSignatures = new Set();
+                                l[id].forEach(a => {
+                                    const sig = `${normalizeRemoteDate(a.fecha)}_${Math.round(a.cantidad)}`;
+                                    existingSignatures.add(sig);
+                                });
+                                
+                                dAnticipos[id].forEach(r => { 
+                                    const sheetFecha = normalizeRemoteDate(r.fecha);
+                                    const sheetMonto = Math.round(r.cantidad);
+                                    // La firma del dato que viene de la nube
+                                    const incomingSignature = `${sheetFecha}_${sheetMonto}`;
+
+                                    // Solo agregamos si NO existe esa combinación de Fecha y Monto
+                                    if (!existingSignatures.has(incomingSignature)) { 
+                                        l[id].push({ 
+                                            fecha: sheetFecha, 
+                                            cantidad: sheetMonto, 
+                                            uuid: r.uuid || generateUUID() 
+                                        }); 
+                                        // Agregamos al Set temporalmente por si el sheet trae duplicados en la misma carga
+                                        existingSignatures.add(incomingSignature);
+                                        hayCambios = true; 
+                                    } 
+                                }); 
+                                setStorage('anticipos_data_v3', l); 
+                            }
+                            // ---------------------------------------
+
                             if (dExtras[id]) {
                                 const lDesc = getStorage('descuentos_personales_v1'); const lAbs = getStorage('planta_absences_v1');
-                                dExtras[id].forEach(item => { if (item.tipo === 'DESCUENTO_PERSONAL') { if (!lDesc[id]) lDesc[id] = []; if (!lDesc[id].some(d => Math.round(d.monto) === Math.round(item.monto) && d.motivo === item.detalle)) { lDesc[id].push({ monto: item.monto, motivo: item.detalle }); hayCambios = true; } } else if (item.tipo === 'AUSENCIA') { if (!lAbs[id]) lAbs[id] = []; const f = normalizeRemoteDate(item.fecha); if (!lAbs[id].includes(f)) { lAbs[id].push(f); hayCambios = true; } } });
+                                dExtras[id].forEach(item => { if (item.tipo === 'DESCUENTO_PERSONAL') { if (!lDesc[id]) lDesc[id] = []; if (!lDesc[id].some(d => d.motivo === item.detalle && d.monto == item.monto)) { lDesc[id].push({ monto: item.monto, motivo: item.detalle }); hayCambios = true; } } else if (item.tipo === 'AUSENCIA') { if (!lAbs[id]) lAbs[id] = []; const f = normalizeRemoteDate(item.fecha); if (!lAbs[id].includes(f)) { lAbs[id].push(f); hayCambios = true; } } });
                                 setStorage('descuentos_personales_v1', lDesc); setStorage('planta_absences_v1', lAbs);
                             }
                         });
                         if (hayCambios) { updateAllUI(); showToast(isMassive ? 'Datos actualizados de la nube' : 'Datos del socio importados'); } else { showToast('No hay datos nuevos en la nube'); }
                     } else {
+                        // Lógica de subida (Upload) - Se mantiene igual
                         const idsSubir = isMassive ? sociosData.map(s => s.ID) : [socioId]; const allAnts = getStorage('anticipos_data_v3'); const allDescP = getStorage('descuentos_personales_v1'); const allAbs = getStorage('planta_absences_v1');
                         const listAnts = []; const listExtras = [];
                         idsSubir.forEach(id => {
                             const socio = sociosData.find(x => x.ID === id); if (!socio) return;
-                            if(allAnts[id]) allAnts[id].forEach(a => listAnts.push({id, nombre:`${socio.Nombre} ${socio.Apellido}`, fecha:a.fecha, monto:Math.round(a.cantidad)}));
+                            if(allAnts[id]) allAnts[id].forEach(a => listAnts.push({id, nombre:`${socio.Nombre} ${socio.Apellido}`, fecha:a.fecha, monto:Math.round(a.cantidad), uuid: a.uuid}));
                             if(allDescP[id]) allDescP[id].forEach(d => { listExtras.push({ id, nombre: `${socio.Nombre} ${socio.Apellido}`, fecha: new Date().toISOString().split('T')[0], tipo: 'DESCUENTO_PERSONAL', monto: Math.round(d.monto), detalle: d.motivo }); });
                             if(allAbs[id]) allAbs[id].forEach(dateStr => { listExtras.push({ id, nombre: `${socio.Nombre} ${socio.Apellido}`, fecha: dateStr, tipo: 'AUSENCIA', monto: 0, detalle: 'Ausencia registrada' }); });
                         });
@@ -566,7 +609,7 @@
                         await apiCall(SCRIPT_URL_SOCIOS, 'registrarTodoMasivo', 'POST', { detalleAnticipos: listAnts, detalleExtras: listExtras });
                         showToast(isMassive ? 'Todo guardado en la nube' : 'Datos del socio guardados en la nube');
                     }
-                } catch (e) { showToast(e.message, 'danger'); } finally { setBtnLoading(btn, false); }
+                } catch (e) { showToast(e.message, 'danger'); console.error(e); } finally { setBtnLoading(btn, false); }
             }
 
             function resetDatosLocales() { confirmAction('¿Desea borrar TODOS los anticipos, notas y ausencias guardados en este dispositivo?', () => { localStorage.removeItem('anticipos_data_v3'); localStorage.removeItem('descuentos_personales_v1'); localStorage.removeItem('planta_absences_v1'); localStorage.removeItem('saldo_anterior_v1'); updateAllUI(); showToast('Memoria local limpiada correctamente', 'success'); }); }
@@ -600,7 +643,6 @@
                             finalArea += ' - ' + form.editSubArea.value; 
                         } 
                         try { 
-                            // CORRECCIÓN: 'updateSocio' como STRING
                             await apiCall(SCRIPT_URL_SOCIOS, 'updateSocio', 'POST', { 
                                 socioId: socio.ID, 
                                 updates: { 
@@ -622,7 +664,35 @@
                 }); 
             }
             
-            function handleEditAnt(socioId, index) { const ants = getStorage('anticipos_data_v3'); const anticipo = ants[socioId][index]; if (!anticipo) return; openModal('templateEditAnticipoModal', (form, modal) => { setupNumericInputFormatting(form.editAnticipoCantidad); form.editSocioId.value = socioId; form.editAnticipoIndex.value = index; form.editAnticipoFecha.value = normalizeRemoteDate(anticipo.fecha); form.editAnticipoCantidad.value = formatNumber(anticipo.cantidad); form.onsubmit = (e) => { e.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { ants[socioId][index] = { fecha: form.editAnticipoFecha.value, cantidad: parseNumber(form.editAnticipoCantidad.value) }; setStorage('anticipos_data_v3', ants); updateAllUI(); modal.style.display = 'none'; showToast('Anticipo editado'); setBtnLoading(btn, false); }, 400); }; }); }
+            function handleEditAnt(socioId, index) { 
+                const ants = getStorage('anticipos_data_v3'); 
+                const anticipo = ants[socioId][index]; 
+                if (!anticipo) return; 
+                openModal('templateEditAnticipoModal', (form, modal) => { 
+                    setupNumericInputFormatting(form.editAnticipoCantidad); 
+                    form.editSocioId.value = socioId; 
+                    form.editAnticipoIndex.value = index; 
+                    form.editAnticipoFecha.value = normalizeRemoteDate(anticipo.fecha); 
+                    form.editAnticipoCantidad.value = formatNumber(anticipo.cantidad); 
+                    form.onsubmit = (e) => { 
+                        e.preventDefault(); 
+                        const btn = form.querySelector('button[type="submit"]'); 
+                        setBtnLoading(btn, true, 'Guardando'); 
+                        setTimeout(() => { 
+                            ants[socioId][index] = { 
+                                fecha: form.editAnticipoFecha.value, 
+                                cantidad: parseNumber(form.editAnticipoCantidad.value),
+                                uuid: anticipo.uuid || generateUUID() // Aseguramos que siempre tenga UUID
+                            }; 
+                            setStorage('anticipos_data_v3', ants); 
+                            updateAllUI(); 
+                            modal.style.display = 'none'; 
+                            showToast('Anticipo editado'); 
+                            setBtnLoading(btn, false); 
+                        }, 400); 
+                    }; 
+                }); 
+            }
             
             function handleShowDescuentoModal(id = null) { const descuentos = getStorage('descuentos_operacionales_v1'); const descuento = id ? descuentos.find(d => d.id == id) : null; openModal('templateAddDescuentoModal', (form, modal) => { setupNumericInputFormatting(form.descuentoCantidad); if (descuento) { form.descuentoId.value = descuento.id; form.descuentoCategoria.value = descuento.categoria; form.descuentoDescripcion.value = descuento.descripcion; form.descuentoCantidad.value = formatNumber(descuento.cantidad); } form.onsubmit = (e) => { e.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const nuevoDescuento = { id: descuento ? descuento.id : Date.now().toString(), categoria: form.descuentoCategoria.value, descripcion: form.descuentoDescripcion.value, cantidad: parseNumber(form.descuentoCantidad.value) }; let newList; if (descuento) { newList = descuentos.map(d => d.id == descuento.id ? nuevoDescuento : d); } else { newList = [...descuentos, nuevoDescuento]; } setStorage('descuentos_operacionales_v1', newList); updateAllUI(); modal.style.display = 'none'; showToast('Descuento guardado'); setBtnLoading(btn, false); }, 400); }; }); }
 
@@ -734,10 +804,10 @@
                 const distribucion=sociosData.map(s=>{ 
                     const l=ants[s.ID]||[]; const sumA=l.reduce((x,y)=>x+y.cantidad,0); 
                     const listDP = descPersonalesData[s.ID] || []; const sumDP = listDP.reduce((x,y) => x + (parseFloat(y.monto)||0), 0); const notasTexto = listDP.map(d => d.motivo).join(', ');
-                    l.forEach(a=>detalleAnts.push({id:s.ID,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad)})); 
-                    listDP.forEach(d => detalleExtrasCierre.push({id:s.ID, fecha: new Date().toISOString().split('T')[0], tipo:'DESCUENTO_PERSONAL', monto: Math.round(d.monto), detalle:d.motivo}));
+                    l.forEach(a=>detalleAnts.push({id:s.ID,nombre:`${s.Nombre} ${s.Apellido}`,fecha:a.fecha,monto:Math.round(a.cantidad), uuid: a.uuid})); 
+                    listDP.forEach(d => detalleExtrasCierre.push({id:s.ID, fecha: new Date().toISOString().split('T')[0], tipo:'DESCUENTO_PERSONAL', detalle:d.motivo}));
                     const absList = getStorage('planta_absences_v1')[s.ID] || [];
-                    absList.forEach(dateStr => detalleExtrasCierre.push({id:s.ID, fecha: dateStr, tipo:'AUSENCIA', monto: 0, detalle:'Ausencia registrada'}));
+                    absList.forEach(dateStr => detalleExtrasCierre.push({id:s.ID, fecha: dateStr, tipo:'AUSENCIA', detalle:'Ausencia registrada'}));
                     return{ 
                         ID:s.ID, NombreCompleto:`${s.Nombre} ${s.Apellido}`, Area:s.Area, TipoContrato:s.TipoContrato, PuntosAntiguedad:s.infoCalculo.puntos, PuntosFinales:s.puntosAsignadosFinales, PropinaAsignada:Math.round(s.propinaAsignada), 
                         DescuentoAusencia: Math.round(s.dineroDescontado || 0), TotalDescuentosPersonales: Math.round(sumDP), DetalleNotas: notasTexto, Anticipos: Math.round(sumA), SaldoFinal:Math.round(s.propinaAsignada - sumA - sumDP + (saldoAnt[s.ID]||0)) 
@@ -753,33 +823,20 @@
                 } catch(e){ showToast(e.message,'danger'); } finally{ setBtnLoading(ui.saveAllAnticiposAndDistribucionBtn, false); }
             }
 
-            // --- LISTENERS GENERALES ---
             ui.menuToggle.onclick=e=>{e.stopPropagation();ui.sideMenu.classList.toggle('open'); ui.menuToggle.classList.toggle('active');};
             document.addEventListener('click', e=>{ 
                 if(ui.sideMenu.classList.contains('open') && !ui.sideMenu.contains(e.target) && !ui.menuToggle.contains(e.target)) { ui.sideMenu.classList.remove('open'); ui.menuToggle.classList.remove('active'); }
                 const areaHeader = e.target.closest('.area-header'); if (areaHeader) { const targetId = areaHeader.dataset.target; const grid = document.getElementById(targetId); if (grid) { grid.classList.toggle('collapsed'); areaHeader.classList.toggle('collapsed'); if (grid.classList.contains('collapsed')) { openSections.delete(targetId); } else { openSections.add(targetId); } } return; }
                 const filterHeader = e.target.closest('.filtros-header'); if (filterHeader) { const container = filterHeader.closest('.filtros-container'); container.classList.toggle('collapsed'); }
-                
-                const edit=e.target.closest('.edit-btn'); 
-                if(edit) handleShowEditSocioModal(edit.dataset.socioId);
-
-                const del=e.target.closest('.delete-btn'); 
-                if(del) confirmAction('¿Eliminar Socio permanentemente?', async ()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
-                
+                const edit=e.target.closest('.edit-btn'); if(edit) handleShowEditSocioModal(edit.dataset.socioId);
+                const del=e.target.closest('.delete-btn'); if(del) confirmAction('¿Eliminar Socio permanentemente?', async ()=>{ await apiCall(SCRIPT_URL_SOCIOS,'deleteSocio','POST',{socioId:del.dataset.socioId}); syncData(); });
                 const cal=e.target.closest('.calendar-btn'); if(cal) abrirCalendarModal(cal.dataset.socioId, 'PT');
                 const calP=e.target.closest('.calendar-discount-btn'); if(calP) abrirCalendarModal(calP.dataset.socioId, 'PLANTA');
                 const cpt=e.target.closest('.calculate-btn'); if(cpt) abrirPuntosPT(cpt.dataset.socioId);
                 const edA=e.target.closest('.edit-anticipo-btn'); if(edA) handleEditAnt(edA.dataset.socioId, edA.dataset.anticipoIndex);
-                
-                const dlA = e.target.closest('.delete-anticipo-btn'); 
-                if (dlA) { const sId = dlA.dataset.socioId; const idx = dlA.dataset.anticipoIndex; const socio = sociosData.find(s => s.ID == sId); const ants = getStorage('anticipos_data_v3')[sId]; const ant = ants ? ants[idx] : null; if (socio && ant) { confirmAction(`¿Estás seguro de eliminar el anticipo de:\n\n👤 ${socio.Nombre} ${socio.Apellido}\n💰 $${formatNumber(ant.cantidad)}?`, () => { ants.splice(idx, 1); const allAnts = getStorage('anticipos_data_v3'); allAnts[sId] = ants; setStorage('anticipos_data_v3', allAnts); updateAllUI(); showToast('Anticipo eliminado', 'warning'); }); } }
-                
-                const btnAddPd = e.target.closest('.add-pd-btn'); 
-                if (btnAddPd) { const sId = btnAddPd.dataset.socioId; openModal('templatePersonalDiscountModal', (form, modal) => { setupNumericInputFormatting(form.pdMonto); form.pdSocioId.value = sId; form.onsubmit = (ev) => { ev.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const monto = parseNumber(form.pdMonto.value); const motivo = form.pdMotivo.value; const storage = getStorage('descuentos_personales_v1'); if (!storage[sId]) storage[sId] = []; storage[sId].push({ monto: monto, motivo: motivo }); setStorage('descuentos_personales_v1', storage); updateAllUI(); modal.style.display = 'none'; showToast('Descuento agregado'); setBtnLoading(btn, false); }, 300); }; }); }
-                
-                const btnDelPd = e.target.closest('.delete-pd-btn'); 
-                if (btnDelPd) { const sId = btnDelPd.dataset.socioId; const idx = btnDelPd.dataset.index; confirmAction('¿Borrar este descuento/nota?', () => { const storage = getStorage('descuentos_personales_v1'); if (storage[sId]) { storage[sId].splice(idx, 1); setStorage('descuentos_personales_v1', storage); updateAllUI(); showToast('Descuento eliminado'); } }); }
-                
+                const dlA = e.target.closest('.delete-anticipo-btn'); if (dlA) { const sId = dlA.dataset.socioId; const idx = dlA.dataset.anticipoIndex; const socio = sociosData.find(s => s.ID == sId); const ants = getStorage('anticipos_data_v3')[sId]; const ant = ants ? ants[idx] : null; if (socio && ant) { confirmAction(`¿Estás seguro de eliminar el anticipo de:\n\n👤 ${socio.Nombre} ${socio.Apellido}\n💰 $${formatNumber(ant.cantidad)}?`, () => { ants.splice(idx, 1); const allAnts = getStorage('anticipos_data_v3'); allAnts[sId] = ants; setStorage('anticipos_data_v3', allAnts); updateAllUI(); showToast('Anticipo eliminado', 'warning'); }); } }
+                const btnAddPd = e.target.closest('.add-pd-btn'); if (btnAddPd) { const sId = btnAddPd.dataset.socioId; openModal('templatePersonalDiscountModal', (form, modal) => { setupNumericInputFormatting(form.pdMonto); form.pdSocioId.value = sId; form.onsubmit = (ev) => { ev.preventDefault(); const btn = form.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const monto = parseNumber(form.pdMonto.value); const motivo = form.pdMotivo.value; const storage = getStorage('descuentos_personales_v1'); if (!storage[sId]) storage[sId] = []; storage[sId].push({ monto: monto, motivo: motivo }); setStorage('descuentos_personales_v1', storage); updateAllUI(); modal.style.display = 'none'; showToast('Descuento agregado'); setBtnLoading(btn, false); }, 300); }; }); }
+                const btnDelPd = e.target.closest('.delete-pd-btn'); if (btnDelPd) { const sId = btnDelPd.dataset.socioId; const idx = btnDelPd.dataset.index; confirmAction('¿Borrar este descuento/nota?', () => { const storage = getStorage('descuentos_personales_v1'); if (storage[sId]) { storage[sId].splice(idx, 1); setStorage('descuentos_personales_v1', storage); updateAllUI(); showToast('Descuento eliminado'); } }); }
                 const edD=e.target.closest('.edit-descuento-btn'); if(edD) handleShowDescuentoModal(edD.dataset.id);
                 const dlD=e.target.closest('.delete-descuento-btn'); if(dlD) confirmAction('¿Borrar descuento?',()=>{ const l=getStorage('descuentos_operacionales_v1').filter(x=>x.id!=dlD.dataset.id); setStorage('descuentos_operacionales_v1',l); updateAllUI(); }); 
                 const btnUp = e.target.closest('.upload-anticipos-btn'); if(btnUp) syncWithSheets(btnUp.closest('.socio-distribucion-card').dataset.socioId, 'upload');
@@ -811,31 +868,42 @@
                     const submitBtn = f.querySelector('button[type="submit"]'); 
                     setBtnLoading(submitBtn, true, 'Guardando'); 
                     let finalArea = f.area.value; 
-                    if (finalArea === 'Mesas' && f.subArea.value) { 
-                        finalArea += ' - ' + f.subArea.value; 
-                    } 
+                    if (finalArea === 'Mesas' && f.subArea.value) { finalArea += ' - ' + f.subArea.value; } 
                     try{ 
-                        // CORRECCIÓN: 'addSocio' como STRING
-                        await apiCall(SCRIPT_URL_SOCIOS,'addSocio','POST',{ 
-                            socio:{ 
-                                Nombre:f.nombre.value, 
-                                Apellido:f.apellido.value, 
-                                FechaIngreso:f.fechaIngreso.value, 
-                                Area:finalArea, 
-                                TipoContrato:f.tipoContrato.value 
-                            } 
+                        await apiCall(SCRIPT_URL_SOCIOS,'addSocio','POST', { 
+                            socio: { Nombre:f.nombre.value, Apellido:f.apellido.value, FechaIngreso:f.fechaIngreso.value, Area:finalArea, TipoContrato:f.tipoContrato.value } 
                         }); 
-                        showToast('Socio agregado correctamente'); 
-                        modal.style.display='none'; 
-                        syncData(); 
-                    } catch(e){ 
-                        showToast(e.message,'danger'); 
-                        setBtnLoading(submitBtn, false); 
-                    } 
+                        showToast('Socio agregado correctamente'); modal.style.display='none'; syncData(); 
+                    } catch(e){ showToast(e.message,'danger'); setBtnLoading(submitBtn, false); } 
                 } 
             });
 
-            ui.addAnticipoBtn.onclick=()=>openModal('templateAddAnticipoModal',(f,m)=>{ m.querySelector('#sociosAnticipoList').innerHTML=sociosData.map(s=>`<option value="${s.Nombre} ${s.Apellido}" data-id="${s.ID}">`).join(''); m.querySelector('#anticipoSocioInput').oninput=e=>{const o=[...m.querySelectorAll('option')].find(x=>x.value===e.target.value); if(o) m.querySelector('#anticipoSocioId').value=o.dataset.id;}; setupNumericInputFormatting(f.anticipoCantidad); f.onsubmit=e=>{ e.preventDefault();const id=e.target.anticipoSocioId.value; if(id){ const btn = f.querySelector('button[type="submit"]'); setBtnLoading(btn, true, 'Guardando'); setTimeout(() => { const l=getStorage('anticipos_data_v3');if(!l[id])l[id]=[];l[id].push({fecha:f.anticipoFecha.value,cantidad:parseNumber(f.anticipoCantidad.value)});setStorage('anticipos_data_v3',l);updateAllUI();m.style.display='none'; setBtnLoading(btn, false); }, 400); } } });
+            ui.addAnticipoBtn.onclick=()=>openModal('templateAddAnticipoModal',(f,m)=>{ 
+                m.querySelector('#sociosAnticipoList').innerHTML=sociosData.map(s=>`<option value="${s.Nombre} ${s.Apellido}" data-id="${s.ID}">`).join(''); 
+                m.querySelector('#anticipoSocioInput').oninput=e=>{const o=[...m.querySelectorAll('option')].find(x=>x.value===e.target.value); if(o) m.querySelector('#anticipoSocioId').value=o.dataset.id;}; 
+                setupNumericInputFormatting(f.anticipoCantidad); 
+                f.onsubmit=e=>{ 
+                    e.preventDefault();
+                    const id=e.target.anticipoSocioId.value; 
+                    if(id){ 
+                        const btn = f.querySelector('button[type="submit"]'); 
+                        setBtnLoading(btn, true, 'Guardando'); 
+                        setTimeout(() => { 
+                            const l=getStorage('anticipos_data_v3');
+                            if(!l[id])l[id]=[];
+                            l[id].push({
+                                fecha: f.anticipoFecha.value,
+                                cantidad: parseNumber(f.anticipoCantidad.value),
+                                uuid: generateUUID() // Clave única local
+                            });
+                            setStorage('anticipos_data_v3',l);
+                            updateAllUI();
+                            m.style.display='none'; 
+                            setBtnLoading(btn, false); 
+                        }, 400); 
+                    } 
+                } 
+            });
             ui.addDescuentoBtn.onclick=()=>handleShowDescuentoModal();
             syncData(); setInterval(syncData, 300000);
         });
