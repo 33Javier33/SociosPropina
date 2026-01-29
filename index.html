@@ -532,9 +532,42 @@
             async function syncData() { 
                 if(isSyncing)return; isSyncing=true; ui.syncIndicator.classList.add('visible'); setBtnLoading(ui.syncDataBtn, true, 'Sincronizando'); ui.balancePropinaBruta.innerHTML='<span style="color:#f39c12; font-size: 0.6em;">↻ Actualizando datos...</span>';
                 try{ 
+                    // 1. Recaudaciones
                     const urlRec = SCRIPT_URL_RECAUDACIONES + (SCRIPT_URL_RECAUDACIONES.includes('?') ? '&' : '?') + 'action=get&t=' + new Date().getTime(); const recRes = await fetch(urlRec); const recJson = await recRes.json(); let listaRec = []; if (Array.isArray(recJson)) listaRec = recJson; else if (recJson.data && Array.isArray(recJson.data)) listaRec = recJson.data; else if (recJson.result && Array.isArray(recJson.result)) listaRec = recJson.result; montosData = listaRec; historialRawData = listaRec; recaudacionPorDia={}; if(Array.isArray(montosData)) { montosData.forEach(r=>{ if(r.fecha && r.monto) { let m = parseMoney(r.monto); let fRec = normalizeRemoteDate(r.fecha); recaudacionPorDia[fRec]=(recaudacionPorDia[fRec]||0)+m; } }); }
-                    const rS = await apiCall(SCRIPT_URL_SOCIOS,'getSocios'); sociosData=rS.map(s=>({...s, propinaAsignada:0})); const pt=getStorage('part_time_data_v3'); sociosData.filter(isPartTime).forEach(s=>{ if(!pt[s.ID]) pt[s.ID]={diasTrabajados:[],montoAsignable:0}; let m=0; (pt[s.ID].diasTrabajados||[]).forEach(d=>{ m+=(recaudacionPorDia[d]||0); }); pt[s.ID].montoAsignable=m; }); setStorage('part_time_data_v3',pt);
-                    try{ultimaDistribucionData=await apiCall(SCRIPT_URL_SOCIOS,'getUltimaDistribucion');}catch(e){} renderHistorial(historialRawData); showToast('Sincronizado'); 
+                    
+                    // 2. Socios
+                    const rS = await apiCall(SCRIPT_URL_SOCIOS,'getSocios'); sociosData=rS.map(s=>({...s, propinaAsignada:0})); 
+
+                    // 3. Obtener SALDOS ANTERIORES masivos
+                    try {
+                        const saldosNube = await apiCall(SCRIPT_URL_SOCIOS, 'getSaldosAnteriores');
+                        if(saldosNube) setStorage('saldo_anterior_v1', saldosNube);
+                    } catch(e) { console.warn("No se pudieron cargar saldos anteriores", e); }
+
+                    // 4. Obtener DÍAS PART-TIME masivos
+                    try {
+                        const diasNube = await apiCall(SCRIPT_URL_SOCIOS, 'getDiasPartTime');
+                        const pt = getStorage('part_time_data_v3');
+                        if (diasNube) {
+                            Object.keys(diasNube).forEach(id => {
+                                if(!pt[id]) pt[id] = { diasTrabajados: [], montoAsignable: 0, puntosCalculados: 0 };
+                                pt[id].diasTrabajados = diasNube[id];
+                            });
+                            setStorage('part_time_data_v3', pt);
+                        }
+                    } catch(e) { console.warn("No se pudieron cargar días PT", e); }
+
+                    // 5. Recalcular montos asignables para Part-Time con los datos frescos
+                    const ptCalc = getStorage('part_time_data_v3'); 
+                    sociosData.filter(isPartTime).forEach(s=>{ 
+                        if(!ptCalc[s.ID]) ptCalc[s.ID]={diasTrabajados:[],montoAsignable:0}; 
+                        let m=0; (ptCalc[s.ID].diasTrabajados||[]).forEach(d=>{ m+=(recaudacionPorDia[d]||0); }); 
+                        ptCalc[s.ID].montoAsignable=m; 
+                    }); 
+                    setStorage('part_time_data_v3',ptCalc);
+
+                    try{ultimaDistribucionData=await apiCall(SCRIPT_URL_SOCIOS,'getUltimaDistribucion');}catch(e){} 
+                    renderHistorial(historialRawData); showToast('Sincronizado'); 
                 }catch(e){ ui.balancePropinaBruta.textContent="Error"; console.error(e); showToast("Error Sincronizando", 'danger'); } finally{ isSyncing=false; ui.syncIndicator.classList.remove('visible'); setBtnLoading(ui.syncDataBtn, false); } 
             }
 
@@ -702,11 +735,22 @@
                     setupNumericInputFormatting(form.editSaldoMonto);
                     form.editSaldoSocioId.value = socioId;
                     form.editSaldoMonto.value = formatNumber(storage[socioId] || 0);
-                    form.onsubmit = (e) => {
+                    form.onsubmit = async (e) => {
                         e.preventDefault();
-                        storage[socioId] = parseNumber(form.editSaldoMonto.value);
+                        const nuevoMonto = parseNumber(form.editSaldoMonto.value);
+                        storage[socioId] = nuevoMonto;
                         setStorage('saldo_anterior_v1', storage);
                         updateAllUI();
+                        // Guardar también en la nube para que no se pierda al refrescar
+                        try {
+                            const socio = sociosData.find(s=>s.ID == socioId);
+                            await apiCall(SCRIPT_URL_SOCIOS, 'registrarSaldoAnterior', 'POST', {
+                                id: socioId, 
+                                nombre: socio ? `${socio.Nombre} ${socio.Apellido}` : 'Desconocido',
+                                monto: nuevoMonto
+                            });
+                        } catch(err) { console.error('Error guardando saldo en nube', err); }
+                        
                         modal.style.display = 'none';
                         showToast('Saldo anterior actualizado');
                     };
@@ -750,20 +794,32 @@
 
                     countDisplay.textContent = preSelected.length;
 
-                    saveBtn.onclick = () => {
+                    saveBtn.onclick = async () => {
                         const selectedFechas = fp.selectedDates.map(d => d.toISOString().split('T')[0]);
+                        setBtnLoading(saveBtn, true, 'Guardando');
+                        
                         if (tipo === 'PT') {
                             const pt = getStorage('part_time_data_v3');
                             if (!pt[socioId]) pt[socioId] = { diasTrabajados: [], puntosCalculados: 0, montoAsignable: 0 };
                             pt[socioId].diasTrabajados = selectedFechas;
                             setStorage('part_time_data_v3', pt);
                             recalculatePartTimeAssignable(socioId);
+                            // GUARDAR DÍAS PT EN LA NUBE PARA QUE NO SE BORREN AL SINCRONIZAR
+                            try {
+                                await apiCall(SCRIPT_URL_SOCIOS, 'guardarDiasPartTime', 'POST', {
+                                    id: socioId,
+                                    nombre: `${socio.Nombre} ${socio.Apellido}`,
+                                    dias: selectedFechas
+                                });
+                            } catch(err) { console.error('Error guardando días PT en nube', err); }
+
                         } else {
                             const abs = getStorage('planta_absences_v1');
                             abs[socioId] = selectedFechas;
                             setStorage('planta_absences_v1', abs);
                         }
                         updateAllUI();
+                        setBtnLoading(saveBtn, false);
                         parentModal.style.display = 'none';
                         showToast('Días actualizados');
                     };
