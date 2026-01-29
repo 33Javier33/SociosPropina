@@ -735,13 +735,19 @@
                     setupNumericInputFormatting(form.editSaldoMonto);
                     form.editSaldoSocioId.value = socioId;
                     form.editSaldoMonto.value = formatNumber(storage[socioId] || 0);
+                    const btn = form.querySelector('button[type="submit"]'); // Seleccionar el botón
+
                     form.onsubmit = async (e) => {
                         e.preventDefault();
+                        // Activar animación
+                        setBtnLoading(btn, true, 'Guardando');
+                        
                         const nuevoMonto = parseNumber(form.editSaldoMonto.value);
                         storage[socioId] = nuevoMonto;
                         setStorage('saldo_anterior_v1', storage);
                         updateAllUI();
-                        // Guardar también en la nube para que no se pierda al refrescar
+                        
+                        // Guardar también en la nube
                         try {
                             const socio = sociosData.find(s=>s.ID == socioId);
                             await apiCall(SCRIPT_URL_SOCIOS, 'registrarSaldoAnterior', 'POST', {
@@ -749,8 +755,10 @@
                                 nombre: socio ? `${socio.Nombre} ${socio.Apellido}` : 'Desconocido',
                                 monto: nuevoMonto
                             });
-                        } catch(err) { console.error('Error guardando saldo en nube', err); }
+                        } catch(err) { console.error('Error guardando saldo en nube', err); showToast('Error al guardar en nube', 'warning'); }
                         
+                        // Desactivar animación y cerrar
+                        setBtnLoading(btn, false);
                         modal.style.display = 'none';
                         showToast('Saldo anterior actualizado');
                     };
